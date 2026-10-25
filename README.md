@@ -9,6 +9,7 @@ A free scam-pattern check for international and exchange students renting a room
 - `index.html`: the whole app (HTML, CSS and plain JavaScript, no build step). Feedback is saved through Netlify Forms.
 - `architecturedoc.md`: components, data stored, security choices, change log.
 - `scope.md`: riskiest guess, goal, what is in and out of scope.
+- `ai-orchestration-log.md`: AI Orchestration Log, Entry 6 (Session 6).
 
 ## Deploy
 Drag the folder onto Netlify, then enable Forms > form detection and redeploy.

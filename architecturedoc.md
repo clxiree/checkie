@@ -35,7 +35,7 @@ Both are a single HTML file (HTML, CSS and plain JavaScript). There is no build 
 
 | Data | Stored? | Where | Who can read it |
 |---|---|---|---|
-| Answers to the 12 questions | No | Page memory only | Nobody |
+| Answers to the 12 questions | No. Netlify Forms keeps only the feedback form. If the student sends feedback, it includes the names of the warning signs they answered Yes / Not sure to, never listing details. | Page memory only | Nobody |
 | Screenshots | No | Browser only; sent to Claude only if the student taps the AI check | The student; Claude processes them for that one answer |
 | Review entry, public site: warning-sign answer, rating, tags, comment, result level, which warning signs the student answered Yes or Not sure to (pattern names only, never listing details), number of screenshots, timestamp | Yes (since 25 October) | Netlify Forms, form `checkie-feedback`. **Netlify also records the submitter's IP address**, and this can't be turned off; the page says so. | Only me, in the Netlify dashboard. The public page can submit but cannot read submissions. |
 | Review entry, Claude version: same fields | Yes | Claude's built-in artifact storage, at `feedback/<viewer id>/entries` | **Only me (owner)**. Rules: `feedback` read/write = owner; `feedback/{self}` read/write = interact. Tested: a normal user reads nothing. |
@@ -49,9 +49,9 @@ In block 1, AI drafted SQL for an insert-only Supabase table for the questionnai
 | Who | When | How | Result |
 |---|---|---|---|
 | 5 international students | Before and during class, 13 October | Asked in conversation: "Have you come across scam warning signs while looking for a room?" | **2 of 5 said yes** |
-| 15 students: 12 Esade exchange students, 3 UPF students | 25 October | I sent the link to exchange students I know, mostly classmates from my modules, and asked them to share it; they replied to: "Was Checkie useful for spotting warning signs? Which features did you like? What could be improved?" | **12 of 15 had struggled and met scam warning signs**; they usually ask previous exchange students or seniors. 3 of 15 had no housing problems but saw the benefit for first-time students. Answers given verbally (I transcribed them) or by text. |
+| 15 students: 12 Esade exchange students, 3 UPF students | 25 October | I sent the link to exchange students I know, mostly classmates from my modules, and asked them to share it; I asked whether Checkie was useful for spotting warning signs | **12 of 15 had struggled and met scam warning signs**; they usually ask previous exchange students or seniors. 3 of 15 had no housing problems but saw the benefit for first-time students. Answers given verbally (I transcribed them) or by text. |
 
-On 13 October the in-app question did not save answers, so those 5 answers came from conversation. On 25 October, 12 of 15 (80%) said they had met warning signs, above my 3-in-10 line, so Guess 1 holds for now. I keep the two groups separate because they may overlap. All 15 are my target users, but I reached them through people I know and collected answers through conversation and texts, so it is strong early support, not proof. Next: count the warning-sign answers saved in the app by students I don't know.
+On 13 October the in-app question did not save answers, so those 5 answers came from conversation. On 25 October, 12 of 15 (80%) said they had met warning signs, above my 3-in-10 line, so Guess 1 holds for now. I keep the two groups separate because they may overlap. All 15 are my target users, but I reached them through people I know and collected answers through conversation and texts, so it is strong early support, not proof. No one has paid or signed up yet. Next: count the warning-sign answers saved in the app by students I don't know.
 
 ## 6. Security and privacy choices
 
@@ -106,11 +106,13 @@ On 13 October the in-app question did not save answers, so those 5 answers came 
 - Updated the privacy note: Netlify records the IP address of anyone who sends the review form.
 - Each saved answer now also records which warning signs the student flagged (Yes / Not sure), so I can see which scam patterns are most common, not only how many students met one.
 - Added a "Copy the Checkie link to share" button after the review is sent, to help reach more students.
+- Enabled form detection, redeployed and confirmed a live test submission in the Netlify dashboard.
+- Asked 15 students (12 Esade exchange, 3 UPF): 12 said they had met scam warning signs.
 
 ## 10. Next steps
 
-1. Enable form detection in Netlify (Forms > Enable form detection), redeploy, and check that a test answer appears in the dashboard.
-2. Share the Netlify link with more international and exchange students, to reach at least 10 in total, and count how many answer "Yes" to the warning-sign question. So far 2 of 5 said yes in conversation. Guess 1 needs at least 3 in 10.
+1. ~~Enable form detection in Netlify and check a test answer~~ Done 25 October: a test submission was saved.
+2. Keep sharing the Netlify link with students I don't know, and count the warning-sign answers saved in the app (so far 12 of 15 said yes in conversation and texts, 2 of 5 on 13 October).
 3. Add the Esade exchange office address once confirmed from an official source.
 4. Approach Esade's international office about a pilot.
 5. If a pilot is agreed: a small server (e.g. a Netlify Function) holding a Claude API key, so the AI check works on the public site, with a spending limit and a privacy notice.
