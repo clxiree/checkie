@@ -1,0 +1,937 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Checkie · Check before you pay</title>
+<link rel="icon" href="logo.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Text:wght@700&display=swap">
+<style>
+:root{--bg:#f4f1ea;--card:#fffdf8;--ink:#1d2a33;--muted:#5f6b73;--line:#e3ddd0;--accent:#1f5f5b;--accent-soft:#e3efec;--warn:#b7791f;--warn-soft:#fbf1dc;--stop:#a63d32;--stop-soft:#f8e4e0;--ok:#2f6f4f}
+*{box-sizing:border-box}
+[hidden]{display:none !important}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif}
+main{max-width:560px;margin:0 auto;padding:20px 16px 48px}
+header{display:flex;align-items:center;gap:12px;margin-bottom:20px}
+.logo{width:36px;height:36px;border-radius:10px;background:var(--accent);color:#fff;display:grid;place-items:center;font-weight:800;font-size:1.1rem}
+header .brand b{display:block;font-family:"Libre Caslon Text",Georgia,"Times New Roman",serif;font-weight:700;font-size:1.55rem;line-height:1;letter-spacing:.01em;color:var(--ink)}
+header .brand span{display:block;margin-top:5px;font-size:.68rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
+header svg{flex:0 0 auto;filter:drop-shadow(0 1px 2px rgba(21,49,46,.18))}
+.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:22px;box-shadow:0 1px 2px rgba(0,0,0,.03)}
+h1{font-size:1.6rem;line-height:1.25;margin:0 0 10px}
+h2{font-size:1.2rem;margin:0 0 8px}
+p{margin:0 0 12px}
+.muted{color:var(--muted)}
+.pill{display:inline-block;font-size:.75rem;font-weight:600;padding:3px 9px;border-radius:99px;background:var(--accent-soft);color:var(--accent);margin-bottom:12px}
+.btn{display:block;width:100%;padding:15px;border:0;border-radius:12px;background:var(--accent);color:#fff;font-size:1rem;font-weight:650;cursor:pointer;margin-top:8px}
+.btn:disabled{background:#a9b9b6;cursor:not-allowed}
+.btn.ghost{background:var(--card);color:var(--accent);border:1.5px solid #bcd3cc;box-shadow:0 1px 2px rgba(21,49,46,.06);transition:background .15s,border-color .15s}
+.btn.ghost:hover{background:var(--accent-soft);border-color:var(--accent)}
+.btn:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.progress{height:6px;background:var(--line);border-radius:99px;overflow:hidden;margin-bottom:18px}
+.progress div{height:100%;background:var(--accent);width:0;transition:width .25s}
+.step{font-size:.8rem;color:var(--muted);margin-bottom:6px}
+.opts{display:grid;gap:8px;margin:14px 0 4px}
+.opt{all:unset;cursor:pointer;border:1px solid var(--line);border-radius:12px;padding:13px 15px;background:#fff}
+.opt:hover{border-color:var(--accent)}
+.opt[aria-pressed="true"]{border-color:var(--accent);background:var(--accent-soft);font-weight:600}
+.opt:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.why{font-size:.9rem;color:var(--muted);background:#f7f4ee;border-radius:10px;padding:10px 12px;margin-top:10px}
+.result{border-radius:14px;padding:16px;margin-bottom:14px}
+.result.ok{background:var(--accent-soft)} .result.warn{background:var(--warn-soft)} .result.stop{background:var(--stop-soft)}
+.result h2{margin-bottom:4px} .result.warn h2{color:var(--warn)} .result.stop h2{color:var(--stop)} .result.ok h2{color:var(--ok)}
+ul.flags{padding-left:20px;margin:8px 0 12px} ul.flags li{margin-bottom:6px}
+.trust{background:var(--accent-soft);border-radius:12px;padding:12px 14px;font-size:.93rem;margin:6px 0 18px}
+.q p{font-weight:600;margin-bottom:0}
+.q{margin-bottom:18px}
+.proto{background:var(--warn-soft);border:1px solid #ecd59f;border-radius:10px;padding:8px 12px;font-size:.85rem;margin-bottom:14px}
+.err{color:var(--stop);font-size:.9rem;margin-top:8px;display:none}
+.hidden{display:none}
+footer{color:var(--muted);font-size:.78rem;margin-top:18px;text-align:center}
+.shot{border:1px dashed var(--line);border-radius:12px;padding:12px;margin-bottom:16px;background:#fff}
+.shot label{display:block;cursor:pointer;color:var(--accent);font-weight:600;font-size:.95rem}
+.shot input{display:none}
+.shot small{display:block;color:var(--muted);font-size:.8rem;margin-top:2px}
+.shot img{display:block;max-width:100%;max-height:260px;margin:10px auto 0;border-radius:8px;border:1px solid var(--line);object-fit:contain}
+.shot .rm{all:unset;cursor:pointer;color:var(--muted);font-size:.8rem;text-decoration:underline;margin-top:6px;display:inline-block}
+.shot{border:2px dashed #c9c1ae;border-radius:14px;padding:0;margin-bottom:16px;background:#fff;transition:border-color .15s,background .15s}
+.shot.drag{border-color:var(--accent);background:var(--accent-soft)}
+.shot .dz{display:flex;flex-direction:column;align-items:center;text-align:center;gap:4px;padding:22px 14px;cursor:pointer}
+.dz-icon{width:44px;height:44px;border-radius:50%;background:var(--accent-soft);color:var(--accent);display:grid;place-items:center;font-size:1.3rem;font-weight:700;margin-bottom:4px}
+.dz-title{font-weight:650}
+.dz-sub{color:var(--muted);font-size:.88rem}
+.dz-sub u{color:var(--accent)}
+.dz-lock{color:var(--muted);font-size:.78rem;margin-top:6px}
+.shot.has .dz{padding:12px 14px}
+.shot.has .dz-icon,.shot.has .dz-lock{display:none}
+
+.shot img{display:block;max-width:calc(100% - 24px);max-height:280px;margin:0 auto;border-radius:8px;border:1px solid var(--line);object-fit:contain}
+.shot .rm{display:block;margin:8px auto 12px;width:max-content}
+.chip{display:flex;align-items:center;gap:10px;margin:0 12px 10px;padding:10px 12px;border:1px solid var(--line);border-radius:10px;background:#faf8f3}
+.chip-ic{font-size:1.3rem}
+.chip-txt{flex:1;min-width:0;display:flex;flex-direction:column}
+.chip-txt b{font-size:.92rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.chip-txt small{color:var(--muted);font-size:.78rem}
+.chip-ok{color:var(--ok);font-size:.82rem;font-weight:600;white-space:nowrap}
+.resfile{display:flex;align-items:center;gap:8px;font-size:.88rem;color:var(--muted);margin-bottom:12px}
+.hero{margin:-6px -6px 16px}
+.hero svg{display:block;width:100%;height:auto;border-radius:14px}
+.street{position:fixed;left:0;right:0;bottom:0;height:200px;pointer-events:none;z-index:0;overflow:hidden}
+main{position:relative;z-index:1}
+.scene{position:absolute;left:50%;transform:translateX(-50%);bottom:38px;width:min(100%,760px);height:auto;max-height:150px}
+.road{position:absolute;left:0;right:0;bottom:0;height:38px;background:linear-gradient(#ddd3c2 0 10px,#5d6670 10px)}
+.road::after{content:"";position:absolute;left:0;right:0;bottom:13px;height:3px;background:repeating-linear-gradient(90deg,#f2e9d8 0 26px,transparent 26px 48px)}
+.walker{position:absolute;bottom:27px;z-index:2;left:-60px;animation:walk 26s linear infinite}
+.walker svg{display:block;animation:bob .5s ease-in-out infinite}
+.leg{transform-box:fill-box;transform-origin:top center}
+.l1{animation:stepA .5s ease-in-out infinite}
+.l2{animation:stepB .5s ease-in-out infinite}
+.arm{transform-box:fill-box;transform-origin:top left;animation:stepB .5s ease-in-out infinite}
+@keyframes walk{0%{left:-60px;transform:scaleX(1)}49%{left:calc(100% + 10px);transform:scaleX(1)}50%{left:calc(100% + 10px);transform:scaleX(-1)}99%{left:-60px;transform:scaleX(-1)}100%{left:-60px;transform:scaleX(1)}}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-2px)}}
+@keyframes stepA{0%,100%{transform:rotate(18deg)}50%{transform:rotate(-18deg)}}
+@keyframes stepB{0%,100%{transform:rotate(-18deg)}50%{transform:rotate(18deg)}}
+@media (prefers-reduced-motion: reduce){.walker,.walker svg,.leg,.arm{animation:none}.walker{left:16px}}
+main{padding-bottom:210px}
+.btn.soft{background:var(--accent-soft);color:var(--accent)}
+.links{display:flex;gap:8px;margin-top:10px}
+.links .btn{margin-top:0;font-size:.92rem;padding:12px}
+.shotgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(88px,1fr));gap:8px;padding:0 12px 12px}
+.thumb{position:relative;border:1px solid var(--line);border-radius:10px;overflow:hidden;background:#faf8f3;aspect-ratio:3/4;display:flex;align-items:center;justify-content:center}
+.thumb img{width:100%;height:100%;object-fit:cover;display:block;border:0;border-radius:0;max-height:none;margin:0}
+.thumb .nm{position:absolute;left:0;right:0;bottom:0;background:rgba(29,42,51,.72);color:#fff;font-size:.68rem;padding:3px 5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.thumb .x{all:unset;position:absolute;top:4px;right:4px;width:22px;height:22px;border-radius:50%;background:rgba(255,255,255,.92);color:var(--ink);display:grid;place-items:center;font-size:.8rem;cursor:pointer;box-shadow:0 1px 2px rgba(0,0,0,.15)}
+.thumb .x:focus-visible{outline:2px solid var(--accent)}
+.count{display:flex;justify-content:space-between;align-items:center;padding:0 12px 10px;font-size:.85rem;color:var(--muted)}
+.count b{color:var(--ok)}
+.warnmsg{color:var(--warn);font-size:.85rem;padding:0 12px 10px;display:none}
+.review{border:1px solid var(--line);border-radius:14px;padding:16px;background:#fff;margin-top:14px}
+.review h3{margin:0 0 6px;font-size:1.05rem}
+.review ol{margin:8px 0 12px;padding-left:20px} .review li{margin-bottom:5px}
+.vs{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:10px 0 12px;font-size:.85rem}
+.vs div{border-radius:10px;padding:10px}
+.vs .ai{background:#f1eee7} .vs .hu{background:var(--accent-soft)}
+.vs b{display:block;margin-bottom:4px}
+.badge{display:inline-block;font-size:.72rem;font-weight:700;letter-spacing:.3px;text-transform:uppercase;padding:2px 8px;border-radius:99px;background:var(--warn-soft);color:var(--warn);margin-left:6px;vertical-align:middle}
+.area{display:grid;gap:8px;margin:12px 0}
+.arow{display:flex;justify-content:space-between;align-items:center;gap:10px;border:1px solid var(--line);border-radius:12px;padding:11px 13px;background:#fff}
+.arow b{display:block}
+.arow small{color:var(--muted);font-size:.8rem}
+.arow .pr{font-weight:700;white-space:nowrap;color:var(--accent)}
+.tagrow{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0 2px}
+.tag{font-size:.72rem;font-weight:600;padding:2px 8px;border-radius:99px}
+.tag.st{background:var(--accent-soft);color:var(--accent)} .tag.va{background:#eef3e6;color:#4d6b2f} .tag.ca{background:var(--warn-soft);color:var(--warn)}
+h3.sec{font-size:1rem;margin:20px 0 4px}
+.tip{background:#f7f4ee;border-radius:10px;padding:10px 12px;font-size:.9rem;margin:8px 0}
+.src{font-size:.75rem;color:var(--muted);margin-top:14px}
+.src a{color:var(--muted)}
+.benefit{display:flex;gap:12px;align-items:flex-start;padding:12px 0;border-bottom:1px solid var(--line)}
+.benefit:last-child{border-bottom:0}
+.benefit .ic{flex:0 0 36px;height:36px;border-radius:10px;background:var(--accent-soft);display:grid;place-items:center;font-size:1.1rem}
+.benefit b{display:block;margin-bottom:2px}
+.benefit p{margin:0;font-size:.9rem;color:var(--muted)}
+.offer{background:linear-gradient(135deg,#1f5f5b,#2c7a73);color:#fff;border-radius:14px;padding:16px;margin:14px 0}
+.offer b{font-size:1.05rem}
+.offer p{margin:6px 0 0;opacity:.92;font-size:.92rem}
+footer a{color:var(--accent);cursor:pointer;text-decoration:underline}
+.mapwrap{border:1px solid var(--line);border-radius:14px;overflow:hidden;background:#f3eee4}
+#bcnMap{display:block;width:100%;height:auto}
+.mlab{font:600 11px -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;text-anchor:middle}
+.mlab.hill{fill:#7d9672}.mlab.sea{fill:#5f9aa6;font-style:italic}.mlab.road{fill:#b49d7d;font-size:10px}.mlab.tiny{fill:#a59a88;font-size:9px;font-weight:500}
+.dist ellipse{fill:#fffaf0;opacity:.75}
+.pin{cursor:pointer}
+.pin .bg{fill:#fff;stroke:#d5cbb8;stroke-width:1.5;transition:all .15s}
+.pin text{font:700 10.5px -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;fill:#1d2a33;text-anchor:middle;paint-order:stroke;stroke:#f3eee4;stroke-width:3px}
+.pin:hover .bg,.pin:focus .bg{stroke:var(--accent)}
+.pin.on .bg{fill:var(--accent-soft);stroke:var(--accent);stroke-width:2.5}
+.pin:focus{outline:none}
+.pin.esade .bg{fill:#fff6e0;stroke:#e0b45a}
+.adetail{border:1px solid var(--line);border-radius:14px;background:#fff;margin-top:12px;overflow:hidden}
+.adetail .art{background:linear-gradient(#fbe8cd,#f6efe2);display:flex;align-items:flex-end;justify-content:center;height:130px;position:relative}
+.adetail .art svg{width:120px;height:120px}
+.adetail .art .lm{position:absolute;left:12px;bottom:10px;font-size:.75rem;font-weight:600;background:rgba(255,255,255,.85);padding:3px 9px;border-radius:99px;color:var(--ink)}
+.adetail .body{padding:14px 16px}
+.adetail h4{margin:0;font-size:1.2rem;display:flex;justify-content:space-between;align-items:baseline;gap:10px}
+.adetail h4 span{font-size:1.05rem;color:var(--accent);white-space:nowrap}
+.adetail .vibe{color:var(--muted);margin:6px 0 10px;font-size:.93rem}
+.facts{display:grid;grid-template-columns:1fr;gap:6px;font-size:.88rem}
+.facts div{display:flex;gap:8px}
+.facts b{flex:0 0 112px;color:var(--ink)}
+.facts span{color:var(--muted)}
+.arow{cursor:pointer}
+.arow .mini{flex:0 0 40px;width:40px;height:40px;border-radius:10px;background:#fbefdc;display:grid;place-items:center;margin-right:10px}
+.arow .mini svg{width:34px;height:34px}
+.arow > span:first-of-type{display:flex;align-items:center}
+.arow.on{border-color:var(--accent);background:var(--accent-soft)}
+.campus{border:1px solid var(--line);border-radius:14px;background:#fff;padding:14px;margin:14px 0 4px;display:grid;gap:8px}
+.campus select,.campus input{font:inherit;padding:11px 12px;border:1px solid var(--line);border-radius:10px;background:#faf8f3;color:var(--ink);width:100%}
+.campus select:focus,.campus input:focus{outline:2px solid var(--accent);outline-offset:1px}
+.campus small{color:var(--muted);font-size:.8rem}
+.travel{margin-top:12px;border-radius:12px;padding:12px;background:#f7f4ee}
+.travel .row{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.travel .big{font-size:1.15rem;font-weight:700}
+.feas{font-size:.75rem;font-weight:700;padding:3px 9px;border-radius:99px;white-space:nowrap}
+.feas.easy{background:var(--accent-soft);color:var(--ok)} .feas.ok{background:var(--warn-soft);color:var(--warn)} .feas.long{background:var(--stop-soft);color:var(--stop)}
+.travel small{display:block;color:var(--muted);font-size:.78rem;margin-top:6px}
+.routebtn{display:block;text-align:center;margin-top:10px;padding:10px;border-radius:10px;background:var(--accent);color:#fff;text-decoration:none;font-weight:600;font-size:.92rem}
+.dist{font-size:.75rem;color:var(--muted);text-align:right;display:block;font-weight:500}
+.sortbtn{all:unset;cursor:pointer;font-size:.78rem;font-weight:600;color:var(--accent);border:1px solid var(--line);border-radius:99px;padding:4px 10px;background:#fff}
+.aires{border-radius:12px;padding:12px 14px;font-weight:700}
+.aires.high{background:var(--stop-soft);color:var(--stop)} .aires.some{background:var(--warn-soft);color:var(--warn)} .aires.low{background:var(--accent-soft);color:var(--ok)}
+.aires small{display:block;font-weight:500;color:var(--ink);margin-top:2px}
+ul.aisig{padding-left:0;list-style:none;margin:8px 0 12px;display:grid;gap:8px}
+ul.aisig li{border:1px solid var(--line);border-radius:10px;padding:10px 12px;background:#faf8f3;font-size:.9rem}
+ul.aisig li b{display:block;margin-bottom:2px}
+ul.aisig li span{display:block;color:var(--muted);font-size:.85rem}
+.thinking{display:flex;align-items:center;gap:10px;color:var(--muted);font-size:.9rem;margin:10px 0}
+.thinking i{width:16px;height:16px;border-radius:50%;border:2px solid var(--line);border-top-color:var(--accent);animation:spin .8s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+@media (prefers-reduced-motion: reduce){.thinking i{animation:none}}
+.qhead{display:flex;gap:12px;align-items:flex-start;margin-bottom:6px}
+.qic{flex:0 0 46px;height:46px;border-radius:12px;background:var(--accent-soft);display:grid;place-items:center;font-size:1.5rem}
+.qhead h2{margin:2px 0 0;font-size:1.2rem;line-height:1.3;text-wrap:balance}
+.qdesc{color:var(--muted);margin:4px 0 12px;font-size:.95rem}
+.qex{background:#f7f4ee;border-left:3px solid var(--warn);border-radius:0 10px 10px 0;padding:9px 12px;font-size:.92rem;margin-bottom:6px}
+.qex span{display:block;font-size:.7rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--warn);margin-bottom:2px}
+.qex q{font-style:italic;quotes:"“" "”"}
+.opts.three{grid-template-columns:repeat(3,1fr);gap:8px}
+.opt.big{text-align:center;padding:14px 6px;display:flex;flex-direction:column;align-items:center;gap:4px;font-weight:600}
+.opt.big .sym{width:28px;height:28px;border-radius:50%;display:grid;place-items:center;font-size:.95rem;background:#f1eee7;color:var(--muted)}
+.opt.big.yes[aria-pressed="true"]{border-color:var(--stop);background:var(--stop-soft)} .opt.big.yes[aria-pressed="true"] .sym{background:var(--stop);color:#fff}
+.opt.big.no[aria-pressed="true"]{border-color:var(--ok);background:var(--accent-soft)} .opt.big.no[aria-pressed="true"] .sym{background:var(--ok);color:#fff}
+.opt.big.unsure[aria-pressed="true"]{border-color:var(--warn);background:var(--warn-soft)} .opt.big.unsure[aria-pressed="true"] .sym{background:var(--warn);color:#fff}
+details.why{margin-top:10px;background:none;padding:0}
+details.why summary{cursor:pointer;font-size:.88rem;color:var(--accent);font-weight:600}
+details.why p{margin:6px 0 0;font-size:.9rem;color:var(--muted);background:#f7f4ee;border-radius:10px;padding:10px 12px}
+.fb h2{margin-bottom:6px}
+.stars{display:grid;grid-template-columns:repeat(5,1fr);gap:8px}
+.star{all:unset;cursor:pointer;text-align:center;padding:10px 0;border:1px solid var(--line);border-radius:12px;background:#fff;font-weight:700;font-size:1.05rem;color:var(--muted)}
+.star:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.star[aria-checked="true"]{background:var(--accent);border-color:var(--accent);color:#fff}
+.fbscale{display:flex;justify-content:space-between;font-size:.75rem;color:var(--muted);margin-top:4px}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip2{all:unset;cursor:pointer;font-size:.85rem;padding:7px 12px;border-radius:99px;border:1px solid var(--line);background:#fff}
+.chip2:focus-visible{outline:2px solid var(--accent)}
+.chip2[aria-pressed="true"]{background:var(--accent-soft);border-color:var(--accent);color:var(--accent);font-weight:600}
+#fbText{width:100%;font:inherit;padding:10px 12px;border:1px solid var(--line);border-radius:10px;background:#faf8f3;color:var(--ink);resize:vertical}
+#fbText:focus{outline:2px solid var(--accent);outline-offset:1px}
+.opt.big.yes{background:#fdf1ee;border-color:#efd3cc} .opt.big.yes .sym{background:#f6d9d2;color:var(--stop)}
+.opt.big.no{background:#eef6f2;border-color:#cfe3da} .opt.big.no .sym{background:#d5ebe1;color:var(--ok)}
+.opt.big.unsure{background:#fdf6e9;border-color:#efdfbd} .opt.big.unsure .sym{background:#f6e6c4;color:var(--warn)}
+.halo{fill:#fffaf0;opacity:.7}
+.leader{stroke:#b9ab93;stroke-width:1.2;stroke-dasharray:2 2}
+.truedot{fill:#1f5f5b;stroke:#fffaf0;stroke-width:1.2}
+.mlab.campuslab{fill:#1f5f5b;font-size:10.5px;font-weight:700;paint-order:stroke;stroke:#f3eee4;stroke-width:3px}
+.humanhelp select{font:inherit;padding:11px 12px;border:1px solid var(--line);border-radius:10px;background:#faf8f3;color:var(--ink);width:100%}
+.office{margin-top:12px;border:1px solid var(--line);border-radius:12px;padding:12px 14px;background:#fff;display:grid;gap:8px}
+.office a{color:var(--accent);font-size:.88rem;font-weight:600}
+.mailrow{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.mail{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.88rem;background:var(--accent-soft);color:var(--accent);padding:5px 9px;border-radius:8px;user-select:all;word-break:break-all}
+.copy{all:unset;cursor:pointer;font-size:.8rem;font-weight:600;color:var(--accent);border:1px solid #bcd3cc;border-radius:99px;padding:4px 10px;background:var(--card)}
+.copy:focus-visible{outline:2px solid var(--accent)}
+#offMsg{width:100%;font:inherit;font-size:.88rem;padding:10px 12px;border:1px solid var(--line);border-radius:10px;background:#faf8f3;color:var(--ink);resize:vertical}
+</style>
+</head>
+<body>
+<main>
+<header><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="44" height="44" role="img" aria-label="Checkie logo"><rect width="64" height="64" rx="14" fill="#15312E"/><rect x="3.5" y="3.5" width="57" height="57" rx="11" fill="none" stroke="#C9A45C" stroke-opacity=".6" stroke-width="1"/><path d="M17 30.5 L32 18.5 L47 30.5" fill="none" stroke="#F4EDE0" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M21.5 27.5 V44.5 a1.5 1.5 0 0 0 1.5 1.5 H41 a1.5 1.5 0 0 0 1.5 -1.5 V27.5" fill="none" stroke="#F4EDE0" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M26.5 37 L30.6 41.1 L38.5 33.2" fill="none" stroke="#C9A45C" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+<div class="brand"><b>Checkie</b><span>Check before you pay</span></div></header>
+
+
+<!-- Screen 1: intro -->
+<section class="card" id="s-intro">
+  <div class="hero"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 260" role="img" aria-label="Two students with luggage arriving at a street of apartment buildings">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fbe3c4"/><stop offset="1" stop-color="#f6efe2"/></linearGradient>
+  </defs>
+  <rect width="520" height="260" rx="16" fill="url(#sky)"/>
+  <circle cx="420" cy="62" r="28" fill="#f2b84b" opacity=".85"/>
+  <!-- far buildings -->
+  <g fill="#e2d3bd">
+    <rect x="0" y="110" width="70" height="120"/><rect x="62" y="90" width="58" height="140"/><rect x="300" y="100" width="64" height="130"/><rect x="452" y="96" width="68" height="134"/>
+  </g>
+  <!-- main apartment blocks -->
+  <g>
+    <rect x="18" y="120" width="96" height="120" fill="#d98a5f"/>
+    <rect x="114" y="96" width="92" height="144" fill="#efc48a"/>
+    <rect x="206" y="128" width="84" height="112" fill="#7fa79f"/>
+    <rect x="356" y="108" width="100" height="132" fill="#e6a77e"/>
+    <rect x="456" y="134" width="64" height="106" fill="#c9b08b"/>
+  </g>
+  <!-- windows + balconies -->
+  <g fill="#fff6e8" opacity=".95">
+    <rect x="32" y="136" width="16" height="22" rx="2"/><rect x="58" y="136" width="16" height="22" rx="2"/><rect x="84" y="136" width="16" height="22" rx="2"/>
+    <rect x="32" y="176" width="16" height="22" rx="2"/><rect x="58" y="176" width="16" height="22" rx="2"/><rect x="84" y="176" width="16" height="22" rx="2"/>
+    <rect x="128" y="112" width="18" height="24" rx="2"/><rect x="152" y="112" width="18" height="24" rx="2"/><rect x="176" y="112" width="18" height="24" rx="2"/>
+    <rect x="128" y="152" width="18" height="24" rx="2"/><rect x="152" y="152" width="18" height="24" rx="2"/><rect x="176" y="152" width="18" height="24" rx="2"/>
+    <rect x="220" y="144" width="16" height="22" rx="2"/><rect x="246" y="144" width="16" height="22" rx="2"/>
+    <rect x="370" y="122" width="18" height="24" rx="2"/><rect x="396" y="122" width="18" height="24" rx="2"/><rect x="422" y="122" width="18" height="24" rx="2"/>
+    <rect x="370" y="164" width="18" height="24" rx="2"/><rect x="396" y="164" width="18" height="24" rx="2"/><rect x="422" y="164" width="18" height="24" rx="2"/>
+    <rect x="468" y="150" width="16" height="22" rx="2"/><rect x="492" y="150" width="16" height="22" rx="2"/>
+  </g>
+  <g stroke="#1f5f5b" stroke-width="2.5" fill="none">
+    <path d="M124 140 h80"/><path d="M124 180 h80"/><path d="M364 150 h86"/><path d="M364 192 h86"/>
+  </g>
+  <g stroke="#1f5f5b" stroke-width="1.5">
+    <path d="M128 140v-8M140 140v-8M152 140v-8M164 140v-8M176 140v-8M188 140v-8M200 140v-8"/>
+    <path d="M368 150v-8M380 150v-8M392 150v-8M404 150v-8M416 150v-8M428 150v-8M440 150v-8"/>
+  </g>
+  <!-- plants on balconies -->
+  <g fill="#3f7d5a"><circle cx="134" cy="176" r="5"/><circle cx="196" cy="136" r="5"/><circle cx="446" cy="146" r="5"/></g>
+  <!-- door with check -->
+  <rect x="236" y="196" width="24" height="44" rx="3" fill="#1f5f5b"/>
+  <!-- street -->
+  <rect x="0" y="236" width="520" height="24" fill="#d8ccb8"/>
+  <!-- palm tree -->
+  <g><path d="M300 236 C298 210 300 190 306 170" stroke="#8a6a46" stroke-width="5" fill="none" stroke-linecap="round"/>
+    <g fill="#3f7d5a"><path d="M306 170 q-26 -6 -36 8 q18 -4 36 -8z"/><path d="M306 170 q26 -8 36 6 q-18 -2 -36 -6z"/><path d="M306 170 q-8 -22 -26 -24 q14 10 26 24z"/><path d="M306 170 q10 -22 28 -22 q-16 10 -28 22z"/></g></g>
+  <!-- student 1 with suitcase -->
+  <g transform="translate(150 168)">
+    <circle cx="20" cy="10" r="10" fill="#8a5a3c"/>
+    <path d="M10 6 q10 -12 20 0 q-4 -4 -10 -4 q-6 0 -10 4z" fill="#2b2018"/>
+    <path d="M6 28 q14 -10 28 0 v26 h-28z" fill="#1f5f5b"/>
+    <rect x="9" y="54" width="8" height="16" fill="#2c3e50"/><rect x="23" y="54" width="8" height="16" fill="#2c3e50"/>
+    <rect x="40" y="40" width="22" height="30" rx="4" fill="#f2b84b"/><path d="M46 40 v-8 h10 v8" stroke="#1d2a33" stroke-width="2.5" fill="none"/>
+    <path d="M34 34 l8 10" stroke="#8a5a3c" stroke-width="5" stroke-linecap="round"/>
+  </g>
+  <!-- student 2 with backpack + phone -->
+  <g transform="translate(318 168)">
+    <circle cx="20" cy="10" r="10" fill="#f1c9a5"/>
+    <path d="M9 10 q0 -16 22 -10 q2 6 0 14 q-2 -10 -10 -10 q-8 0 -12 6z" fill="#c4562e"/>
+    <rect x="-2" y="30" width="12" height="20" rx="4" fill="#7fa79f"/>
+    <path d="M6 28 q14 -10 28 0 v26 h-28z" fill="#e6a77e"/>
+    <rect x="9" y="54" width="8" height="16" fill="#34495e"/><rect x="23" y="54" width="8" height="16" fill="#34495e"/>
+    <path d="M30 34 l8 -6" stroke="#f1c9a5" stroke-width="5" stroke-linecap="round"/>
+    <rect x="35" y="16" width="9" height="15" rx="2" fill="#1d2a33"/>
+    <g transform="translate(46 -6)"><circle r="11" fill="#fff"/><path d="M-5 0 l3.5 3.5 l6 -7" stroke="#2f6f4f" stroke-width="2.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/></g>
+  </g>
+</svg>
+</div>
+  <span class="pill">For international &amp; exchange students · Barcelona</span>
+  <h1>Found a room online? Check it for scam signs first.</h1>
+  <p class="muted">Answer 12 quick questions about the listing and add up to 10 screenshots. Checkie points out common scam patterns and what to verify. It never tells you a listing is safe.</p>
+  <button class="btn" onclick="startCheck()">Check a listing</button>
+  <div class="links"><button class="btn soft" onclick="show('s-guide')">🗺️ Area &amp; price guide</button><button class="btn ghost" onclick="show('s-uni')">🎓 For universities</button></div>
+  <p class="muted" style="font-size:.8rem;margin-top:12px">12 questions · about 2 minutes · no sign-up</p>
+</section>
+
+<!-- Screen 2: questions -->
+<section class="card hidden" id="s-check">
+  
+  <div class="progress"><div id="bar"></div></div>
+  <div class="step" id="stepLabel"></div>
+  <div class="qhead"><span class="qic" id="qIc" aria-hidden="true"></span><h2 id="qText"></h2></div>
+  <p class="qdesc" id="qDesc"></p>
+  <div class="qex"><span>Sounds like</span><q id="qEx"></q></div>
+  <div class="opts three" id="qOpts"></div>
+  <details class="why"><summary>Why this matters</summary><p id="qWhy"></p></details>
+  <button class="btn" id="nextBtn" disabled onclick="next()">Next</button>
+  <button class="btn ghost" id="backBtn" onclick="back()">Back</button>
+</section>
+
+<!-- Screen 2b: optional screenshot, last step before result -->
+<section class="card hidden" id="s-shot">
+  <div class="progress"><div style="width:100%"></div></div>
+  <div class="step">Last step · optional</div>
+  <h2>Add screenshots of the listing</h2>
+  <p class="muted">The ad, the chat with the landlord, the payment request. Up to 10 images, so you can compare them with what Checkie flagged.</p>
+  <div class="shot" id="dropZone">
+    <label for="shotIn" class="dz" id="dzLabel">
+      <span class="dz-icon">⬆</span>
+      <span class="dz-title">Drop up to 10 screenshots here</span>
+      <span class="dz-sub">or <u>choose a file</u> from your phone or computer · optional</span>
+      <span class="dz-lock">🔒 Stays on your device unless you choose the AI check on the result page.</span>
+    </label>
+    <input type="file" id="shotIn" accept="image/*" multiple>
+    <div class="count" id="shotCount" hidden><span><b id="shotN">0</b> of 10 added · stays on this device</span><button class="rm" id="shotRm" style="margin:0">Remove all</button></div>
+    <div class="warnmsg" id="shotWarn"></div>
+    <div class="shotgrid" id="shotGrid"></div>
+  </div>
+  <button class="btn" onclick="result()">See my result</button>
+  <button class="btn ghost" onclick="backToQuestions()">Back</button>
+</section>
+
+<!-- Screen 3: result + evidence card -->
+<section class="hidden" id="s-result">
+  <div class="card">
+    <div class="result" id="resBox"><h2 id="resTitle"></h2><p id="resText" style="margin:0"></p></div>
+    <div class="resfile" id="resFile" hidden>🖼️ <span id="resFileTxt"></span></div>
+    <div class="shotgrid" id="resGrid" style="padding:0 0 12px"></div>
+    
+    <div id="flagWrap"><b>What we noticed:</b><ul class="flags" id="flagList"></ul></div>
+    <div class="review" id="aiBox">
+      <h3>Check my screenshots with AI <span class="badge">Beta</span></h3>
+      <p class="muted" style="font-size:.9rem;margin-bottom:8px" id="aiIntro">Claude reads your screenshots and points out scam warning signs in them: who asks for money and when, the payment method, the price for the area, pressure and missing contract details.</p>
+      <div id="aiReady" hidden>
+        <p style="font-size:.85rem;margin:0 0 8px">🔒 Your screenshots are sent to Claude only when you tap the button, through your own Claude account. Checkie stores nothing.</p>
+        <button class="btn" id="aiBtn">Check my screenshots</button>
+        <button class="btn ghost" id="aiStop" hidden>Stop</button>
+      </div>
+      <p class="muted" id="aiNoShots" style="font-size:.85rem;margin:0" hidden>Add screenshots in the last step to use this. <a href="#" id="aiBack">Go back and add them</a></p>
+      <p class="muted" id="aiUnavailable" style="font-size:.85rem;margin:0" hidden>The AI check works when Checkie is opened inside Claude. It isn't available in this version.</p>
+      <div id="aiOut" hidden>
+        <div class="aires" id="aiLevel"></div>
+        <p id="aiSummary" style="margin:10px 0"></p>
+        <div id="aiSignalsWrap"><b style="font-size:.92rem">What the AI noticed</b><ul class="aisig" id="aiSignals"></ul></div>
+        <div id="aiVerifyWrap"><b style="font-size:.92rem">Check these before you pay</b><ul class="flags" id="aiVerify"></ul></div>
+        <p class="muted" id="aiUnclear" style="font-size:.85rem"></p>
+        <p class="muted" style="font-size:.8rem;margin:0">AI can miss things or misread an image. It never confirms that a listing is safe.</p>
+      </div>
+      <p class="err" id="aiErr" style="display:block" hidden></p>
+      <p class="muted" style="font-size:.8rem;margin:12px 0 0;border-top:1px solid var(--line);padding-top:10px">🧑‍💼 <b>Human review:</b> at partner universities, a trained person will check your screenshots and reply to you. Not available yet.</p>
+    </div>
+    <p class="muted" style="font-size:.85rem;margin-top:14px">Checkie checks patterns, not people. No result here ever means a listing is safe — always see the room (in person or live video) and get a written contract before paying.</p>
+  </div>
+
+  <div class="card humanhelp" id="helpCard" style="margin-top:14px">
+    <h2>Need to ask a real person?</h2>
+    <p class="muted" style="margin:-2px 0 12px;font-size:.9rem">Your university's international office helps incoming students. Checkie gets you ready, so your question is short and clear.</p>
+    <label for="helpSel" style="display:block;font-weight:600;font-size:.92rem;margin-bottom:6px">Your university</label>
+    <select id="helpSel"><option value="">Choose your university…</option></select>
+    <div id="helpOut" hidden>
+      <div class="office"><b id="offName"></b>
+        <div class="mailrow" id="offMailRow"><span class="mail" id="offMail"></span><button class="copy" id="offCopy">Copy email</button></div>
+        <a id="offLink" target="_blank" rel="noopener">Official contact page ↗</a>
+      </div>
+      <p style="font-weight:600;font-size:.92rem;margin:14px 0 6px">Ready-made message</p>
+      <textarea id="offMsg" rows="7" readonly></textarea>
+      <button class="btn ghost" id="msgCopy" style="margin-top:8px">Copy message</button>
+      <small class="muted" style="display:block;font-size:.78rem;margin-top:6px">Add the listing link yourself if you want them to look at it. Checkie doesn't include your name or the landlord's details.</small>
+    </div>
+    <p class="muted" id="helpOther" hidden style="font-size:.85rem;margin:10px 0 0">For another university, look for its "international office" or "incoming students" page.</p>
+    <p class="muted" style="font-size:.78rem;margin:12px 0 0;border-top:1px solid var(--line);padding-top:10px">Checkie isn't affiliated with these universities. These are their public contacts. With partner universities, a trained person from Checkie will also check your screenshots before anything reaches the office.</p>
+  </div>
+  <div class="card fb" id="fbCard" style="margin-top:14px">
+    <h2>How was this check?</h2>
+    <p class="muted" style="margin:-2px 0 12px;font-size:.9rem">Optional and anonymous to other students. It helps improve Checkie for the next person.</p>
+    <p style="font-weight:600;margin:0 0 6px;font-size:.95rem">While looking for a room in Barcelona, have you come across a listing with any of these warning signs?</p><p class="muted" style="margin:-2px 0 8px;font-size:.82rem">For example: asked to pay before a viewing, no real video of the room, photos that didn't look real, or no exact address.</p>
+    <div class="chips" id="fbPaid" style="margin-bottom:14px"><button class="chip2" data-v="yes" aria-pressed="false">Yes</button><button class="chip2" data-v="no" aria-pressed="false">No</button><button class="chip2" data-v="not_looking" aria-pressed="false">I'm not looking for a room</button></div>
+    <p style="font-weight:600;margin:0 0 6px;font-size:.95rem">How useful was this check?</p>
+    <div class="stars" id="fbStars" role="radiogroup" aria-label="How useful was this check, 1 to 5"></div>
+    <div class="fbscale"><span>Not useful</span><span>Very useful</span></div>
+    <p style="font-weight:600;margin:14px 0 6px;font-size:.95rem">What would make it better?</p>
+    <div class="chips" id="fbChips"></div>
+    <label for="fbText" style="display:block;font-weight:600;margin:14px 0 6px;font-size:.95rem">Anything else?</label>
+    <textarea id="fbText" rows="3" maxlength="500" placeholder="A scam trick we missed, a confusing question, an area to add…"></textarea>
+    <small class="muted" style="display:block;margin-top:4px;font-size:.78rem">Please don't include names, phone numbers or addresses. Only what you send here is saved.</small>
+    <button class="btn" id="fbSend" disabled>Send feedback</button>
+    <p class="err" id="fbErr" hidden style="display:block"></p>
+    <p class="muted" id="fbOff" hidden style="font-size:.82rem;margin:8px 0 0">Feedback can't be sent from this copy of Checkie.</p>
+    <p class="muted" id="fbHostNote" hidden style="font-size:.78rem;margin:8px 0 0">Your answers are stored by Checkie's website host, Netlify, which also records your IP address. Checkie never asks for your name, email or the listing.</p>
+  </div>
+  <div class="card hidden" id="fbThanks" style="margin-top:14px;text-align:center">
+    <h2 style="color:var(--ok)">Thanks for the feedback.</h2>
+    <p class="muted" style="margin:0 0 12px">It goes straight into the next update of Checkie.</p>
+    <p style="font-weight:600;margin:0 0 8px">Know someone looking for a room in Barcelona?</p>
+    <button class="btn" id="shareBtn" style="margin-top:0">Copy the Checkie link to share</button>
+    <p class="muted" id="shareLink" hidden style="font-size:.85rem;margin:8px 0 0;user-select:all;word-break:break-all"></p>
+  </div>
+
+  <button class="btn ghost" onclick="location.reload()" style="margin-top:14px">↻&nbsp; Check another listing</button>
+</section>
+
+
+<!-- Screen: area & price guide -->
+<section class="card hidden" id="s-guide">
+  <span class="pill">Barcelona area &amp; price guide</span>
+  <h1 style="font-size:1.4rem">Where to live in Barcelona, and what a room should cost</h1>
+  <p class="muted">Typical asking price for a single room in a shared flat, per month. The city average was about <b>€600</b> in mid-2026.</p>
+  <div class="tip">⚠️ If a listing is <b>far below</b> these ranges for its area, treat that as a warning sign. It's one of Checkie's scam patterns.</div>
+
+  <div class="campus">
+    <label for="campusSel"><b>🎓 Where do you study?</b></label>
+    <select id="campusSel">
+      <option value="">Choose your university campus…</option>
+    </select>
+    <input id="campusCustom" type="text" placeholder="Or type your campus address (e.g. Carrer de …)" autocomplete="off">
+    <small id="campusNote">Each area will then show the distance and an estimated travel time to your campus.</small>
+  </div>
+  <h3 class="sec">Explore the map</h3>
+  <p class="muted" style="font-size:.88rem;margin:0 0 8px">Tap a landmark to see the area. Dots mark where each area is; the green pin is your campus.</p>
+  <div class="mapwrap">
+    <svg id="bcnMap" viewBox="0 0 600 516" role="img" aria-label="Map of Barcelona neighbourhoods, north at the top">
+      <defs>
+        <pattern id="waves" width="24" height="12" patternUnits="userSpaceOnUse"><path d="M0 6 q6 -5 12 0 t12 0" fill="none" stroke="#b9d6dc" stroke-width="1.4"/></pattern>
+      </defs>
+      <rect width="600" height="516" fill="#f3eee4"/>
+      <!-- Collserola hills (north-west) -->
+      <path d="M0 0 H392 Q360 22 336 44 Q300 74 262 96 Q214 126 170 148 Q118 176 72 206 Q34 230 0 248 Z" fill="#d8e3cf"/>
+      <path d="M0 0 H300 Q262 30 220 56 Q160 92 100 122 Q50 148 0 170 Z" fill="#cbdbc0"/>
+      <text x="96" y="70" class="mlab hill">Collserola hills</text>
+      <g transform="translate(132 119)"><path d="M-6 6 L0 -6 L6 6z" fill="#9db58f"/><text y="18" class="mlab hill" style="font-size:9px">Tibidabo</text></g>
+      <!-- sea -->
+      <path d="M252,516 L302,480 L337,428 L366,364 L403,392 L418,341 L449,304 L476,263 L503,237 L530,201 L557,170 L585,124 L600,93 L600,93 L600,516 L252,516 Z" fill="#d6e9ec"/>
+      <path d="M252,516 L302,480 L337,428 L366,364 L403,392 L418,341 L449,304 L476,263 L503,237 L530,201 L557,170 L585,124 L600,93 L600,93 L600,516 L252,516 Z" fill="url(#waves)" opacity=".7"/>
+      <text x="530" y="420" class="mlab sea">Mediterranean</text>
+      <!-- Montjuic -->
+      <ellipse cx="275" cy="418" rx="46" ry="38" fill="#d8e3cf"/>
+      <text x="283" y="444" class="mlab hill">Montjuïc</text>
+      <!-- Avinguda Diagonal -->
+      <polyline points="128,309 226,271 286,255 396,214 526,175" fill="none" stroke="#e2d4bd" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+      <text x="258" y="250" class="mlab road" transform="rotate(-15 258 250)">Av. Diagonal</text>
+      <g id="halos"></g><g id="leaders"></g>
+      <g id="pins"></g>
+      <g id="campusPin"></g>
+      <!-- compass -->
+      <g transform="translate(572 30)"><circle r="13" fill="#fffaf0" stroke="#d5cbb8"/><path d="M0 -8 L4 3 L0 1 L-4 3z" fill="#1f5f5b"/><text y="-15" class="mlab tiny" style="font-weight:700;fill:#1f5f5b">N</text></g>
+      <text x="590" y="508" class="mlab tiny" style="text-anchor:end">Approximate locations · OpenStreetMap is more precise</text>
+    </svg>
+  </div>
+
+  <div class="adetail" id="aDetail"></div>
+
+  <h3 class="sec" style="display:flex;justify-content:space-between;align-items:center">All areas at a glance <button class="sortbtn" id="sortBtn" hidden>Sort: closest first</button></h3>
+  <div class="area" id="areaList"></div>
+
+  <h3 class="sec">Before you pay anything</h3>
+  <div class="tip">💡 Ask whether bills are included. A €500 room can cost around €580–620 once electricity, water and internet are added.</div>
+  <div class="tip">💡 A deposit (<i>fianza</i>) of one to two months' rent is typical. Only pay it after you've seen the room and read the contract.</div>
+
+  <button class="btn" onclick="startCheck()">Check a listing</button>
+  <button class="btn ghost" onclick="show('s-intro')">Back</button>
+  <p class="src">Ranges are approximate 2026 asking prices and change quickly; always compare with current listings. Sources:
+    <a href="https://www.idealista.com/sala-de-prensa/notas-de-prensa/2026/08/24/266632-la-oferta-de-habitaciones-se-dispara-un-12-y-el-precio-se-queda-casi-plano" target="_blank" rel="noopener">idealista, Q2 2026 room report</a> ·
+    <a href="https://www.uniplaces.com/city-explorer/cost-of-living-in-barcelona-2026/" target="_blank" rel="noopener">Uniplaces, Cost of living in Barcelona 2026</a> ·
+    <a href="https://www.casaradar.io/blog/barcelona-rent-prices-2026" target="_blank" rel="noopener">CasaRadar, Barcelona rent prices 2026</a>.</p>
+</section>
+
+<!-- Screen: for universities -->
+<section class="card hidden" id="s-uni">
+  <span class="pill">For universities &amp; international offices</span>
+  <h1 style="font-size:1.4rem">Fewer students arriving without a room.</h1>
+  <p class="muted">Every intake, some incoming students lose a deposit to a fake listing. Then your team handles the emergency housing, the stress and the late start. Checkie helps stop it before they pay.</p>
+
+  <div class="benefit"><span class="ic">✉️</span><span><b>One link in emails you already send</b><p>A co-branded Checkie link for your pre-arrival and welcome emails. No integration, no IT project.</p></span></div>
+  <div class="benefit"><span class="ic">🧑‍💼</span><span><b>A real person checks the screenshots</b><p>For partner universities, a trained Checkie reviewer vets the screenshots students submit, on top of today's AI check (beta).</p></span></div>
+  <div class="benefit"><span class="ic">📥</span><span><b>Fewer, clearer emails to your office</b><p>Checkie answers the routine "is this a scam?" questions first. When a student still needs a person, they reach your office with a short ready-made message listing exactly what was flagged.</p></span></div>
+  <div class="benefit"><span class="ic">🗺️</span><span><b>Kept up to date every semester</b><p>Scam patterns and the area &amp; price guide are refreshed before each intake, so the advice stays current.</p></span></div>
+  <div class="benefit"><span class="ic">📊</span><span><b>A semester report on your intake</b><p>Anonymous figures on how many of your incoming students met scam tactics, to support your housing guidance.</p></span></div>
+  <div class="benefit"><span class="ic">🔒</span><span><b>Low data risk for you</b><p>The self-check stores no personal data. Screenshot checks are opt-in and nothing is stored by Checkie.</p></span></div>
+
+  <div class="offer"><b>Annual subscription, scaled to your intake</b><p>Priced to stay affordable for universities while keeping the service maintained. Founding partners help shape the review service and the semester report.</p></div>
+
+  <a class="btn" id="pilotBtn" href="#" style="text-align:center;text-decoration:none">Talk to us about a pilot</a>
+  <button class="btn ghost" onclick="show('s-intro')">Back</button>
+</section>
+
+<footer><a onclick="show('s-guide')">Area &amp; price guide</a> · <a onclick="show('s-uni')">For universities</a><br>Checkie never tells you a listing is safe. The self-check stores no personal data.</footer>
+</main>
+
+<script>
+
+const CONTACT_EMAIL = "";     // fill in, e.g. you@example.com, to make "Talk to us" open an email
+
+const QUESTIONS = [{"ic": "💸", "t": "Did they ask you to pay before you've seen the room?", "d": "A deposit, booking fee or \"reservation\" before a viewing in person or on a live video call.", "ex": "\"Send €300 today to hold the room for you.\"", "flag": "Payment requested before any viewing.", "why": "This is the most common rental scam pattern. Once the money is sent, it is very hard to get back."}, {"ic": "✈️", "t": "Is the landlord \"abroad\" and unable to show it?", "d": "They say they'll post the keys, or someone will hand them over after you pay.", "ex": "\"I'm working in London, I'll send the keys by courier.\"", "flag": "Landlord 'abroad', keys sent after payment.", "why": "A real owner or agency can arrange a viewing or a live video call."}, {"ic": "🏦", "t": "Do they want an unusual way to pay?", "d": "Money-transfer services, crypto, gift cards, or a bank account outside Spain.", "ex": "\"Please use Western Union, it's faster for me.\"", "flag": "Unusual or untraceable payment method.", "why": "These payments are almost impossible to reverse. Legitimate rentals use a bank transfer to a Spanish account in the owner's or agency's name."}, {"ic": "🏷️", "t": "Is it much cheaper than similar rooms nearby?", "d": "Compare it with the area & price guide. A big gap is a warning sign.", "ex": "A room in Eixample for €300 a month.", "flag": "Price well below the area.", "why": "A price that looks too good is used to make you rush before you compare."}, {"ic": "⏱️", "t": "Are they rushing you to decide?", "d": "Pressure to pay today, or being told lots of other people want it.", "ex": "\"5 people are interested, pay now or lose it.\"", "flag": "Pressure to pay quickly.", "why": "Urgency stops you from checking. A genuine offer can wait a day for a viewing."}, {"ic": "📄", "t": "No written contract before paying?", "d": "You haven't seen a contract with the owner's name and the room's address.", "ex": "\"We'll sign everything when you arrive.\"", "flag": "No written contract before payment.", "why": "You should read the contract, with the owner's identity and the address, before paying anything."}, {"ic": "🪪", "t": "Do they want your passport or ID before you've seen it?", "d": "A photo or scan of your passport, ID card or residence permit, just to \"reserve\" or \"send the contract\".", "ex": "\"Send me a photo of your passport so I can hold the room.\"", "flag": "ID requested before any viewing.", "why": "Copies of your ID can be used for identity fraud. You normally show ID when you sign the contract, not before."}, {"ic": "💬", "t": "Did they move the chat off the website?", "d": "They asked to continue on WhatsApp, Telegram or private email instead of the platform's messages.", "ex": "\"Let's talk on WhatsApp, it's easier.\"", "flag": "Conversation moved off the platform.", "why": "Off the platform you lose its moderation, records and any buyer protection, which is why scammers prefer it."}, {"ic": "📍", "t": "Won't they give you the exact address?", "d": "You only have a neighbourhood or a street name, not the building number and floor.", "ex": "\"I'll send you the address after the deposit.\"", "flag": "No exact address before payment.", "why": "Without the address you can't check that the building exists or matches the photos, for example on Google Street View."}, {"ic": "📸", "t": "Do they avoid a live video call of the room?", "d": "They only send photos, or the photos look like a hotel or appear on other listings.", "ex": "\"My camera is broken, but the photos are recent.\"", "flag": "No live video tour; photos can't be verified.", "why": "Stolen photos are common. Ask for a live video call and search the photos with a reverse image search."}, {"ic": "💶", "t": "Are they asking for more than two months' rent upfront?", "d": "Deposit, first month and extra guarantees added together, before you move in.", "ex": "\"Three months in advance plus deposit to confirm.\"", "flag": "Large upfront payment.", "why": "Deposits of one to two months are typical. Big upfront sums increase what you lose if the listing isn't real."}, {"ic": "🧾", "t": "Are they charging you an extra fee you don't understand?", "d": "An \"admin\", \"booking\", \"key\" or agency fee, especially before you've signed anything.", "ex": "\"Just €150 admin fee and I'll email you the contract.\"", "flag": "Unexplained extra fee.", "why": "Fake fees are a common add-on. For a standard rental of a home, Spain's 2023 housing law says the landlord pays the agency's fees, so ask what any fee to you is for."}];
+const OPTS = [["yes","Yes","✓"],["no","No","✕"],["unsure","Not sure","?"]];
+let i = 0; const ans = [];
+
+function show(id){ ["s-intro","s-check","s-shot","s-result","s-guide","s-uni"].forEach(s=>document.getElementById(s).classList.toggle("hidden", s!==id)); window.scrollTo(0,0); }
+function startCheck(){ i=0; show("s-check"); render(); }
+function render(){
+  const Q = QUESTIONS[i];
+  document.getElementById("bar").style.width = ((i)/QUESTIONS.length*100)+"%";
+  document.getElementById("stepLabel").textContent = "Question "+(i+1)+" of "+QUESTIONS.length;
+  document.getElementById("qText").textContent = Q.t;
+  document.getElementById("qIc").textContent = Q.ic;
+  document.getElementById("qDesc").textContent = Q.d;
+  document.getElementById("qEx").textContent = Q.ex.replace(/^"|"$/g,"");
+  document.getElementById("qWhy").textContent = Q.why;
+  const box = document.getElementById("qOpts"); box.innerHTML = "";
+  OPTS.forEach(([v,l,sym])=>{
+    const b=document.createElement("button"); b.className="opt big "+v; b.innerHTML='<span class="sym">'+sym+'</span>'+l;
+    b.setAttribute("aria-pressed", ans[i]===v ? "true":"false");
+    b.onclick=()=>{ ans[i]=v; render(); };
+    box.appendChild(b);
+  });
+  document.getElementById("nextBtn").disabled = !ans[i];
+  document.getElementById("nextBtn").textContent = i===QUESTIONS.length-1 ? "Continue" : "Next";
+  document.getElementById("backBtn").style.display = i===0 ? "none" : "block";
+}
+function next(){ if(i<QUESTIONS.length-1){ i++; render(); } else show("s-shot"); }
+function backToQuestions(){ show("s-check"); render(); }
+function back(){ if(i>0){ i--; render(); } }
+function result(){
+  const yes = QUESTIONS.filter((_,k)=>ans[k]==="yes");
+  const unsure = QUESTIONS.filter((_,k)=>ans[k]==="unsure");
+  const box=document.getElementById("resBox"), t=document.getElementById("resTitle"), p=document.getElementById("resText");
+  if(yes.length>=3){ box.className="result stop"; t.textContent="Stop before you pay"; p.textContent=yes.length+" common scam patterns are present. Don't send money until you've seen the room and have a written contract."; }
+  else if(yes.length>=1 || unsure.length>=2){ box.className="result warn"; t.textContent="Be careful"; p.textContent="Some warning signs, or things you couldn't confirm. Verify them before paying anything."; }
+  else { box.className="result ok"; t.textContent="No common patterns found"; p.textContent="That does not mean it's safe. Still see the room and get a written contract first."; }
+  const list=document.getElementById("flagList"); list.innerHTML="";
+  yes.forEach(Q=>{ const li=document.createElement("li"); li.textContent=Q.flag; list.appendChild(li); });
+  unsure.forEach(Q=>{ const li=document.createElement("li"); li.textContent="Not sure: "+Q.flag.toLowerCase(); list.appendChild(li); });
+  document.getElementById("flagWrap").style.display = (yes.length||unsure.length) ? "block":"none";
+  document.getElementById("bar").style.width="100%";
+  const rf=document.getElementById("resFile");
+  if(shots.length){ document.getElementById("resFileTxt").textContent = shots.length===1 ? "Your screenshot:" : "Your "+shots.length+" screenshots:"; rf.hidden=false; } else { rf.hidden=true; }
+  renderGrid(document.getElementById("resGrid"), false);
+  if(typeof renderHelp==="function"){ const hs=document.getElementById("helpSel"); if(!hs.value && campus && campus.id) hs.value=campus.id; renderHelp(); }
+  if(typeof aiShow==="function"){ aiShow(); document.getElementById("aiOut").hidden=true; document.getElementById("aiErr").hidden=true; }
+  show("s-result");
+}
+
+// Screenshots: up to 10, read locally only, never uploaded
+const MAX_SHOTS = 10;
+const shotIn=document.getElementById("shotIn"), dz=document.getElementById("dropZone"), shotRm=document.getElementById("shotRm");
+const shots=[]; // {name,size,url}
+function fmtSize(b){ return b>1048576 ? (b/1048576).toFixed(1)+" MB" : Math.max(1,Math.round(b/1024))+" KB"; }
+function warn(msg){ const w=document.getElementById("shotWarn"); w.textContent=msg; w.style.display=msg?"block":"none"; }
+function addShots(list){
+  warn("");
+  const files=[...(list||[])];
+  const imgs=files.filter(f=>f.type && f.type.startsWith("image/"));
+  if(imgs.length<files.length) warn("Only image files can be added.");
+  const room=MAX_SHOTS-shots.length;
+  if(imgs.length>room) warn("You can add up to "+MAX_SHOTS+" screenshots. "+(imgs.length-room)+" not added.");
+  imgs.slice(0,Math.max(0,room)).forEach(f=>{
+    const item={name:f.name,size:f.size,url:null,file:f}; shots.push(item);
+    const r=new FileReader(); r.onload=()=>{ item.url=r.result; refresh(); }; r.readAsDataURL(f);
+  });
+  refresh();
+}
+function renderGrid(el, removable){
+  el.innerHTML="";
+  shots.forEach((s,k)=>{
+    const t=document.createElement("div"); t.className="thumb"; t.title=s.name+" · "+fmtSize(s.size);
+    if(s.url){ const im=document.createElement("img"); im.alt=""; im.src=s.url; im.onerror=()=>im.remove(); t.appendChild(im); } else { t.textContent="🖼️"; }
+    const nm=document.createElement("span"); nm.className="nm"; nm.textContent=s.name; t.appendChild(nm);
+    if(removable){ const x=document.createElement("button"); x.className="x"; x.textContent="✕"; x.setAttribute("aria-label","Remove "+s.name); x.onclick=e=>{ e.preventDefault(); shots.splice(k,1); warn(""); refresh(); }; t.appendChild(x); }
+    el.appendChild(t);
+  });
+}
+function refresh(){
+  document.getElementById("shotN").textContent=shots.length;
+  document.getElementById("shotCount").hidden = shots.length===0;
+  dz.classList.toggle("has", shots.length>0);
+  document.querySelector("#dropZone .dz-title").textContent = shots.length>=MAX_SHOTS ? "Limit reached (10 screenshots)" : (shots.length ? "Drop more screenshots here" : "Drop up to 10 screenshots here");
+  renderGrid(document.getElementById("shotGrid"), true);
+}
+shotIn.onchange=()=>{ addShots(shotIn.files); shotIn.value=""; };
+["dragenter","dragover"].forEach(ev=>dz.addEventListener(ev,x=>{x.preventDefault();dz.classList.add("drag");}));
+["dragleave","drop"].forEach(ev=>dz.addEventListener(ev,x=>{x.preventDefault();dz.classList.remove("drag");}));
+dz.addEventListener("drop",x=>addShots(x.dataTransfer && x.dataTransfer.files));
+window.addEventListener("dragover",x=>x.preventDefault()); window.addEventListener("drop",x=>x.preventDefault());
+shotRm.onclick=e=>{ e.preventDefault(); shots.length=0; warn(""); refresh(); };
+
+// University contact
+const pilotBtn=document.getElementById("pilotBtn");
+if(CONTACT_EMAIL){ pilotBtn.href="mailto:"+CONTACT_EMAIL+"?subject="+encodeURIComponent("Checkie pilot for our university"); }
+else { pilotBtn.removeAttribute("href"); pilotBtn.textContent="Pilot contact coming soon"; pilotBtn.style.opacity=".6"; pilotBtn.style.cursor="default"; }
+
+// ---------- Area guide map ----------
+var campus=null, sortClosest=false;
+function projX(lng){ return Math.round((lng-2.085)*3871); }
+function projY(lat){ return Math.round((41.445-lat)*5161); }
+const ICONS = {"park": "<svg viewBox=\"0 0 60 60\" width=\"60\" height=\"60\"><path d=\"M6 52 h48\" stroke=\"#a8b98f\" stroke-width=\"3\"/><rect x=\"14\" y=\"30\" width=\"32\" height=\"22\" rx=\"3\" fill=\"#f3d9b1\"/><path d=\"M12 31 q18 -26 36 0z\" fill=\"#d98a5f\"/><g fill=\"#7fa79f\"><circle cx=\"20\" cy=\"27\" r=\"2.4\"/><circle cx=\"28\" cy=\"22\" r=\"2.4\"/><circle cx=\"36\" cy=\"24\" r=\"2.4\"/></g><g fill=\"#f2b84b\"><circle cx=\"24\" cy=\"25\" r=\"2\"/><circle cx=\"32\" cy=\"22\" r=\"2\"/><circle cx=\"40\" cy=\"28\" r=\"2\"/></g><path d=\"M30 8 v8\" stroke=\"#d98a5f\" stroke-width=\"3\" stroke-linecap=\"round\"/><circle cx=\"30\" cy=\"7\" r=\"3\" fill=\"#fff6e8\" stroke=\"#d98a5f\" stroke-width=\"1.5\"/><rect x=\"26\" y=\"40\" width=\"8\" height=\"12\" rx=\"4\" fill=\"#9a6a48\"/><g fill=\"#fff6e8\"><rect x=\"17\" y=\"38\" width=\"5\" height=\"6\" rx=\"1\"/><rect x=\"38\" y=\"38\" width=\"5\" height=\"6\" rx=\"1\"/></g></svg>", "sagrada": "<svg viewBox=\"0 0 60 60\" width=\"60\" height=\"60\"><g fill=\"#d9bf98\"><path d=\"M12 54 V26 q3 -16 6 0 V54z\"/><path d=\"M21 54 V16 q4 -18 8 0 V54z\"/><path d=\"M31 54 V12 q4 -20 8 0 V54z\"/><path d=\"M41 54 V22 q3 -16 6 0 V54z\"/></g><rect x=\"9\" y=\"40\" width=\"42\" height=\"14\" fill=\"#cdb08a\"/><path d=\"M24 54 q6 -14 12 0z\" fill=\"#9a7a58\"/><g fill=\"#f2b84b\"><circle cx=\"25\" cy=\"2\" r=\"2\"/><circle cx=\"35\" cy=\"-2\" r=\"2\"/></g><g fill=\"#fff6e8\"><rect x=\"14\" y=\"30\" width=\"2\" height=\"5\"/><rect x=\"24\" y=\"24\" width=\"2\" height=\"5\"/><rect x=\"34\" y=\"22\" width=\"2\" height=\"5\"/><rect x=\"44\" y=\"30\" width=\"2\" height=\"5\"/></g></svg>", "market": "<svg viewBox=\"0 0 60 60\" width=\"60\" height=\"60\"><path d=\"M30 10 L54 30 H6z\" fill=\"#7fa79f\"/><path d=\"M30 14 L48 29 H12z\" fill=\"#9fc3b8\"/><rect x=\"8\" y=\"30\" width=\"44\" height=\"22\" fill=\"#efc48a\"/><g fill=\"#fff6e8\"><path d=\"M12 52 V40 q4 -6 8 0 V52z\"/><path d=\"M26 52 V40 q4 -6 8 0 V52z\"/><path d=\"M40 52 V40 q4 -6 8 0 V52z\"/></g><circle cx=\"30\" cy=\"22\" r=\"3.5\" fill=\"#fff6e8\" stroke=\"#1f5f5b\" stroke-width=\"1.2\"/><path d=\"M4 52 h52\" stroke=\"#a8b98f\" stroke-width=\"3\"/></svg>", "arc": "<svg viewBox=\"0 0 60 60\" width=\"60\" height=\"60\"><rect x=\"12\" y=\"16\" width=\"36\" height=\"38\" fill=\"#c9774f\"/><rect x=\"10\" y=\"12\" width=\"40\" height=\"7\" rx=\"1\" fill=\"#b2603c\"/><path d=\"M22 54 V36 a8 8 0 0 1 16 0 V54z\" fill=\"#f6efe2\"/><g fill=\"#e6a77e\"><rect x=\"14\" y=\"22\" width=\"4\" height=\"30\"/><rect x=\"42\" y=\"22\" width=\"4\" height=\"30\"/></g><g fill=\"#f2b84b\"><circle cx=\"16\" cy=\"9\" r=\"2.5\"/><circle cx=\"44\" cy=\"9\" r=\"2.5\"/></g><path d=\"M4 54 h52\" stroke=\"#a8b98f\" stroke-width=\"3\"/></svg>", "museum": "<svg viewBox=\"0 0 60 60\" width=\"60\" height=\"60\"><rect x=\"6\" y=\"22\" width=\"48\" height=\"30\" fill=\"#fbfbf8\" stroke=\"#cfc7b6\"/><rect x=\"6\" y=\"18\" width=\"30\" height=\"6\" fill=\"#ecebe5\" stroke=\"#cfc7b6\"/><path d=\"M36 22 q10 -12 18 0\" fill=\"#ecebe5\" stroke=\"#cfc7b6\"/><g fill=\"#b9d6dc\"><rect x=\"10\" y=\"28\" width=\"40\" height=\"10\"/></g><g stroke=\"#cfc7b6\"><path d=\"M18 28v10M26 28v10M34 28v10M42 28v10\"/></g><rect x=\"24\" y=\"42\" width=\"12\" height=\"10\" fill=\"#1f5f5b\"/><path d=\"M2 52 h56\" stroke=\"#a8b98f\" stroke-width=\"3\"/><circle cx=\"48\" cy=\"48\" r=\"3\" fill=\"#f2b84b\"/><path d=\"M48 51 v4\" stroke=\"#1d2a33\" stroke-width=\"1.5\"/></svg>", "tower": "<svg viewBox=\"0 0 60 60\" width=\"60\" height=\"60\"><path d=\"M20 54 V22 q10 -24 20 0 V54z\" fill=\"#5f8fbf\"/><path d=\"M20 54 V22 q10 -24 20 0 V54z\" fill=\"url(#none)\"/><g fill=\"#e85d4a\" opacity=\".85\"><rect x=\"22\" y=\"44\" width=\"16\" height=\"10\"/></g><g fill=\"#f2b84b\" opacity=\".85\"><rect x=\"21\" y=\"34\" width=\"18\" height=\"10\"/></g><g fill=\"#7fd1c7\" opacity=\".7\"><rect x=\"21\" y=\"24\" width=\"18\" height=\"10\"/></g><g stroke=\"#fff\" stroke-width=\".8\" opacity=\".6\"><path d=\"M24 20v34M28 16v38M32 16v38M36 20v34\"/></g><path d=\"M4 54 h52\" stroke=\"#a8b98f\" stroke-width=\"3\"/><path d=\"M8 50 q6 -6 12 0\" fill=\"#bcd3c0\"/><path d=\"M44 50 q6 -8 12 0\" fill=\"#bcd3c0\"/></svg>", "station": "<svg viewBox=\"0 0 60 60\" width=\"60\" height=\"60\"><rect x=\"6\" y=\"26\" width=\"48\" height=\"24\" rx=\"2\" fill=\"#efc48a\"/><path d=\"M4 28 L30 14 L56 28z\" fill=\"#d98a5f\"/><rect x=\"22\" y=\"34\" width=\"16\" height=\"16\" fill=\"#1f5f5b\"/><circle cx=\"30\" cy=\"22\" r=\"4\" fill=\"#fff6e8\" stroke=\"#1d2a33\" stroke-width=\"1.2\"/><path d=\"M30 20 v2 h2\" stroke=\"#1d2a33\" stroke-width=\"1.2\" fill=\"none\"/><g fill=\"#fff6e8\"><rect x=\"10\" y=\"32\" width=\"8\" height=\"8\" rx=\"1\"/><rect x=\"42\" y=\"32\" width=\"8\" height=\"8\" rx=\"1\"/></g><path d=\"M2 54 h56\" stroke=\"#7d6a55\" stroke-width=\"2\"/><path d=\"M2 57 h56\" stroke=\"#7d6a55\" stroke-width=\"2\" stroke-dasharray=\"3 3\"/></svg>", "fountain": "<svg viewBox=\"0 0 60 60\" width=\"60\" height=\"60\"><path d=\"M0 40 q30 -40 60 0 V54 H0z\" fill=\"#bcd3c0\"/><rect x=\"24\" y=\"12\" width=\"12\" height=\"16\" fill=\"#e3d6c2\"/><path d=\"M22 12 h16 l-8 -8z\" fill=\"#cdb08a\"/><ellipse cx=\"30\" cy=\"50\" rx=\"22\" ry=\"5\" fill=\"#9fc3b8\"/><g stroke=\"#7fb7c9\" stroke-width=\"2.4\" fill=\"none\" stroke-linecap=\"round\"><path d=\"M30 48 V30\"/><path d=\"M30 34 q-8 -2 -12 10\"/><path d=\"M30 34 q8 -2 12 10\"/></g><g fill=\"#f2b84b\" opacity=\".8\"><circle cx=\"30\" cy=\"28\" r=\"3\"/></g></svg>", "bunkers": "<svg viewBox=\"0 0 60 60\" width=\"60\" height=\"60\"><path d=\"M0 54 Q12 22 30 20 Q48 18 60 54z\" fill=\"#a8b98f\"/><path d=\"M14 54 Q22 34 30 32 Q40 30 48 54z\" fill=\"#bcd3c0\"/><rect x=\"20\" y=\"18\" width=\"20\" height=\"6\" rx=\"1\" fill=\"#cfc7b6\"/><g fill=\"#1d2a33\"><circle cx=\"26\" cy=\"15\" r=\"2.5\"/><circle cx=\"34\" cy=\"15\" r=\"2.5\"/></g><g fill=\"#e6a77e\"><rect x=\"24\" y=\"17\" width=\"4\" height=\"2\"/><rect x=\"32\" y=\"17\" width=\"4\" height=\"2\"/></g><circle cx=\"48\" cy=\"12\" r=\"5\" fill=\"#f2b84b\"/><g fill=\"#fff6e8\"><rect x=\"6\" y=\"46\" width=\"4\" height=\"4\"/><rect x=\"50\" y=\"46\" width=\"4\" height=\"4\"/></g></svg>", "chimney": "<svg viewBox=\"0 0 60 60\" width=\"60\" height=\"60\"><rect x=\"36\" y=\"6\" width=\"8\" height=\"40\" fill=\"#c9774f\"/><g stroke=\"#b2603c\" stroke-width=\"1\"><path d=\"M36 14h8M36 22h8M36 30h8M36 38h8\"/></g><rect x=\"6\" y=\"30\" width=\"34\" height=\"22\" fill=\"#d98a5f\"/><path d=\"M6 30 l8 -6 l8 6 l8 -6 l8 6\" fill=\"#c9774f\"/><g fill=\"#fff6e8\"><rect x=\"10\" y=\"36\" width=\"6\" height=\"8\" rx=\"1\"/><rect x=\"20\" y=\"36\" width=\"6\" height=\"8\" rx=\"1\"/><rect x=\"30\" y=\"36\" width=\"6\" height=\"8\" rx=\"1\"/></g><rect x=\"40\" y=\"40\" width=\"16\" height=\"12\" fill=\"#e6a77e\"/><g fill=\"#d8d0c2\" opacity=\".8\"><circle cx=\"40\" cy=\"4\" r=\"3\"/><circle cx=\"46\" cy=\"1\" r=\"2\"/></g><path d=\"M2 54 h56\" stroke=\"#a8b98f\" stroke-width=\"3\"/></svg>", "stadium": "<svg viewBox=\"0 0 60 60\" width=\"60\" height=\"60\"><ellipse cx=\"30\" cy=\"40\" rx=\"27\" ry=\"13\" fill=\"#5f6b78\"/><ellipse cx=\"30\" cy=\"38\" rx=\"27\" ry=\"13\" fill=\"#9aa5b1\"/><ellipse cx=\"30\" cy=\"38\" rx=\"19\" ry=\"8\" fill=\"#7fbf7a\"/><path d=\"M30 30v16\" stroke=\"#fff\" stroke-width=\"1\"/><ellipse cx=\"30\" cy=\"38\" rx=\"4\" ry=\"2\" fill=\"none\" stroke=\"#fff\" stroke-width=\"1\"/><g fill=\"#e6a77e\"><rect x=\"6\" y=\"22\" width=\"2\" height=\"12\"/><rect x=\"52\" y=\"22\" width=\"2\" height=\"12\"/></g><g fill=\"#f2b84b\"><circle cx=\"7\" cy=\"21\" r=\"2.5\"/><circle cx=\"53\" cy=\"21\" r=\"2.5\"/></g></svg>", "tibidabo": "<svg viewBox=\"0 0 60 60\" width=\"60\" height=\"60\"><path d=\"M0 54 Q20 24 30 26 Q42 24 60 54z\" fill=\"#a8b98f\"/><rect x=\"24\" y=\"14\" width=\"12\" height=\"14\" fill=\"#e3d6c2\"/><path d=\"M22 14 h16 l-8 -9z\" fill=\"#cdb08a\"/><path d=\"M30 5 v-4\" stroke=\"#f2b84b\" stroke-width=\"2\"/><circle cx=\"30\" cy=\"1\" r=\"1.8\" fill=\"#f2b84b\"/><rect x=\"27\" y=\"20\" width=\"6\" height=\"8\" rx=\"3\" fill=\"#9a7a58\"/><g><path d=\"M42 30 a7 7 0 1 1 0.1 0\" fill=\"none\" stroke=\"#e85d4a\" stroke-width=\"1.5\"/><path d=\"M42 30 v12\" stroke=\"#e85d4a\" stroke-width=\"1.2\"/></g><g fill=\"#fff6e8\"><rect x=\"8\" y=\"46\" width=\"4\" height=\"4\"/><rect x=\"16\" y=\"44\" width=\"4\" height=\"4\"/></g></svg>", "esade": "<svg viewBox=\"0 0 60 60\" width=\"60\" height=\"60\"><path d=\"M30 8 L54 20 L30 32 L6 20z\" fill=\"#1f5f5b\"/><path d=\"M16 25 v12 q14 8 28 0 v-12 l-14 7z\" fill=\"#2c7a73\"/><path d=\"M50 22 v14\" stroke=\"#f2b84b\" stroke-width=\"2\"/><circle cx=\"50\" cy=\"38\" r=\"3\" fill=\"#f2b84b\"/></svg>", "commute": "<svg viewBox=\"0 0 60 60\" width=\"60\" height=\"60\"><rect x=\"8\" y=\"16\" width=\"44\" height=\"30\" rx=\"6\" fill=\"#e85d4a\"/><rect x=\"12\" y=\"20\" width=\"16\" height=\"12\" rx=\"2\" fill=\"#d6e9ec\"/><rect x=\"32\" y=\"20\" width=\"16\" height=\"12\" rx=\"2\" fill=\"#d6e9ec\"/><g fill=\"#1d2a33\"><circle cx=\"18\" cy=\"48\" r=\"4\"/><circle cx=\"42\" cy=\"48\" r=\"4\"/></g><rect x=\"12\" y=\"36\" width=\"36\" height=\"4\" fill=\"#f2b84b\"/><path d=\"M2 54 h56\" stroke=\"#7d6a55\" stroke-width=\"2\"/></svg>"};
+const AREAS = [{"id": "gracia", "lat": 41.4036, "lng": 2.1567, "n": "Gr\u00e0cia", "lm": "Park G\u00fcell", "ic": "park", "x": 250, "y": 182, "pr": "\u20ac480\u2013750", "g": "Popular with students", "tag": "st", "vibe": "A former village swallowed by the city: small squares, independent caf\u00e9s and bars, and a big student and international crowd.", "good": "Social life, students who want a neighbourhood feel", "watch": "Some streets and squares are noisy late at night", "metro": "L3 Fontana \u00b7 L4 Joanic \u00b7 FGC Gr\u00e0cia", "centre": "Short", "esade": "Medium"}, {"id": "eixample", "lat": 41.3917, "lng": 2.1649, "n": "Eixample", "lm": "Sagrada Fam\u00edlia", "ic": "sagrada", "x": 346, "y": 232, "pr": "\u20ac550\u2013750", "g": "Popular with students", "tag": "st", "vibe": "The grid of wide avenues and Modernista buildings in the middle of the city. Very walkable, with shops and transport everywhere.", "good": "Walking everywhere, easy metro to any campus", "watch": "Busy main avenues; flats on them can be loud", "metro": "L2/L3/L4 Passeig de Gr\u00e0cia \u00b7 L3/L5 Diagonal \u00b7 L2/L5 Sagrada Fam\u00edlia", "centre": "Short", "esade": "Medium"}, {"id": "santantoni", "lat": 41.3781, "lng": 2.1617, "n": "Sant Antoni", "lm": "Sant Antoni Market", "ic": "market", "x": 258, "y": 356, "pr": "\u20ac500\u2013700", "g": "Popular with students", "tag": "st", "vibe": "Lively, food-focused area around the restored iron market, between Eixample and the old town.", "good": "Being central without the tourist crowds", "watch": "Prices have risen fast as it became fashionable", "metro": "L2 Sant Antoni \u00b7 L1 Urgell", "centre": "Short", "esade": "Medium"}, {"id": "born", "lat": 41.3851, "lng": 2.1823, "n": "El Born", "lm": "Arc de Triomf (nearby)", "ic": "arc", "x": 414, "y": 288, "pr": "\u20ac550\u2013750", "g": "Popular with students", "tag": "st", "vibe": "Medieval streets, boutiques and bars in the old town, a short walk from the beach and Ciutadella Park.", "good": "Atmosphere and walking to the beach", "watch": "Tourist-heavy; old buildings can be small and lack a lift", "metro": "L4 Jaume I \u00b7 L1 Arc de Triomf", "centre": "Short", "esade": "Medium\u2013long"}, {"id": "raval", "lat": 41.3795, "lng": 2.1683, "n": "El Raval", "lm": "MACBA museum", "ic": "museum", "x": 300, "y": 298, "pr": "\u20ac400\u2013700", "g": "Know before you choose", "tag": "ca", "tl": "Check the exact street", "vibe": "Central, multicultural and cheaper, next to La Rambla, with museums, caf\u00e9s and a busy street life.", "good": "Low budget, central location", "watch": "More petty crime, and some blocks feel unsafe at night. Visit the exact street before committing", "metro": "L3 Liceu \u00b7 L1/L2 Universitat \u00b7 L2 Sant Antoni", "centre": "Short", "esade": "Medium"}, {"id": "poblenou", "lat": 41.4036, "lng": 2.2, "n": "Poblenou", "lm": "Torre Gl\u00f2ries", "ic": "tower", "x": 486, "y": 200, "pr": "\u20ac450\u2013750", "g": "Know before you choose", "tag": "ca", "tl": "Varies by block", "vibe": "Former industrial district turned tech and design hub, with the beach and Rambla del Poblenou.", "good": "Beach life, newer buildings, start-up scene", "watch": "Some blocks are still industrial and very quiet at night", "metro": "L4 Poblenou / Llacuna \u00b7 L1 Gl\u00f2ries", "centre": "Medium", "esade": "Long"}, {"id": "sants", "lat": 41.3757, "lng": 2.1352, "n": "Sants", "lm": "Sants station", "ic": "station", "x": 160, "y": 372, "pr": "\u20ac400\u2013650", "g": "Better value", "tag": "va", "vibe": "Local, working neighbourhood around the main train station. Fewer tourists, more everyday Barcelona.", "good": "Value for money, transport links, quieter evenings", "watch": "Fewer bars and a smaller international scene", "metro": "L3/L5 Sants Estaci\u00f3 \u00b7 L1 Pla\u00e7a de Sants", "centre": "Short", "esade": "Medium"}, {"id": "poblesec", "lat": 41.3732, "lng": 2.1606, "n": "Poble-sec", "lm": "Montju\u00efc fountain", "ic": "fountain", "x": 214, "y": 412, "pr": "\u20ac450\u2013650", "g": "Better value", "tag": "va", "vibe": "Relaxed area at the foot of Montju\u00efc hill, known for tapas bars on Carrer Blai.", "good": "Good value close to the centre, parks on Montju\u00efc", "watch": "Steep streets towards the hill", "metro": "L3 Poble Sec \u00b7 L2/L3 Paral\u00b7lel", "centre": "Short", "esade": "Medium"}, {"id": "horta", "lat": 41.418, "lng": 2.166, "n": "Horta-Guinard\u00f3", "lm": "Bunkers del Carmel", "ic": "bunkers", "x": 332, "y": 110, "pr": "\u20ac400\u2013550", "g": "Better value", "tag": "va", "vibe": "Hilly, residential and green, with some of the best views over the city.", "good": "Lowest prices inside the city, calm", "watch": "Longer ride to the centre and campuses; hilly streets", "metro": "L5 Horta \u00b7 L4 Guinard\u00f3 \u00b7 L5 Vilapicina", "centre": "Medium\u2013long", "esade": "Long"}, {"id": "santandreu", "lat": 41.4357, "lng": 2.1897, "n": "Sant Andreu", "lm": "Fabra i Coats factory", "ic": "chimney", "x": 450, "y": 52, "pr": "\u20ac400\u2013550", "g": "Better value", "tag": "va", "vibe": "Old village centre with a strong local identity, markets and squares, in the north-east of the city.", "good": "Budget, local life", "watch": "Far from the centre and from Esade", "metro": "L1 Sant Andreu \u00b7 L1 Fabra i Puig", "centre": "Medium", "esade": "Long"}, {"id": "lescorts", "lat": 41.3851, "lng": 2.1311, "n": "Les Corts", "lm": "Football stadium", "ic": "stadium", "x": 206, "y": 300, "pr": "\u20ac500\u2013700", "g": "Near the Diagonal campuses", "tag": "st", "vibe": "Residential and business area along Diagonal, home to the big football stadium and university campuses.", "good": "Short trip to Esade Pedralbes and other campuses", "watch": "Quieter, less character in the evenings", "metro": "L3 Les Corts \u00b7 Maria Cristina \u00b7 Palau Reial", "centre": "Medium", "esade": "Short"}, {"id": "sarria", "lat": 41.399, "lng": 2.1218, "n": "Sarri\u00e0", "lm": "Tibidabo (above)", "ic": "tibidabo", "x": 112, "y": 206, "pr": "\u20ac600\u2013800", "g": "Near the Diagonal campuses", "tag": "st", "vibe": "Upmarket, quiet and residential, at the foot of the hills with Tibidabo above.", "good": "Calm, safe-feeling streets near Esade", "watch": "Among the most expensive; fewer bars", "metro": "FGC Sarri\u00e0 (S1/S2/L6)", "centre": "Medium", "esade": "Short\u2013medium"}];
+const OUTSIDE = {"n": "Outside the city", "lat": 41.4500, "lng": 2.2474, "q": "Badalona", "lm": "Commuter train", "ic": "commute", "pr": "\u20ac350\u2013450", "g": "Know before you choose", "tag": "ca", "tl": "Long commute", "vibe": "Towns such as Badalona and Cornell\u00e0, connected by metro and commuter trains.", "good": "Tight budgets", "watch": "Often a 30\u201345 minute commute each way", "metro": "L2 Badalona \u00b7 L5 Cornell\u00e0", "centre": "Long", "esade": "Long"};
+const ESADE = {x:40,y:140};
+function areaDetail(a){
+  const d=document.getElementById("aDetail");
+  d.innerHTML = '<div class="art">'+ICONS[a.ic]+'<span class="lm">📍 '+a.lm+'</span></div>'+
+   '<div class="body"><h4>'+a.n+'<span>'+a.pr+'/mo</span></h4>'+
+   (a.tl?'<div class="tagrow"><span class="tag ca">'+a.tl+'</span></div>':'<div class="tagrow"><span class="tag '+a.tag+'">'+a.g+'</span></div>')+
+   '<p class="vibe">'+a.vibe+'</p><div class="facts">'+
+   '<div><b>Good for</b><span>'+a.good+'</span></div>'+
+   '<div><b>Watch out</b><span>'+a.watch+'</span></div>'+
+   '<div><b>Metro</b><span>'+a.metro+'</span></div>'+
+   '<div><b>To the centre</b><span>'+a.centre+'</span></div>'+
+   '</div>'+travelHTML(a)+'</div>';
+  document.querySelectorAll(".pin").forEach(p=>p.classList.toggle("on",p.dataset.id===a.id));
+  document.querySelectorAll(".arow[data-id]").forEach(r=>r.classList.toggle("on",r.dataset.id===a.id));
+}
+(function buildMap(){
+  const g=document.getElementById("pins"); const NS="http://www.w3.org/2000/svg";
+
+  const halos=document.getElementById("halos");
+  AREAS.forEach(a=>{
+    const dx=projX(a.lng), dy=projY(a.lat);
+    const halo=document.createElementNS(NS,"circle"); halo.setAttribute("cx",a.x); halo.setAttribute("cy",a.y); halo.setAttribute("r","34"); halo.setAttribute("class","halo"); halos.appendChild(halo);
+    const ln=document.createElementNS(NS,"line"); ln.setAttribute("x1",dx); ln.setAttribute("y1",dy); ln.setAttribute("x2",a.x); ln.setAttribute("y2",a.y); ln.setAttribute("class","leader"); document.getElementById("leaders").appendChild(ln);
+    const dot=document.createElementNS(NS,"circle"); dot.setAttribute("cx",dx); dot.setAttribute("cy",dy); dot.setAttribute("r","3.5"); dot.setAttribute("class","truedot"); document.getElementById("leaders").appendChild(dot);
+    const p=document.createElementNS(NS,"g"); p.setAttribute("class","pin"); p.dataset.id=a.id; p.setAttribute("tabindex","0"); p.setAttribute("role","button"); p.setAttribute("aria-label",a.n+", "+a.pr);
+    p.setAttribute("transform","translate("+a.x+" "+a.y+")");
+    p.innerHTML='<circle class="bg" r="19"/><g transform="translate(-15 -15) scale(.5)">'+ICONS[a.ic]+'</g><text y="33">'+a.n+'</text>';
+    p.addEventListener("click",()=>areaDetail(a)); p.addEventListener("keydown",e=>{ if(e.key==="Enter"||e.key===" "){ e.preventDefault(); areaDetail(a);} });
+    g.appendChild(p);
+  });
+  const list=document.getElementById("areaList");
+  [...AREAS, OUTSIDE].forEach(a=>{
+    const r=document.createElement("div"); r.className="arow"; if(a.id) r.dataset.id=a.id;
+    r.innerHTML='<span><span class="mini">'+ICONS[a.ic]+'</span><span><b>'+a.n+'</b><small>'+(a.tl||a.g)+'</small></span></span><span class="pr">'+a.pr+'</span>';
+    r.onclick=()=>{ areaDetail(a); document.getElementById("aDetail").scrollIntoView({behavior:"smooth",block:"center"}); };
+    list.appendChild(r);
+  });
+  areaDetail(AREAS[0]);
+})();
+
+// ---------- Campus distance & travel feasibility ----------
+const CAMPUSES = [{"id": "esade-ped", "n": "Esade – Pedralbes (Barcelona)", "lat": 41.3916, "lng": 2.1146, "office": {"o": "Esade international exchange team", "url": "https://www.esade.edu/en"}}, {"id": "esade-sc", "n": "Esade – Sant Cugat", "lat": 41.473, "lng": 2.0695, "office": {"o": "Esade international exchange team", "url": "https://www.esade.edu/en"}}, {"id": "iese", "n": "IESE – Barcelona campus", "lat": 41.3975, "lng": 2.1158, "office": {"o": "IESE contact directory", "url": "https://www.iese.edu/contact-us/"}}, {"id": "ub-diag", "n": "UB – Diagonal / Zona Universitària", "lat": 41.3851, "lng": 2.118, "office": {"o": "UB International Mobility and Programmes office", "email": "ompi@ub.edu", "url": "https://www.ub.edu/mobilitat-internacional/en/contact-0"}}, {"id": "ub-hist", "n": "UB – Plaça Universitat (historic building)", "lat": 41.3866, "lng": 2.164, "office": {"o": "UB International Mobility and Programmes office", "email": "ompi@ub.edu", "url": "https://www.ub.edu/mobilitat-internacional/en/contact-0"}}, {"id": "upc-nord", "n": "UPC – Campus Nord", "lat": 41.3888, "lng": 2.113, "office": {"o": "UPC International Welcome Unit", "email": "students.international@upc.edu", "url": "https://www.upc.edu/sri/en/mobility_office/students-mobility-office/incomings/contact-us"}}, {"id": "upf-ciut", "n": "UPF – Ciutadella campus", "lat": 41.3905, "lng": 2.1915, "office": {"o": "UPF incoming students", "url": "https://www.upf.edu/web/incoming/exchange-students"}}, {"id": "upf-pob", "n": "UPF – Poblenou campus", "lat": 41.4037, "lng": 2.1945, "office": {"o": "UPF incoming students", "url": "https://www.upf.edu/web/incoming/exchange-students"}}, {"id": "uab", "n": "UAB – Bellaterra campus", "lat": 41.502, "lng": 2.105, "office": {"o": "UAB International Welcome Point", "email": "international.welcome.point@uab.cat", "url": "https://www.uab.cat/web/international-exchange/itineraris/incoming-exchange-students-1345747168037.html"}}];
+function km(a,b){ const R=6371,r=x=>x*Math.PI/180; const dLa=r(b.lat-a.lat), dLo=r(b.lng-a.lng);
+  const s=Math.sin(dLa/2)**2+Math.cos(r(a.lat))*Math.cos(r(b.lat))*Math.sin(dLo/2)**2; return 2*R*Math.asin(Math.sqrt(s)); }
+function estMin(d){ const road=d*1.3; return road<=1.5 ? Math.round(road/4.8*60) : Math.round(10 + road/20*60); }
+function feas(m){ return m<=20?["easy","Easy commute"]:m<=35?["ok","Manageable"]:["long","Long commute"]; }
+function mapsUrl(a){ const origin=(a.q||a.n)+", Barcelona";
+  const dest = campus.custom ? campus.custom : campus.lat+","+campus.lng;
+  return "https://www.google.com/maps/dir/?api=1&origin="+encodeURIComponent(origin)+"&destination="+encodeURIComponent(dest)+"&travelmode=transit"; }
+function travelHTML(a){
+  if(!campus) return '<div class="travel"><small style="margin:0">🎓 Choose your university above to see the distance and travel time from '+a.n+'.</small></div>';
+  if(campus.custom || a.lat==null) return '<div class="travel"><div class="row"><b>To '+(campus.custom?'your campus':campus.n)+'</b></div><a class="routebtn" href="'+mapsUrl(a)+'" target="_blank" rel="noopener">🗺️ See the exact route in Google Maps</a></div>';
+  const d=km(a,campus), m=estMin(d), f=feas(m);
+  return '<div class="travel"><div class="row"><span>To <b>'+campus.n+'</b></span><span class="feas '+f[0]+'">'+f[1]+'</span></div>'+
+    '<div class="row" style="margin-top:6px"><span class="big">~'+m+' min</span><span class="muted">'+d.toFixed(1)+' km straight line</span></div>'+
+    '<small>Rough estimate by public transport or walking. Real times depend on the metro line and changes.</small>'+
+    '<a class="routebtn" href="'+mapsUrl(a)+'" target="_blank" rel="noopener">🗺️ See the exact route in Google Maps</a></div>';
+}
+var current=AREAS[0];
+const _areaDetail=areaDetail; areaDetail=function(a){ current=a; _areaDetail(a); };
+function refreshList(){
+  const list=document.getElementById("areaList");
+  const rows=[...list.children];
+  rows.forEach(r=>{
+    const a=[...AREAS,OUTSIDE].find(x=>(x.id||"out")===(r.dataset.id||"out"));
+    let el=r.querySelector(".dist"); if(!el){ el=document.createElement("span"); el.className="dist"; r.querySelector(".pr").appendChild(el); }
+    if(campus && !campus.custom && a.lat!=null){ const m=estMin(km(a,campus)); el.textContent="~"+m+" min to campus"; r.dataset.min=m; } else { el.textContent=""; r.dataset.min=999; }
+  });
+  const sb=document.getElementById("sortBtn"); sb.hidden = !(campus && !campus.custom);
+  if(sortClosest && campus && !campus.custom){ rows.sort((x,y)=>x.dataset.min-y.dataset.min).forEach(r=>list.appendChild(r)); sb.textContent="Sort: default"; }
+  else { const order=[...AREAS.map(a=>a.id),"out"]; rows.sort((x,y)=>order.indexOf(x.dataset.id||"out")-order.indexOf(y.dataset.id||"out")).forEach(r=>list.appendChild(r)); sb.textContent="Sort: closest first"; }
+}
+function setCampus(c){
+  campus=c;
+  try{ localStorage.setItem("checkie_campus", c ? JSON.stringify(c) : ""); }catch(e){}
+  document.getElementById("campusNote").textContent = !c ? "Each area will then show the distance and an estimated travel time to your campus." :
+    c.custom ? "Custom address: tap an area to open the exact route in Google Maps." : "Showing estimated travel times to "+c.n+".";
+  const cp=document.getElementById("campusPin");
+  if(cp){ cp.innerHTML="";
+    if(c && !c.custom){ const x=projX(c.lng), y=projY(c.lat);
+      if(x>=0 && x<=600 && y>=0 && y<=516){ cp.innerHTML='<g transform="translate('+x+' '+y+')"><path d="M0 0 C-9 -12 -11 -16 -11 -21 a11 11 0 0 1 22 0 c0 5 -2 9 -11 21z" fill="#1f5f5b" stroke="#fffaf0" stroke-width="1.5"/><text y="-17" style="font-size:11px;text-anchor:middle;fill:#fffaf0">🎓</text><title>Your campus</title></g>'; }
+      else { cp.innerHTML='<g transform="translate(300 24)"><rect x="-110" y="-13" width="220" height="24" rx="12" fill="#1f5f5b"/><text y="4" class="mlab campuslab" style="fill:#fffaf0;stroke:none">🎓 Your campus is outside this map</text></g>'; }
+    } }
+  areaDetail(current); refreshList();
+}
+(function initCampus(){
+  const sel=document.getElementById("campusSel"), inp=document.getElementById("campusCustom");
+  CAMPUSES.forEach(c=>{ const o=document.createElement("option"); o.value=c.id; o.textContent=c.n; sel.appendChild(o); });
+  const o=document.createElement("option"); o.value="other"; o.textContent="Other (type the address below)"; sel.appendChild(o);
+  inp.hidden=true;
+  sel.onchange=()=>{ if(sel.value==="other"){ inp.hidden=false; inp.focus(); setCampus(inp.value.trim()?{custom:inp.value.trim()}:null); }
+    else { inp.hidden=true; setCampus(CAMPUSES.find(c=>c.id===sel.value)||null); } };
+  inp.oninput=()=>{ const v=inp.value.trim(); setCampus(v?{custom:v}:null); };
+  document.getElementById("sortBtn").onclick=()=>{ sortClosest=!sortClosest; refreshList(); };
+  document.querySelectorAll("#areaList .arow").forEach(r=>{ if(!r.dataset.id) r.dataset.id="out"; });
+  try{ const s=localStorage.getItem("checkie_campus"); if(s){ const c=JSON.parse(s); if(c.custom){ sel.value="other"; inp.hidden=false; inp.value=c.custom; } else sel.value=c.id; setCampus(c); } }catch(e){}
+  areaDetail(current);
+})();
+
+// ---------- AI screenshot check (Claude, via the artifact "sample" capability) ----------
+var aiSample=null, aiMax=0, aiCtl=null;
+const AI_LEVELS={high:["High concern","Several scam warning signs are visible in your screenshots."],some:["Some warning signs","There are things to verify before you pay."],low:["Few warning signs found","That does not mean it's safe. Still see the room and read the contract first."]};
+function aiShow(){
+  const has=shots.length>0;
+  document.getElementById("aiUnavailable").hidden = !!aiSample;
+  document.getElementById("aiReady").hidden = !(aiSample && has);
+  document.getElementById("aiNoShots").hidden = !(aiSample && !has);
+}
+function aiErrCopy(c){
+  return ({not_granted:"Claude wasn't allowed for this page, so the AI check is switched off.",sampling_disabled:"Claude isn't available on this account.",rate_limited:"Too many checks right now. Try again in a few minutes.",session_expired:"Please sign in to Claude again, then retry.",image_rejected:"One of the screenshots couldn't be read. Try a PNG or JPG screenshot.",refused:"The AI couldn't review these images. Try clearer screenshots of the listing and chat.",invalid_json:"The AI's answer came back in the wrong format. Tap the button to try again.",images_unavailable:"This view can't send images to Claude."})[c]||"Something went wrong. Tap the button to try again.";
+}
+function aiPrompt(){
+  const answers=QUESTIONS.map((Q,k)=>"- "+Q.t+" Student answered: "+(ans[k]||"no answer")).join("\n");
+  const prices=AREAS.map(a=>a.n+": "+a.pr).join("; ");
+  return "You are helping an international or exchange student in Barcelona check a room listing for rental-scam warning signs before they pay anything. "+
+  "The attached images are their screenshots (the listing, chats with the landlord or agent, payment requests). Number them 1 to N in the order given.\n\n"+
+  "Their answers to Checkie's questions:\n"+answers+"\n\n"+
+  "Typical monthly price for a single room in a shared flat (2026, approximate): "+prices+". Barcelona average about 600 euros.\n\n"+
+  "Look for: payment or deposit requested before a viewing; landlord abroad or keys sent by post; untraceable payment (money-transfer services, crypto, gift cards, a foreign bank account, paying a private person instead of the owner or agency); price far below the area; pressure to pay fast; no written contract before payment, or a contract without the owner's identity and the address; requests for passport or ID copies before a viewing; moving the conversation off the platform; details that contradict each other (address, photos, price, dates).\n\n"+
+  "Rules: Never say or imply the listing is safe or legitimate. 'low' means few warning signs were visible, not that it is safe. Describe patterns, never accuse a named person. Do not repeat personal data from the images (names, phone numbers, emails, bank account numbers): refer to them generically, like 'the landlord' or 'a foreign bank account'. If an image is not about a room listing, say so in 'unclear'. If you can't verify something from images (for example whether photos are real), say what the student should check instead. Plain, short sentences for a student who is new to Spain.\n\n"+
+  'Reply with only this JSON: {"level":"high"|"some"|"low","summary":"one or two sentences","signals":[{"pattern":"short name","where":"screenshot number and what you saw","why":"why it matters"}],"verify":["concrete check before paying"],"unclear":"what you could not read or judge, or empty string"}';
+}
+async function aiRun(){
+  const btn=document.getElementById("aiBtn"), stop=document.getElementById("aiStop"), out=document.getElementById("aiOut"), err=document.getElementById("aiErr");
+  err.hidden=true; out.hidden=true;
+  const files=shots.map(s=>s.file).filter(Boolean).slice(0, aiMax||10);
+  if(!files.length) return;
+  btn.disabled=true; btn.textContent="Checking your screenshots…"; stop.hidden=false;
+  let th=document.getElementById("aiThinking");
+  if(!th){ th=document.createElement("div"); th.id="aiThinking"; th.className="thinking"; th.innerHTML='<i></i><span>Reading '+files.length+' screenshot'+(files.length>1?'s':'')+'. This can take up to a minute.</span>'; btn.parentNode.insertBefore(th, btn); }
+  th.hidden=false;
+  aiCtl=new AbortController();
+  try{
+    const r=await aiSample.json(aiPrompt(),{images:files,signal:aiCtl.signal});
+    aiRender(r, files.length);
+  }catch(e){
+    if(e && e.code!=="cancelled"){ err.textContent=aiErrCopy(e && e.code); err.hidden=false; }
+    if(e && (e.code==="not_granted"||e.code==="sampling_disabled"||e.code==="images_unavailable")){ document.getElementById("aiReady").hidden=true; }
+  }finally{
+    th.hidden=true; stop.hidden=true; btn.disabled=false; btn.textContent="Check again";
+  }
+}
+function aiRender(r, n){
+  const lv=AI_LEVELS[r && r.level] ? r.level : "some";
+  const box=document.getElementById("aiLevel"); box.className="aires "+lv; box.textContent=AI_LEVELS[lv][0];
+  const sm=document.createElement("small"); sm.textContent=AI_LEVELS[lv][1]+(shots.length>n?" (Only the first "+n+" screenshots were checked.)":""); box.appendChild(sm);
+  document.getElementById("aiSummary").textContent = String((r&&r.summary)||"");
+  const sig=document.getElementById("aiSignals"); sig.innerHTML="";
+  const list=Array.isArray(r&&r.signals)?r.signals:[];
+  list.slice(0,10).forEach(s=>{ const li=document.createElement("li"); const b=document.createElement("b"); b.textContent=String(s.pattern||"Warning sign"); const w=document.createElement("span"); w.textContent=String(s.where||""); const y=document.createElement("span"); y.textContent=String(s.why||""); li.append(b,w,y); sig.appendChild(li); });
+  document.getElementById("aiSignalsWrap").hidden = list.length===0;
+  const ver=document.getElementById("aiVerify"); ver.innerHTML="";
+  const vl=Array.isArray(r&&r.verify)?r.verify:[];
+  vl.slice(0,8).forEach(v=>{ const li=document.createElement("li"); li.textContent=String(v); ver.appendChild(li); });
+  document.getElementById("aiVerifyWrap").hidden = vl.length===0;
+  document.getElementById("aiUnclear").textContent = r && r.unclear ? "Couldn't judge: "+String(r.unclear) : "";
+  document.getElementById("aiOut").hidden=false;
+}
+(async function initAI(){
+  document.getElementById("aiBtn").onclick=aiRun;
+  document.getElementById("aiStop").onclick=()=>aiCtl&&aiCtl.abort();
+  document.getElementById("aiBack").onclick=e=>{ e.preventDefault(); show("s-shot"); };
+  aiShow();
+  try{
+    if(window.claude && window.claude.use){
+      const s=await window.claude.use("sample");
+      if(s){ const lim=await s.limits().catch(()=>null); if(lim && lim.images){ aiSample=s; aiMax=lim.images.maxCount||10; } }
+    }
+  }catch(e){}
+  aiShow();
+})();
+
+function flaggedList(v){ return QUESTIONS.filter((_,k)=>ans[k]===v).map(Q=>Q.flag.replace(/\.$/,"")).join("; "); }
+// ---------- Feedback (saved privately for the owner via the artifact "db" capability) ----------
+var fbDb=null, fbUser=null, fbNetlify=false, fb={rating:0,tags:[],paid:null};
+const FB_TAGS=["Clearer questions","More scam examples","More areas & prices","Better AI check","Spanish / other languages","Faster to use"];
+function fbValid(){ document.getElementById("fbSend").disabled = !((fbDb||fbNetlify) && (fb.rating || fb.tags.length || fb.paid || document.getElementById("fbText").value.trim())); }
+(function fbUI(){
+  const st=document.getElementById("fbStars");
+  for(let n=1;n<=5;n++){ const b=document.createElement("button"); b.className="star"; b.textContent=n; b.setAttribute("role","radio"); b.setAttribute("aria-checked","false"); b.setAttribute("aria-label",n+" out of 5");
+    b.onclick=()=>{ fb.rating=n; [...st.children].forEach((x,k)=>x.setAttribute("aria-checked", k+1===n?"true":"false")); fbValid(); }; st.appendChild(b); }
+  const ch=document.getElementById("fbChips");
+  FB_TAGS.forEach(t=>{ const b=document.createElement("button"); b.className="chip2"; b.textContent=t; b.setAttribute("aria-pressed","false");
+    b.onclick=()=>{ const on=b.getAttribute("aria-pressed")!=="true"; b.setAttribute("aria-pressed",on?"true":"false"); fb.tags = on ? [...fb.tags,t] : fb.tags.filter(x=>x!==t); fbValid(); }; ch.appendChild(b); });
+  document.querySelectorAll("#fbPaid .chip2").forEach(b=>b.onclick=()=>{ const on=b.getAttribute("aria-pressed")!=="true"; document.querySelectorAll("#fbPaid .chip2").forEach(x=>x.setAttribute("aria-pressed","false")); b.setAttribute("aria-pressed",on?"true":"false"); fb.paid=on?b.dataset.v:null; fbValid(); });
+  document.getElementById("fbText").oninput=fbValid;
+  document.getElementById("fbSend").onclick=async()=>{
+    const btn=document.getElementById("fbSend"), err=document.getElementById("fbErr"); err.hidden=true; btn.disabled=true; btn.textContent="Sending…";
+    try{
+      if(!fbDb && fbNetlify){
+        const body=new URLSearchParams({"form-name":"checkie-feedback",sawWarningSign:fb.paid||"",rating:fb.rating?String(fb.rating):"",tags:fb.tags.join("; "),comment:document.getElementById("fbText").value.trim().slice(0,500),result:(document.getElementById("resTitle")||{}).textContent||"",flagged:flaggedList("yes"),unsure:flaggedList("unsure"),screenshots:String(shots.length),at:new Date().toISOString()});
+        const r=await fetch("/",{method:"POST",headers:{"Content-Type":"application/x-www-form-urlencoded"},body:body.toString()});
+        if(!r.ok) throw new Error(r.status);
+        document.getElementById("fbCard").classList.add("hidden"); document.getElementById("fbThanks").classList.remove("hidden");
+        return;
+      }
+      const uid=await fbUser.id();
+      const lvl=(document.getElementById("resTitle")||{}).textContent||"";
+      await fbDb.collection("feedback/"+uid+"/entries").add({sawWarningSign:fb.paid,rating:fb.rating||null,tags:fb.tags,comment:document.getElementById("fbText").value.trim().slice(0,500),result:lvl,flagged:flaggedList("yes"),unsure:flaggedList("unsure"),screenshots:shots.length,at:new Date().toISOString()});
+      document.getElementById("fbCard").classList.add("hidden"); document.getElementById("fbThanks").classList.remove("hidden");
+    }catch(e){ err.textContent="Couldn't send your feedback. You may need edit access to this page. Try again later."; err.hidden=false; btn.disabled=false; btn.textContent="Send feedback"; }
+  };
+})();
+(async function fbInit(){
+  try{
+    if(window.claude && window.claude.use){
+      const [d,u]=await Promise.all([window.claude.use("db"),window.claude.use("user")]);
+      if(d && u){ fbDb=d; fbUser=u; }
+    }
+  }catch(e){}
+  if(!fbDb && /^https?:$/.test(location.protocol) && !/claude\.(ai|site)|claudeusercontent/.test(location.hostname)) fbNetlify=true;
+  document.getElementById("fbOff").hidden = !!(fbDb||fbNetlify);
+  document.getElementById("fbHostNote").hidden = !fbNetlify;
+  fbValid();
+})();
+
+// ---------- Ask a real person: university international office ----------
+function copyText(text, btn, el){
+  const done=()=>{ const t=btn.textContent; btn.textContent="Copied"; setTimeout(()=>btn.textContent=t,1500); };
+  try{ navigator.clipboard.writeText(text).then(done).catch(()=>{ if(el){ el.focus(); el.select && el.select(); } btn.textContent="Select and copy"; }); }
+  catch(e){ if(el){ el.focus(); el.select && el.select(); } }
+}
+function helpMessage(c){
+  const yes=QUESTIONS.filter((_,k)=>ans[k]==="yes").map(Q=>"- "+Q.flag);
+  const uns=QUESTIONS.filter((_,k)=>ans[k]==="unsure").map(Q=>"- Not sure: "+Q.flag);
+  const lvl=(document.getElementById("resTitle")||{}).textContent||"";
+  return "Subject: Question about a room listing before I pay a deposit\n\nHello,\n\nI'm an incoming student at "+c.n.split(" – ")[0]+" and I'm about to rent a room in Barcelona. Before paying, I ran the listing through Checkie, a scam-pattern check. Its result was: "+lvl+".\n\n"+
+  ((yes.length||uns.length) ? "What it flagged:\n"+yes.concat(uns).join("\n")+"\n\n" : "")+
+  "Could you tell me whether this looks like something I should avoid, or who I can ask about student housing?\n\nThank you,\n[Your name]";
+}
+function renderHelp(){
+  const sel=document.getElementById("helpSel"), out=document.getElementById("helpOut"), other=document.getElementById("helpOther");
+  const c=CAMPUSES.find(x=>x.id===sel.value);
+  other.hidden = sel.value!=="other"; out.hidden=!c;
+  if(!c) return;
+  document.getElementById("offName").textContent=c.office.o;
+  const row=document.getElementById("offMailRow");
+  if(c.office.email){ row.hidden=false; document.getElementById("offMail").textContent=c.office.email; } else { row.hidden=true; }
+  const a=document.getElementById("offLink"); a.href=c.office.url; a.textContent = c.office.email ? "Official contact page ↗" : "Find the right contact on the official page ↗";
+  document.getElementById("offMsg").value=helpMessage(c);
+}
+(function initHelp(){
+  const sel=document.getElementById("helpSel");
+  CAMPUSES.forEach(c=>{ const o=document.createElement("option"); o.value=c.id; o.textContent=c.n; sel.appendChild(o); });
+  const o=document.createElement("option"); o.value="other"; o.textContent="Another university"; sel.appendChild(o);
+  if(campus && campus.id) sel.value=campus.id;
+  sel.onchange=renderHelp;
+  document.getElementById("offCopy").onclick=e=>copyText(document.getElementById("offMail").textContent,e.currentTarget,null);
+  document.getElementById("msgCopy").onclick=e=>copyText(document.getElementById("offMsg").value,e.currentTarget,document.getElementById("offMsg"));
+})();
+
+// ---------- Share link ----------
+(function(){
+  const b=document.getElementById("shareBtn"); if(!b) return;
+  const url=(/^https?:$/.test(location.protocol)?location.origin+location.pathname:"https://symphonious-jelly-dabdfa.netlify.app");
+  b.onclick=()=>{ const show=()=>{ const l=document.getElementById("shareLink"); l.textContent=url; l.hidden=false; };
+    try{ navigator.clipboard.writeText(url).then(()=>{ b.textContent="Link copied. Paste it in your group chat"; show(); }).catch(show); }catch(e){ show(); } };
+})();
+</script>
+<form name="checkie-feedback" method="POST" data-netlify="true" netlify-honeypot="bot-field" hidden>
+  <input type="hidden" name="form-name" value="checkie-feedback">
+  <input name="bot-field"><input name="sawWarningSign"><input name="rating"><input name="tags">
+  <textarea name="comment"></textarea><input name="result"><input name="flagged"><input name="unsure"><input name="screenshots"><input name="at">
+</form>
+<div class="street" aria-hidden="true">
+  <div class="road"></div>
+  <svg class="scene" viewBox="0 -50 720 142" preserveAspectRatio="xMidYMax meet">
+    <!-- Sagrada-style spires -->
+    <g fill="#e3d6c2">
+      <path d="M40 92 V40 q6 -30 12 0 V92z"/><path d="M66 92 V24 q7 -36 14 0 V92z"/><path d="M94 92 V16 q7 -40 14 0 V92z"/><path d="M122 92 V32 q6 -32 12 0 V92z"/>
+      <rect x="30" y="66" width="114" height="26"/>
+      <path d="M76 84 q11 -20 22 0z" fill="#d6c6ae"/>
+      <circle cx="73" cy="5" r="3" fill="#e9c98f"/><circle cx="101" cy="-5" r="3" fill="#e9c98f"/>
+    </g>
+    <!-- Modernista wavy-roof house -->
+    <g>
+      <path d="M290 92 V34 q20 -24 40 -6 q20 18 40 -2 q14 -12 26 4 V92z" fill="#cfe0da"/>
+      <g fill="#fffaf0"><ellipse cx="315" cy="54" rx="9" ry="11"/><ellipse cx="343" cy="54" rx="9" ry="11"/><ellipse cx="371" cy="54" rx="9" ry="11"/></g>
+      <g fill="#9fc3b8"><circle cx="310" cy="40" r="2.2"/><circle cx="356" cy="38" r="2.2"/><circle cx="384" cy="42" r="2.2"/><circle cx="330" cy="70" r="2"/><circle cx="364" cy="72" r="2"/></g>
+      <path d="M298 74 h90" stroke="#9fc3b8" stroke-width="3"/>
+      <rect x="333" y="78" width="20" height="14" rx="8" fill="#9fc3b8"/>
+    </g>
+    <!-- Eixample block with balconies -->
+    <g>
+      <path d="M540 92 V38 l14 -12 h120 l14 12 V92z" fill="#ead7bf"/>
+      <g fill="#fffaf0"><rect x="560" y="40" width="12" height="16" rx="2"/><rect x="584" y="40" width="12" height="16" rx="2"/><rect x="608" y="40" width="12" height="16" rx="2"/><rect x="632" y="40" width="12" height="16" rx="2"/><rect x="656" y="40" width="12" height="16" rx="2"/>
+      <rect x="560" y="66" width="12" height="16" rx="2"/><rect x="584" y="66" width="12" height="16" rx="2"/><rect x="608" y="66" width="12" height="16" rx="2"/><rect x="632" y="66" width="12" height="16" rx="2"/><rect x="656" y="66" width="12" height="16" rx="2"/></g>
+      <g stroke="#c9a97e" stroke-width="2"><path d="M556 58 h116"/><path d="M556 84 h116"/></g>
+    </g>
+    <!-- trees -->
+    <g><rect x="210" y="72" width="4" height="20" fill="#a08263"/><circle cx="212" cy="66" r="12" fill="#bcd3c0"/>
+       <rect x="466" y="72" width="4" height="20" fill="#a08263"/><circle cx="468" cy="66" r="12" fill="#bcd3c0"/></g>
+  </svg>
+  <div class="walker">
+    <svg viewBox="0 0 60 70" width="44" height="52">
+      <g class="body">
+        <circle cx="24" cy="10" r="7" fill="#8a5a3c"/>
+        <path d="M17 8 q7 -10 14 0 q-3 -3 -7 -3 q-4 0 -7 3z" fill="#2b2018"/>
+        <rect x="9" y="19" width="8" height="14" rx="3" fill="#f2b84b"/>
+        <path d="M15 20 q9 -6 18 0 v18 h-18z" fill="#1f5f5b"/>
+        <path class="arm" d="M31 24 l7 9" stroke="#8a5a3c" stroke-width="4" stroke-linecap="round"/>
+      </g>
+      <path class="leg l1" d="M20 38 v16" stroke="#2c3e50" stroke-width="5" stroke-linecap="round"/>
+      <path class="leg l2" d="M28 38 v16" stroke="#2c3e50" stroke-width="5" stroke-linecap="round"/>
+      <g class="case"><rect x="38" y="34" width="14" height="18" rx="3" fill="#e6a77e"/><path d="M42 34 v-4 h6 v4" stroke="#1d2a33" stroke-width="2" fill="none"/><circle cx="41" cy="54" r="2" fill="#1d2a33"/><circle cx="49" cy="54" r="2" fill="#1d2a33"/></g>
+    </svg>
+  </div>
+</div>
+</body>
+</html>
