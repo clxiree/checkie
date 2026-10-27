@@ -230,6 +230,8 @@ details.why p{margin:6px 0 0;font-size:.9rem;color:var(--muted);background:#f7f4
 .copy{all:unset;cursor:pointer;font-size:.8rem;font-weight:600;color:var(--accent);border:1px solid #bcd3cc;border-radius:99px;padding:4px 10px;background:var(--card)}
 .copy:focus-visible{outline:2px solid var(--accent)}
 #offMsg{width:100%;font:inherit;font-size:.88rem;padding:10px 12px;border:1px solid var(--line);border-radius:10px;background:#faf8f3;color:var(--ink);resize:vertical}
+.learnTag{display:inline-block;margin:0 0 10px;padding:3px 10px;border-radius:999px;background:#fdf1d6;color:#7a5200;font-size:.78rem;font-weight:600}
+.learnNote{font-size:.78rem;margin:10px 0 0}
 </style>
 </head>
 <body>
@@ -320,11 +322,13 @@ details.why p{margin:6px 0 0;font-size:.9rem;color:var(--muted);background:#f7f4
   
   <div class="progress"><div id="bar"></div></div>
   <div class="step" id="stepLabel"></div>
+  <p class="learnTag" id="qLearn" hidden>Often reported by students who used Checkie</p>
   <div class="qhead"><span class="qic" id="qIc" aria-hidden="true"></span><h2 id="qText"></h2></div>
   <p class="qdesc" id="qDesc"></p>
   <div class="qex"><span>Sounds like</span><q id="qEx"></q></div>
   <div class="opts three" id="qOpts"></div>
   <details class="why"><summary>Why this matters</summary><p id="qWhy"></p></details>
+  <p class="muted learnNote" id="qLearnNote" hidden></p>
   <button class="btn" id="nextBtn" disabled onclick="next()">Next</button>
   <button class="btn ghost" id="backBtn" onclick="back()">Back</button>
 </section>
@@ -414,6 +418,8 @@ details.why p{margin:6px 0 0;font-size:.9rem;color:var(--muted);background:#f7f4
     <label for="fbText" style="display:block;font-weight:600;margin:14px 0 6px;font-size:.95rem">Anything else?</label>
     <textarea id="fbText" rows="3" maxlength="500" placeholder="A scam trick we missed, a confusing question, an area to add…"></textarea>
     <small class="muted" style="display:block;margin-top:4px;font-size:.78rem">Please don't include names, phone numbers or addresses. Only what you send here is saved.</small>
+    <label style="display:flex;gap:8px;align-items:flex-start;margin:14px 0 0;font-size:.85rem"><input type="checkbox" id="fbShareSigns" checked style="margin-top:3px"> <span>Include which warning signs I answered Yes or Not sure to (sign names only, never the listing). Untick to send only the answers above.</span></label>
+    <p class="muted" style="font-size:.78rem;margin:6px 0 0"><b>How Checkie learns:</b> about once a week, the sign names students choose to send are counted. A person reviews the result before anything on Checkie changes, for example marking signs that are often reported or rewording a question many people answer Not sure to. Your answers are never used to judge a listing or a person.</p>
     <button class="btn" id="fbSend" disabled>Send feedback</button>
     <p class="err" id="fbErr" hidden style="display:block"></p>
     <p class="muted" id="fbOff" hidden style="font-size:.82rem;margin:8px 0 0">Feedback can't be sent from this copy of Checkie.</p>
@@ -527,6 +533,16 @@ let i = 0; const ans = [];
 
 function show(id){ ["s-intro","s-check","s-shot","s-result","s-guide","s-uni"].forEach(s=>document.getElementById(s).classList.toggle("hidden", s!==id)); window.scrollTo(0,0); }
 function startCheck(){ i=0; show("s-check"); render(); }
+let LEARNED=null;
+try{ if(/^https?:$/.test(location.protocol)) fetch("learned.json",{cache:"no-store"}).then(r=>r.ok?r.json():null).then(j=>{ if(j && j.version===1 && Array.isArray(j.mostReported)) LEARNED=j; }).catch(()=>{}); }catch(e){}
+function applyLearned(k){
+  const tag=document.getElementById("qLearn"), note=document.getElementById("qLearnNote");
+  const on = !!(LEARNED && LEARNED.answers>=LEARNED.minAnswers && LEARNED.mostReported.includes(k));
+  tag.hidden=!on;
+  if(LEARNED && LEARNED.answers>=LEARNED.minAnswers){ note.hidden=false; note.textContent="Checkie last learned from "+LEARNED.answers+" student answers, reviewed by a person on "+LEARNED.reviewedOn+"."; } else note.hidden=true;
+  const w = LEARNED && LEARNED.answers>=LEARNED.minAnswers && LEARNED.wording && LEARNED.wording[String(k)];
+  if(w){ if(typeof w.d==="string") document.getElementById("qDesc").textContent=w.d; if(typeof w.ex==="string") document.getElementById("qEx").textContent=w.ex; }
+}
 function render(){
   const Q = QUESTIONS[i];
   document.getElementById("bar").style.width = ((i)/QUESTIONS.length*100)+"%";
@@ -536,6 +552,7 @@ function render(){
   document.getElementById("qDesc").textContent = Q.d;
   document.getElementById("qEx").textContent = Q.ex.replace(/^"|"$/g,"");
   document.getElementById("qWhy").textContent = Q.why;
+  applyLearned(i);
   const box = document.getElementById("qOpts"); box.innerHTML = "";
   OPTS.forEach(([v,l,sym])=>{
     const b=document.createElement("button"); b.className="opt big "+v; b.innerHTML='<span class="sym">'+sym+'</span>'+l;
@@ -797,6 +814,7 @@ function aiRender(r, n){
   aiShow();
 })();
 
+function signsOk(){ const c=document.getElementById("fbShareSigns"); return !c || c.checked; }
 function flaggedList(v){ return QUESTIONS.filter((_,k)=>ans[k]===v).map(Q=>Q.flag.replace(/\.$/,"")).join("; "); }
 // ---------- Feedback (saved privately for the owner via the artifact "db" capability) ----------
 var fbDb=null, fbUser=null, fbNetlify=false, fb={rating:0,tags:[],paid:null};
@@ -815,7 +833,7 @@ function fbValid(){ document.getElementById("fbSend").disabled = !((fbDb||fbNetl
     const btn=document.getElementById("fbSend"), err=document.getElementById("fbErr"); err.hidden=true; btn.disabled=true; btn.textContent="Sending…";
     try{
       if(!fbDb && fbNetlify){
-        const body=new URLSearchParams({"form-name":"checkie-feedback",sawWarningSign:fb.paid||"",rating:fb.rating?String(fb.rating):"",tags:fb.tags.join("; "),comment:document.getElementById("fbText").value.trim().slice(0,500),result:(document.getElementById("resTitle")||{}).textContent||"",flagged:flaggedList("yes"),unsure:flaggedList("unsure"),screenshots:String(shots.length),at:new Date().toISOString()});
+        const body=new URLSearchParams({"form-name":"checkie-feedback",sawWarningSign:fb.paid||"",rating:fb.rating?String(fb.rating):"",tags:fb.tags.join("; "),comment:document.getElementById("fbText").value.trim().slice(0,500),result:(document.getElementById("resTitle")||{}).textContent||"",flagged:signsOk()?flaggedList("yes"):"",unsure:signsOk()?flaggedList("unsure"):"",screenshots:String(shots.length),at:new Date().toISOString()});
         const r=await fetch("/",{method:"POST",headers:{"Content-Type":"application/x-www-form-urlencoded"},body:body.toString()});
         if(!r.ok) throw new Error(r.status);
         document.getElementById("fbCard").classList.add("hidden"); document.getElementById("fbThanks").classList.remove("hidden");
@@ -823,7 +841,7 @@ function fbValid(){ document.getElementById("fbSend").disabled = !((fbDb||fbNetl
       }
       const uid=await fbUser.id();
       const lvl=(document.getElementById("resTitle")||{}).textContent||"";
-      await fbDb.collection("feedback/"+uid+"/entries").add({sawWarningSign:fb.paid,rating:fb.rating||null,tags:fb.tags,comment:document.getElementById("fbText").value.trim().slice(0,500),result:lvl,flagged:flaggedList("yes"),unsure:flaggedList("unsure"),screenshots:shots.length,at:new Date().toISOString()});
+      await fbDb.collection("feedback/"+uid+"/entries").add({sawWarningSign:fb.paid,rating:fb.rating||null,tags:fb.tags,comment:document.getElementById("fbText").value.trim().slice(0,500),result:lvl,flagged:signsOk()?flaggedList("yes"):"",unsure:signsOk()?flaggedList("unsure"):"",screenshots:shots.length,at:new Date().toISOString()});
       document.getElementById("fbCard").classList.add("hidden"); document.getElementById("fbThanks").classList.remove("hidden");
     }catch(e){ err.textContent="Couldn't send your feedback. You may need edit access to this page. Try again later."; err.hidden=false; btn.disabled=false; btn.textContent="Send feedback"; }
   };
