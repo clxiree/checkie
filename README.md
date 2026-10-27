@@ -9,9 +9,16 @@ A free scam-pattern check for international and exchange students renting a room
 - `index.html`: the whole app (HTML, CSS and plain JavaScript, no build step). Feedback is saved through Netlify Forms.
 - `architecturedoc.md`: components, data stored, security choices, change log.
 - `scope.md`: riskiest guess, goal, what is in and out of scope.
-- `ai-orchestration-log.md`: AI Orchestration Log, Entry 6 (Session 6).
+- `ai-orchestration-log.md`: AI Orchestration Log.
+- `learned.json`: what the site has learned, approved by a person (empty until 10 real answers).
+- `loop/`: the learning loop script and how to run it.
+- `redesign-report.md`: 28 October audit, redesign decisions and test report.
+- `student-evaluation.md`: the site evaluated as a new exchange student, the five fixes, and how to test them.
+- `university-and-design-review.md`: the international-office review, pilot proposal and visual review.
+- `trust-audit.md`: trust, privacy and credibility audit, fixes and open decisions.
+- `home-redesign.md`: home page information architecture: problems, new structure, what moved.
 
 ## Deploy
-Drag the folder onto Netlify, then enable Forms > form detection and redeploy.
+Drag a folder containing `index.html` and `learned.json` onto Netlify. Forms detection is already on.
 
 Author: Gau Yi Chi (Esade, Session 6 hackathon)
