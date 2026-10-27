@@ -55,7 +55,7 @@ ul.flags{padding-left:20px;margin:8px 0 12px} ul.flags li{margin-bottom:6px}
 .q{margin-bottom:18px}
 .proto{background:var(--warn-soft);border:1px solid #ecd59f;border-radius:10px;padding:8px 12px;font-size:.85rem;margin-bottom:14px}
 .err{color:var(--stop);font-size:.9rem;margin-top:8px;display:none}
-.hidden{display:none}
+.hidden{display:none !important}
 footer{color:var(--muted);font-size:.78rem;margin-top:18px;text-align:center}
 .shot{border:1px dashed var(--line);border-radius:12px;padding:12px;margin-bottom:16px;background:#fff}
 .shot label{display:block;cursor:pointer;color:var(--accent);font-weight:600;font-size:.95rem}
@@ -272,7 +272,10 @@ body.noscroll{overflow:hidden}
 .pp .pt{display:flex;justify-content:space-between;align-items:center;gap:6px;font-size:.8rem;background:#f7f4ee;border-radius:8px;padding:6px 8px;margin-bottom:8px}
 .pp .pa{display:flex;gap:6px}.pp .pa button,.pp .pa a{flex:1;text-align:center;border:1px solid #d9d1c1;background:#fff;border-radius:999px;padding:6px 8px;font:600 .8rem Inter,system-ui,sans-serif;color:#1f5f5b;cursor:pointer;text-decoration:none}
 .pp .pa button{background:#1f5f5b;border-color:#1f5f5b;color:#fff}
-#lmap .leaflet-tile-pane{filter:saturate(.7) brightness(1.03)}
+#lmap{background:#f1ede4}
+#lmap .leaflet-tile-pane{filter:grayscale(1) sepia(.18) contrast(.82) brightness(1.1)}
+.campusBtn{position:absolute;left:10px;bottom:24px;z-index:800;border:none;background:#1f5f5b;color:#fffaf0;border-radius:999px;padding:7px 12px;font:600 .8rem Inter,system-ui,sans-serif;box-shadow:0 2px 8px rgba(0,0,0,.2);cursor:pointer}
+#lmap .leaflet-control-attribution{background:rgba(255,253,248,.8);font-size:10px}
 .ppill.sm{padding:2px 6px;font-size:11px}
 .pdot{display:inline-block;width:12px;height:12px;border-radius:50%;background:#1f5f5b;border:2px solid #fffaf0;box-shadow:0 1px 3px rgba(0,0,0,.3);transform:translate(-50%,-50%)}
 .pdot.flag{background:#c4562e}
@@ -324,6 +327,47 @@ body.noscroll{overflow:hidden}
 .consentRow input{margin-top:3px;width:18px;height:18px;flex:none}
 .consentMore{margin:8px 0 0 28px}.consentMore summary{cursor:pointer;color:var(--ok,#2f6b5f);font-weight:600}
 .consentMore p,.consentMore ul{margin:6px 0;font-size:.8rem;color:#55524a}.consentMore ul{padding-left:18px}
+
+/* ---------- Layout: mobile ordering for the price & map page ---------- */
+.gwrap{display:flex;flex-direction:column}
+.gside{display:contents}.gside>*{order:4}#pcGuide{order:1}.gside>.campus{order:2}.gmap{order:3}
+
+@media (min-width:900px){
+  #s-intro>.pill{justify-self:start}
+  .benefits{display:grid;grid-template-columns:1fr 1fr;column-gap:32px}
+  #s-uni h1,#s-steps h1{font-size:2rem !important}
+  .steps{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+}
+/* ---------- Full-width desktop layout ---------- */
+@media (min-width:900px){
+  main{max-width:none;padding:0 0 60px}
+  header{margin:0 0 28px;padding:14px max(32px,calc((100% - 1160px)/2));flex-wrap:nowrap;border-bottom:1px solid var(--line);background:rgba(253,251,246,.92);backdrop-filter:blur(8px)}
+  header .tabs{width:auto;margin:0 0 0 auto;align-self:stretch;align-items:flex-end}
+  header .tabs button{padding:22px 14px 18px;font-size:.92rem}
+  main>section.card{max-width:1160px;margin:0 auto 32px;box-sizing:border-box;padding:36px 40px;border-radius:24px}
+  #s-check,#s-shot,#s-result,#s-steps{max-width:820px !important}
+  #s-intro{display:grid;grid-template-columns:1.05fr 1fr;column-gap:64px;align-items:center;background:none;border:none;box-shadow:none;padding:24px 40px 8px}
+  #s-intro>*{grid-column:1}
+  #s-intro .hero{grid-column:2;grid-row:1 / span 5;margin:0}
+  #s-intro .hero svg{border-radius:28px;box-shadow:0 30px 60px -30px rgba(31,95,91,.35)}
+  #s-intro h1{font-size:3rem;line-height:1.08;letter-spacing:-.02em;margin:14px 0 16px}
+  #s-intro>p.muted{font-size:1.12rem;max-width:520px}
+  #s-intro>.btn{max-width:340px;padding:17px;font-size:1.05rem;border-radius:999px}
+  #s-intro>p.muted[style*="text-align:center"]{max-width:340px;text-align:center !important}
+  #s-intro>h3.sec,#s-intro>.tiles{grid-column:1 / -1}
+  #s-intro>h3.sec{margin-top:56px;font-size:1.3rem}
+  .tiles{gap:16px}.tile{padding:22px;border-radius:18px;background:#fff;transition:transform .15s,box-shadow .15s}
+  .tile:hover{transform:translateY(-2px);box-shadow:0 12px 30px -18px rgba(0,0,0,.35)}
+  .tile .ti{font-size:1.7rem}.tile b{font-size:1.05rem}.tile small{font-size:.9rem}
+  #s-guide h1{font-size:2rem !important}
+  .gwrap{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);gap:32px;align-items:start;margin-top:18px}
+  .gside{display:block}.gmap{position:sticky;top:calc(var(--hdr,80px) + 16px)}
+  .gmap h3.sec{margin-top:0}
+  #lmap{height:calc(100vh - var(--hdr,80px) - 120px);min-height:460px}
+  #s-guide>.btn,#s-uni>.btn,#s-steps>.btn{max-width:360px;display:inline-block;margin-right:8px}
+  footer{max-width:1160px;margin:20px auto 0}
+  .street{position:relative;height:150px;margin-top:10px}
+}
 </style>
 <!-- Leaflet 1.9.4 (BSD-2-Clause, (c) Volodymyr Agafonkin), included in the page so the map works without loading other files -->
 <style>/* required styles */
@@ -1222,6 +1266,8 @@ svg.leaflet-image-layer.leaflet-interactive path {
   <p class="muted">Typical asking price for a single room in a shared flat, per month. The city average was about <b>€600</b> in mid-2026.</p>
   <div class="tip">⚠️ If a listing is <b>far below</b> these ranges for its area, treat that as a warning sign. It's one of Checkie's scam patterns.</div>
 
+<div class="gwrap">
+<div class="gside">
   <div class="pcheck" id="pcGuide">
     <h3>💶 Does your listing's price match the area?</h3><p class="muted" style="margin:0;font-size:.84rem">Choose the type of place. Room prices are per area; residences and studios use city-wide ranges.</p>
     <div class="row"><select data-pc="type" aria-label="Type of place"><option value="room">Room in a shared flat</option><option value="res">Student residence</option><option value="studio">Studio / own flat</option></select></div><div class="row"><select data-pc="area" aria-label="Area of the listing"></select><input data-pc="rent" type="number" inputmode="numeric" min="0" step="10" placeholder="Rent €/month" aria-label="Monthly rent in euros"></div>
@@ -1236,6 +1282,24 @@ svg.leaflet-image-layer.leaflet-interactive path {
     <input id="campusCustom" type="text" placeholder="Or type your campus address (e.g. Carrer de …)" autocomplete="off">
     <small id="campusNote">Each area will then show the distance and an estimated travel time to your campus.</small>
   </div>
+
+  <div id="aDetailHome"></div><div class="adetail" id="aDetail"></div>
+
+  <h3 class="sec" style="display:flex;justify-content:space-between;align-items:center">All areas at a glance <button class="sortbtn" id="sortBtn" hidden>Sort: closest first</button></h3>
+  <div class="area" id="areaList"></div>
+
+  <h3 class="sec">Other types of place</h3>
+  <div class="tiers">
+    <div class="tier"><span class="tl">Student residence</span><b>About €600–1,200/mo</b><ul><li>Premium residences can be €1,500 or more</li><li>Usually includes bills; sometimes meals or cleaning</li><li>Book on the residence's own website or a known platform</li></ul></div>
+    <div class="tier"><span class="tl">Studio / own flat</span><b>About €700–1,200/mo</b><ul><li>Central studios often start around €800</li><li>Outer areas can be €700–950</li><li>Ask whether bills and community fees are included</li></ul></div>
+  </div>
+  <p class="muted" style="font-size:.78rem;margin:4px 0 0">City-wide ranges; per-area data for residences and studios isn't available yet.</p>
+  <h3 class="sec">Before you pay anything</h3>
+  <div class="tip">💡 Ask whether bills are included. A €500 room can cost around €580–620 once electricity, water and internet are added.</div>
+  <div class="tip">💡 A deposit (<i>fianza</i>) of one to two months' rent is typical. Only pay it after you've seen the room and read the contract.</div>
+
+</div>
+<div class="gmap">
   <h3 class="sec">Explore the map</h3>
   <p class="muted" style="font-size:.88rem;margin:0 0 8px" id="mapHelp">Tap a landmark to see the area. Dots mark where each area is; the green pin is your campus.</p>
   <div id="lmap" hidden></div>
@@ -1269,21 +1333,8 @@ svg.leaflet-image-layer.leaflet-interactive path {
     </svg>
   </div>
 
-  <div id="aDetailHome"></div><div class="adetail" id="aDetail"></div>
-
-  <h3 class="sec" style="display:flex;justify-content:space-between;align-items:center">All areas at a glance <button class="sortbtn" id="sortBtn" hidden>Sort: closest first</button></h3>
-  <div class="area" id="areaList"></div>
-
-  <h3 class="sec">Other types of place</h3>
-  <div class="tiers">
-    <div class="tier"><span class="tl">Student residence</span><b>About €600–1,200/mo</b><ul><li>Premium residences can be €1,500 or more</li><li>Usually includes bills; sometimes meals or cleaning</li><li>Book on the residence's own website or a known platform</li></ul></div>
-    <div class="tier"><span class="tl">Studio / own flat</span><b>About €700–1,200/mo</b><ul><li>Central studios often start around €800</li><li>Outer areas can be €700–950</li><li>Ask whether bills and community fees are included</li></ul></div>
-  </div>
-  <p class="muted" style="font-size:.78rem;margin:4px 0 0">City-wide ranges; per-area data for residences and studios isn't available yet.</p>
-  <h3 class="sec">Before you pay anything</h3>
-  <div class="tip">💡 Ask whether bills are included. A €500 room can cost around €580–620 once electricity, water and internet are added.</div>
-  <div class="tip">💡 A deposit (<i>fianza</i>) of one to two months' rent is typical. Only pay it after you've seen the room and read the contract.</div>
-
+</div>
+</div>
   <button class="btn" onclick="startCheck()">Check a listing</button>
   <button class="btn ghost" onclick="show('s-intro')">Back</button>
   <p class="src">Ranges are approximate 2026 asking prices and change quickly; always compare with current listings. Sources:
@@ -1343,12 +1394,14 @@ svg.leaflet-image-layer.leaflet-interactive path {
   <h1 style="font-size:1.4rem">Fewer students arriving without a room.</h1>
   <p class="muted">Every intake, some incoming students lose a deposit to a fake listing. Then your team handles the emergency housing, the stress and the late start. Checkie helps stop it before they pay.</p>
 
+  <div class="benefits">
   <div class="benefit"><span class="ic">✉️</span><span><b>One link in emails you already send</b><p>A co-branded Checkie link for your pre-arrival and welcome emails. No integration, no IT project.</p></span></div>
   <div class="benefit"><span class="ic">🧑‍💼</span><span><b>A real person checks the screenshots</b><p>For partner universities, a trained Checkie reviewer vets the screenshots students submit, on top of today's AI check (beta).</p></span></div>
   <div class="benefit"><span class="ic">📥</span><span><b>Fewer, clearer emails to your office</b><p>Checkie answers the routine "is this a scam?" questions first. When a student still needs a person, they reach your office with a short ready-made message listing exactly what was flagged.</p></span></div>
   <div class="benefit"><span class="ic">🗺️</span><span><b>Kept up to date every semester</b><p>Scam patterns and the area &amp; price guide are refreshed before each intake, so the advice stays current.</p></span></div>
   <div class="benefit"><span class="ic">📊</span><span><b>A semester report on your intake</b><p>Anonymous figures on how many of your incoming students met scam tactics, to support your housing guidance.</p></span></div>
   <div class="benefit"><span class="ic">🔒</span><span><b>Low data risk for you</b><p>The self-check stores no personal data. Screenshot checks are opt-in and nothing is stored by Checkie.</p></span></div>
+  </div>
 
   <div class="offer"><b>Annual subscription, scaled to your intake</b><p>Priced to stay affordable for universities while keeping the service maintained. Founding partners help shape the review service and the semester report.</p></div>
 
@@ -1645,18 +1698,20 @@ wirePriceCheck(document.getElementById("pcGuide"));
 (function initLeaflet(){
   if(typeof L==="undefined") return; // map library blocked or offline: keep the drawn map
   const el=document.getElementById("lmap"); el.hidden=false; document.getElementById("svgMapWrap").hidden=true;
-  document.getElementById("mapHelp").textContent="Scroll, pinch or use + and − to zoom; drag to move; ⛶ for full screen. Tap a price to see the area. Prices are typical monthly rents for a single room in a shared flat. The map loads from OpenStreetMap, which sees your IP address like any website.";
-  const map=L.map(el,{scrollWheelZoom:true,zoomControl:false,tap:true}).setView([41.395,2.155],12); window._lmap=map;
+  document.getElementById("mapHelp").textContent="Scroll or pinch to zoom, drag to move. Tap a price to see the area. Prices are typical monthly rents for a single room in a shared flat. The map loads from OpenStreetMap, which sees your IP address like any website.";
+  const BCN=[41.392,2.160], BCNZ=window.innerWidth<600?12.5:13;
+  const map=L.map(el,{scrollWheelZoom:true,zoomControl:false,tap:true,zoomSnap:0.5,minZoom:11,maxZoom:17,
+    maxBounds:[[41.25,1.95],[41.56,2.35]],maxBoundsViscosity:0.8}).setView(BCN,BCNZ); window._lmap=map;
   L.control.zoom({position:"topright"}).addTo(map);
   // Google-Maps-style extra controls: reset view and full screen
   const Ctl=L.Control.extend({options:{position:"topright"},onAdd(){ const d=L.DomUtil.create("div","leaflet-bar mapctl");
-    d.innerHTML='<a href="#" title="Show all areas" role="button" aria-label="Show all areas" data-c="reset">⤢</a><a href="#" title="Full screen" role="button" aria-label="Full screen" data-c="fs">⛶</a>';
+    d.innerHTML='<a href="#" title="Back to Barcelona" role="button" aria-label="Back to Barcelona" data-c="reset">⌂</a><a href="#" title="Full screen" role="button" aria-label="Full screen" data-c="fs">⛶</a>';
     L.DomEvent.disableClickPropagation(d);
     d.querySelector('[data-c="reset"]').onclick=e=>{ e.preventDefault(); fitAll(); };
     d.querySelector('[data-c="fs"]').onclick=e=>{ e.preventDefault(); const on=!el.classList.contains("fs"); el.classList.toggle("fs",on); document.body.classList.toggle("noscroll",on); e.currentTarget.textContent=on?"✕":"⛶"; setTimeout(()=>map.invalidateSize(),50); };
     return d; }});
   map.addControl(new Ctl());
-  function fitAll(){ const pts=AREAS.map(a=>[a.lat,a.lng]); if(campus&&!campus.custom&&campus.lat) pts.push([campus.lat,campus.lng]); map.fitBounds(L.latLngBounds(pts).pad(0.08)); }
+  function fitAll(){ map.setView(BCN,BCNZ); }
   document.addEventListener("keydown",e=>{ if(e.key==="Escape" && el.classList.contains("fs")) el.querySelector('[data-c="fs"]').click(); });
   const tiles=L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png",{maxZoom:19,
     attribution:'&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a> contributors'}).addTo(map);
@@ -1664,8 +1719,9 @@ wirePriceCheck(document.getElementById("pcGuide"));
   let tOk=0,tErr=0; tiles.on("tileload",()=>tOk++); tiles.on("tileerror",()=>{ tErr++; if(tErr>=4 && tOk===0){ el.hidden=true; document.getElementById("svgMapWrap").hidden=false; document.getElementById("mapHelp").textContent="Tap a landmark to see the area. Dots mark where each area is; the green pin is your campus. (The zoomable map needs the live website.)"; } });
   const marks={};
   function pillHTML(a){ const on=current&&current.id===a.id, fl=window._pcFlag===a.id, z=map.getZoom(), c=(on?' on':'')+(fl?' flag':'');
-    if(z<=11 && !on) return '<span class="pdot'+c+'"></span>';                       // zoomed out: dots only
-    if(z<=12 && !on) return '<span class="ppill sm'+c+'">'+a.pr+'</span>';           // middle: price only
+    const FULLZ = window.innerWidth<600 ? 14 : 13;
+    if(z<=11.5 && !on) return '<span class="pdot'+c+'"></span>';                     // zoomed out: dots only
+    if(z<FULLZ && !on) return '<span class="ppill sm'+c+'">'+a.pr+'</span>';         // middle: price only
     return '<span class="ppill'+c+'">'+a.pr+'<small>'+a.n+'</small></span>'; }
   AREAS.forEach(a=>{ const m=L.marker([a.lat,a.lng],{icon:L.divIcon({className:"",html:pillHTML(a),iconSize:null}),keyboard:true,title:a.n+", "+a.pr}).addTo(map); m.bindTooltip(a.n+" · "+a.pr,{direction:"top",offset:[0,-8]});
     m.on("click",()=>{ detailHome(); areaDetail(a); refresh(); m.unbindPopup(); m.bindPopup(popHTML(a),{className:"apop",maxWidth:260,minWidth:220,offset:[0,-6],autoPanPadding:[20,20]}).openPopup(); }); marks[a.id]=m; });
@@ -1682,12 +1738,17 @@ wirePriceCheck(document.getElementById("pcGuide"));
   window._lmapRefresh=refresh; map.on("zoomend",refresh);
   window._lmapCampus=function(c){ if(cm){ map.removeLayer(cm); cm=null; }
     if(c && !c.custom && c.lat){ cm=L.marker([c.lat,c.lng],{icon:L.divIcon({className:"",html:'<span class="cpin">🎓 '+c.n.replace(/</g,"")+'</span>',iconSize:null}),zIndexOffset:1000}).addTo(map);
-      map.fitBounds(L.latLngBounds(AREAS.map(a=>[a.lat,a.lng]).concat([[c.lat,c.lng]])).pad(0.08)); }
-    else map.setView([41.395,2.155],12); };
+      updCampusBtn(); }
+    else updCampusBtn(); };
+  const cbtn=L.DomUtil.create("button","campusBtn",el); L.DomEvent.disableClickPropagation(cbtn); cbtn.hidden=true;
+  cbtn.onclick=()=>{ if(!campus||!campus.lat) return; if(map.getBounds().contains([campus.lat,campus.lng])) map.setView(BCN,BCNZ); else map.fitBounds(L.latLngBounds([[campus.lat,campus.lng],BCN]).pad(0.15)); };
+  function updCampusBtn(){ const c=campus; if(!c||c.custom||!c.lat){ cbtn.hidden=true; return; } cbtn.hidden=false;
+    cbtn.textContent = map.getBounds().contains([c.lat,c.lng]) ? "⌂ Back to the city" : "🎓 Show my campus"; }
+  map.on("moveend",updCampusBtn);
   const _ad=areaDetail; areaDetail=function(a){ _ad(a); try{ refresh(); }catch(e){} };
   const _sc=setCampus; setCampus=function(c){ _sc(c); try{ window._lmapCampus(c); }catch(e){} };
   if(campus) window._lmapCampus(campus);
-  const _show=show; show=function(id){ _show(id); if(id==="s-guide") setTimeout(()=>map.invalidateSize(),60); };
+  let firstShow=true; const _show=show; show=function(id){ _show(id); if(id==="s-guide") setTimeout(()=>{ map.invalidateSize(); if(firstShow){ firstShow=false; map.setView(BCN,BCNZ); } },60); };
 })();
 
 // ---------- Campus distance & travel feasibility ----------
@@ -1717,7 +1778,11 @@ function toggleInline(r,a){
   document.querySelectorAll(".arow.open").forEach(x=>x.classList.remove("open"));
   const y=r.getBoundingClientRect().top;
   areaDetail(a); r.after(d); d.classList.add("inl"); r.classList.add("open");
-  const dy=r.getBoundingClientRect().top-y; if(Math.abs(dy)>1) window.scrollBy(0,dy);    // keep the tapped row where it was
+  const dy=r.getBoundingClientRect().top-y; if(Math.abs(dy)>1) window.scrollBy(0,dy);    // keep the tapped row where it was (no jump)
+  // then glide just enough to show the whole card, never past the tapped row
+  requestAnimationFrame(()=>{ const hdr=(document.querySelector("header")||{offsetHeight:0}).offsetHeight;
+    const rt=r.getBoundingClientRect().top, db=d.getBoundingClientRect().bottom, need=db-(window.innerHeight-12), room=rt-hdr-8;
+    const by=Math.min(need, room); if(by>4) window.scrollBy({top:by,behavior:"smooth"}); });
 }
 function refreshList(){
   const list=document.getElementById("areaList");
