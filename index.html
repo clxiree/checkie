@@ -36,7 +36,9 @@ h1{font-size:1.6rem;line-height:1.25;margin:0 0 10px}
 h2{font-size:1.2rem;margin:0 0 8px}
 p{margin:0 0 12px}
 .muted{color:var(--muted)}
-.pill{display:inline-block;font-size:.75rem;font-weight:600;padding:3px 9px;border-radius:99px;background:var(--accent-soft);color:var(--accent);margin-bottom:12px}
+/* page label: a quiet eyebrow, not a button */
+.pill{display:inline-flex;align-items:center;gap:10px;font-size:.72rem;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--terra-dark,#a84d2a);margin-bottom:10px;padding:0;background:none;border-radius:0;cursor:default;user-select:none}
+.pill::before{content:"";width:22px;height:2px;border-radius:2px;background:var(--terra)}
 .btn{display:block;width:100%;padding:15px;border:0;border-radius:12px;background:var(--accent);color:#fff;font-size:1rem;font-weight:650;cursor:pointer;margin-top:8px}
 .btn:disabled{background:#a9b9b6;cursor:not-allowed}
 .btn.ghost{background:var(--card);color:var(--accent);border:1.5px solid #bcd3cc;box-shadow:0 1px 2px rgba(21,49,46,.06);transition:background .15s,border-color .15s}
@@ -257,33 +259,68 @@ details.why p{margin:6px 0 0;font-size:.9rem;color:var(--muted);background:#f7f4
 .pv .mark{position:absolute;top:-4px;width:4px;height:16px;border-radius:2px;background:#1d2a33}
 .pv .scale{display:flex;justify-content:space-between;font-size:.72rem;opacity:.8}
 .pv .acts{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}.pv .acts button{border:1px solid currentColor;background:transparent;color:inherit;border-radius:999px;padding:5px 10px;font:inherit;font-size:.8rem;cursor:pointer}
-#lmap{height:430px;border-radius:14px;border:1px solid #e3ddd0;z-index:0}
-.ppill{background:#fffaf0;border:1px solid #d5cbb8;border-radius:999px;padding:3px 8px;font:600 12px/1.2 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;color:#1d2a33;white-space:nowrap;box-shadow:0 1px 4px rgba(0,0,0,.18);transform:translate(-50%,-50%);display:inline-block}
-.ppill small{display:block;font-weight:500;font-size:10px;color:#6b665c}
-.ppill.on{background:#1f5f5b;color:#fffaf0;border-color:#1f5f5b}.ppill.on small{color:#d9ece6}
-.ppill.flag{background:#c4562e;color:#fff;border-color:#c4562e}.ppill.flag small{color:#fde3d8}
-.cpin{background:#1f5f5b;color:#fffaf0;border-radius:10px;padding:4px 8px;font:600 12px -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;white-space:nowrap;box-shadow:0 1px 4px rgba(0,0,0,.25);transform:translate(-50%,-100%);display:inline-block}
-.leaflet-div-icon{background:none;border:none}
-.mapctl a{font-size:15px;line-height:30px;color:#1d2a33;text-decoration:none}
+/* ---------- Map (redesigned 28 October): brand-matched, calm by default ---------- */
+#lmap{height:430px;border-radius:16px;border:1px solid var(--line);z-index:0;background:#efe9dc;box-shadow:0 1px 2px rgba(29,42,51,.04);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif}
 #lmap.fs{position:fixed !important;top:0;left:0;width:100vw;height:100vh;height:100dvh;border-radius:0;z-index:1000;border:none;margin:0}
 body.noscroll{overflow:hidden}
-.apop .leaflet-popup-content-wrapper{border-radius:16px;box-shadow:0 10px 30px rgba(0,0,0,.18);padding:0}
-.apop .leaflet-popup-content{margin:14px 16px;font:14px/1.45 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;color:#1d2a33}
-.apop .leaflet-popup-tip{box-shadow:none}
-.apop a.leaflet-popup-close-button{top:8px;right:8px;font-size:18px;color:#8a857a}
-.pp .ph{display:flex;justify-content:space-between;align-items:baseline;gap:8px;padding-right:14px}.pp .ph b{font-size:1rem}.pp .ph span{font-weight:700;color:var(--accent,#1f5f5b);white-space:nowrap}.pp .ph small{font-weight:500;color:#6b665c}
-.pp .tag{display:inline-block;margin:4px 0 6px;font-size:.72rem;padding:2px 8px;border-radius:999px;background:var(--accent-soft,#e3efec);color:var(--accent,#1f5f5b);font-weight:600}
-.pp p{margin:0 0 8px;font-size:.84rem;color:#4a463e}
-.pp .pt{display:flex;justify-content:space-between;align-items:center;gap:6px;font-size:.8rem;background:#f7f4ee;border-radius:8px;padding:6px 8px;margin-bottom:8px}
-.pp .pa{display:flex;gap:6px}.pp .pa button,.pp .pa a{flex:1;text-align:center;border:1px solid #d9d1c1;background:#fff;border-radius:999px;padding:6px 8px;font:600 .8rem -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;color:#1f5f5b;cursor:pointer;text-decoration:none}
-.pp .pa button{background:#1f5f5b;border-color:#1f5f5b;color:#fff}
-#lmap{background:#f1ede4}
-#lmap .leaflet-tile-pane{filter:grayscale(1) sepia(.18) contrast(.82) brightness(1.1)}
-.campusBtn{position:absolute;left:10px;bottom:24px;z-index:800;border:none;background:#1f5f5b;color:#fffaf0;border-radius:999px;padding:7px 12px;font:600 .8rem -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;box-shadow:0 2px 8px rgba(0,0,0,.2);cursor:pointer}
-#lmap .leaflet-control-attribution{background:rgba(255,253,248,.8);font-size:10px}
-.ppill.sm{padding:2px 6px;font-size:11px}
-.pdot{display:inline-block;width:12px;height:12px;border-radius:50%;background:#1f5f5b;border:2px solid #fffaf0;box-shadow:0 1px 3px rgba(0,0,0,.3);transform:translate(-50%,-50%)}
-.pdot.flag{background:#c4562e}
+.leaflet-div-icon,.mkw{background:none;border:none}
+/* base map: keep the colour of parks and sea, soften roads and labels so Checkie's own labels lead */
+#lmap .leaflet-tile-pane{filter:saturate(.62) contrast(.8) brightness(1.09)}
+#lmap{background:#f3efe7}
+#lmap img.leaflet-tile{outline:1px solid transparent}  /* hides hairline gaps between tiles on phones */
+#lmap .leaflet-tile-pane::after{content:"";position:absolute;inset:-6000px;background:rgba(250,246,238,.34);pointer-events:none}
+/* area chips */
+.mk{display:inline-flex;align-items:center;gap:6px;transform:translate(-50%,-50%);height:28px;padding:0 11px 0 8px;border-radius:999px;background:var(--card);color:var(--ink);border:1px solid rgba(29,42,51,.08);
+  box-shadow:0 1px 2px rgba(29,42,51,.10),0 4px 12px rgba(29,42,51,.10);font:600 12.5px/1 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;white-space:nowrap;cursor:pointer;
+  transition:transform .16s ease,box-shadow .16s ease,background-color .16s ease}
+.mk i{width:8px;height:8px;border-radius:50%;background:var(--accent);flex:none;box-shadow:0 0 0 2px var(--accent-soft)}
+.mk b{font-weight:600}
+.mk em{font-style:normal;font-weight:500;color:var(--muted);display:none}
+.mk.full em{display:inline}
+.mk u{text-decoration:none;font-size:11px;font-weight:700;color:var(--accent);background:var(--accent-soft);border-radius:999px;padding:2px 6px;margin-left:1px}
+.mkw:hover .mk,.mkw:focus-visible .mk{transform:translate(-50%,-50%) translateY(-2px);box-shadow:0 2px 4px rgba(29,42,51,.12),0 8px 18px rgba(29,42,51,.14)}
+.mkw:hover .mk:not(.grp) em{display:inline}
+.mkw:focus-visible{outline:none}.mkw:focus-visible .mk{outline:3px solid var(--ochre);outline-offset:2px}
+.mk.on{background:var(--accent);color:#fff;border-color:var(--accent);transform:translate(-50%,-50%) scale(1.06);box-shadow:0 2px 6px rgba(31,95,91,.35),0 10px 24px rgba(31,95,91,.25)}
+.mk.on i{background:#fff;box-shadow:0 0 0 2px rgba(255,255,255,.3)}.mk.on em{color:#d9ece6}
+.mkw:hover .mk.on{transform:translate(-50%,-50%) scale(1.06) translateY(-2px)}
+.mk.flag i{background:var(--terra);box-shadow:0 0 0 2px var(--terra-soft)}.mk.flag:not(.on){border-color:var(--terra)}
+.cpin{display:inline-flex;align-items:center;gap:5px;transform:translate(-50%,-50%);height:26px;padding:0 10px 0 7px;border-radius:999px;background:var(--terra);color:#fff;font:600 12px/1 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;white-space:nowrap;box-shadow:0 2px 8px rgba(168,77,42,.35)}
+.cpin i{font-style:normal;font-size:13px}
+/* one control group */
+#lmap .mctl{display:flex;flex-direction:column;background:rgba(255,253,248,.96);border-radius:12px;box-shadow:0 1px 2px rgba(29,42,51,.10),0 4px 14px rgba(29,42,51,.12);overflow:hidden;margin:12px 12px 0 0}
+#lmap .mctl button{width:36px;height:36px;border:0;background:none;color:var(--ink);font:500 20px/1 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;cursor:pointer;display:grid;place-items:center}
+#lmap .mctl button+button{border-top:1px solid var(--line)}
+#lmap .mctl i{height:6px;background:var(--bg)}
+#lmap .mctl i+button{border-top:0}
+#lmap .mctl svg{width:18px;height:18px}
+#lmap .mctl button:hover{background:var(--accent-soft);color:var(--accent)}
+#lmap .mctl button:focus-visible{outline:3px solid var(--ochre);outline-offset:-3px}
+@media (pointer:coarse){ #lmap .mctl button{width:44px;height:44px} }
+/* campus button: light, top-left */
+.campusBtn{position:absolute;left:12px;bottom:12px;z-index:800;border:1px solid var(--line);background:rgba(255,253,248,.96);color:var(--ink);border-radius:999px;height:36px;padding:0 14px;font:600 .82rem -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;box-shadow:0 1px 2px rgba(29,42,51,.10),0 4px 14px rgba(29,42,51,.10);cursor:pointer}
+.campusBtn:hover{background:var(--accent-soft);color:var(--accent)}
+@media (pointer:coarse){ .campusBtn{height:44px} }
+#lmap .leaflet-control-attribution{background:rgba(255,253,248,.7);font-size:10px;color:var(--muted);border-radius:6px 0 0 0;padding:1px 6px}
+#lmap .leaflet-control-attribution a{color:var(--muted)}
+/* area card: bottom-left on computers, bottom sheet on phones */
+.mcard{position:absolute;z-index:850;left:12px;top:12px;width:300px;max-width:calc(100% - 72px);background:var(--card);border-radius:16px;padding:14px 16px 14px;
+  box-shadow:0 2px 6px rgba(29,42,51,.10),0 16px 40px rgba(29,42,51,.18);font:14px/1.45 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;color:var(--ink);
+  opacity:0;transform:translateY(10px);pointer-events:none;visibility:hidden;transition:opacity .18s ease,transform .18s ease,visibility 0s .18s}
+.mcard.show{opacity:1;transform:none;pointer-events:auto;visibility:visible;transition:opacity .18s ease,transform .18s ease}
+.mcard .mx{position:absolute;top:6px;right:6px;width:36px;height:36px;border:0;border-radius:50%;background:none;color:var(--muted);font-size:22px;line-height:1;cursor:pointer}
+.mcard .mx:hover{background:var(--bg);color:var(--ink)}
+.mcard .mh{display:flex;justify-content:space-between;align-items:baseline;gap:10px;padding-right:30px}
+.mcard .mh b{font-size:1.05rem}.mcard .mh span{font-weight:700;color:var(--accent);white-space:nowrap}.mcard .mh small{font-weight:500;color:var(--muted)}
+.mcard .tag{display:inline-block;margin:6px 0 6px;font-size:.72rem;padding:2px 9px;border-radius:999px;background:var(--accent-soft);color:var(--accent);font-weight:600}
+.mcard p{margin:0 0 10px;font-size:.86rem;color:var(--muted);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.mcard .mt{display:flex;justify-content:space-between;align-items:center;gap:8px;font-size:.8rem;background:var(--bg);border-radius:10px;padding:7px 10px;margin-bottom:10px}
+.mcard .mt small{color:var(--muted)}
+.mcard .ma{display:flex;gap:8px}
+.mcard .ma button,.mcard .ma a{flex:1;display:grid;place-items:center;min-height:40px;border-radius:999px;font:600 .84rem -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;text-decoration:none;cursor:pointer;border:1px solid var(--line);background:#fff;color:var(--accent)}
+.mcard .ma .mfull{background:var(--accent);border-color:var(--accent);color:#fff}
+@media (max-width:599px){ .mcard{left:8px;right:8px;top:auto;bottom:8px;width:auto;max-width:none;border-radius:18px} .mcard .ma button,.mcard .ma a{min-height:44px} }
+@media (prefers-reduced-motion:reduce){ .mk,.mcard{transition:none} }
 .adetail.inl{margin:6px 0 10px;animation:adIn .22s ease-out}
 @keyframes adIn{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:none}}
 .arow.open{border-color:var(--accent);background:var(--accent-soft)}
@@ -507,11 +544,28 @@ a:focus-visible,button:focus-visible,summary:focus-visible,select:focus-visible,
   .gside>.campus{margin-top:0}
   #lmap{height:calc(100vh - var(--hdr,80px) - 110px)}
 }
-@media (max-width:899px){ .gmap{order:2} .gside>.campus{order:1} .gside>h3.sec,.gside>#areaList,.gside>#aDetailHome{order:3} #lmap{height:360px} }
+@media (max-width:899px){ .gmap{order:2} .gside>.campus{order:1} .gside>h3.sec,.gside>#areaList,.gside>#aDetailHome{order:3} #lmap{height:400px} }
 
+/* ---------- Feedback labels and contact page ---------- */
+.req,.opt{display:inline-block;vertical-align:1px;margin-right:8px;font-size:.68rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase;border-radius:999px;padding:2px 8px}
+.req{background:var(--terra-soft);color:var(--terra-dark,#a84d2a)}
+.opt{background:var(--bg);color:var(--muted);border:1px solid var(--line)}
+.contactBox{display:flex;flex-wrap:wrap;align-items:center;gap:10px 16px;background:var(--accent-soft);border-radius:14px;padding:16px 18px;margin:8px 0 6px}
+.contactBox .cLabel{font-size:.72rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--accent);width:100%}
+.contactBox .cMail{font-size:1.15rem;font-weight:700;color:var(--accent);text-decoration:none;word-break:break-all}
+.contactBox .cMail:hover{text-decoration:underline}
+.contactBox .btn{margin:0}
+#s-contact a:not(.btn){color:var(--accent);font-weight:600;text-underline-offset:3px}
+.cList{padding-left:20px;margin:6px 0 14px}.cList li{margin-bottom:8px;line-height:1.55}
+/* ---------- Tidy links: no arrow glyphs; one inline-link style and one action-pill style ---------- */
+.nextList li{line-height:1.55}
+a.nx{display:inline-flex;align-items:center;margin:4px 0 0 2px;padding:3px 11px;border-radius:999px;background:var(--accent-soft);color:var(--accent);font-weight:600;font-size:.86rem;text-decoration:none;white-space:nowrap;vertical-align:baseline}
+a.nx:hover{background:var(--accent);color:#fff}
+a.nx:focus-visible{outline:3px solid var(--ochre);outline-offset:2px}
+@media (pointer:coarse){ a.nx{padding:6px 13px} }
 /* ---------- Home page: one flow ---------- */
 .flow{display:flex;flex-wrap:wrap;gap:4px 0;margin:14px 0 0;font-size:.86rem;color:var(--muted);padding:0;list-style:none}
-.flow span:not(:last-child)::after{content:"→";margin:0 10px;color:var(--terra)}
+.flow{counter-reset:fl;gap:6px 18px}.flow span{counter-increment:fl;display:inline-flex;align-items:center;gap:7px}.flow span::before{content:counter(fl);display:inline-grid;place-items:center;width:20px;height:20px;border-radius:50%;background:var(--accent-soft);color:var(--accent);font-size:.72rem;font-weight:700}
 #s-intro>.homeMore{grid-column:1 / -1}
 .homeMore{margin-top:56px;border-top:1px solid var(--line)}
 @media (max-width:899px){ #s-intro>.homeMore{order:11;margin-top:40px} }
@@ -524,11 +578,12 @@ a:focus-visible,button:focus-visible,summary:focus-visible,select:focus-visible,
 @media (min-width:620px){ .toolPair{grid-template-columns:1fr 1fr} }
 .tool{display:grid;grid-template-columns:36px 1fr 20px;gap:12px;align-items:center;text-align:left;background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px;font:inherit;color:inherit;cursor:pointer;transition:border-color .15s,box-shadow .15s}
 .tool:hover{border-color:var(--accent);box-shadow:0 8px 24px -16px rgba(0,0,0,.35)}
-.tool .ti{font-size:1.5rem}.tool b{display:block;font-size:1rem}.tool small{display:block;color:var(--muted);font-size:.86rem;line-height:1.45;margin-top:2px}.tool .go{color:var(--accent);font-weight:700}
+.tool .ti{font-size:1.5rem}.tool b{display:block;font-size:1rem}.tool small{display:block;color:var(--muted);font-size:.86rem;line-height:1.45;margin-top:2px}.tool .go{width:8px;height:8px;border-right:2px solid var(--accent);border-top:2px solid var(--accent);transform:rotate(45deg);opacity:.7;transition:transform .15s,opacity .15s;justify-self:center}.tool:hover .go{opacity:1;transform:translateX(3px) rotate(45deg)}
 .linkList{list-style:none;margin:0;padding:0}
 .linkList li+li{border-top:1px solid var(--line)}
 .linkList a{display:grid;grid-template-columns:1fr auto;column-gap:16px;padding:14px 2px;text-decoration:none;color:inherit}
-.linkList a::after{content:"→";grid-row:1 / span 2;grid-column:2;align-self:center;color:var(--accent);font-weight:700}
+.linkList a::after{content:"";grid-row:1 / span 2;grid-column:2;align-self:center;width:8px;height:8px;border-right:2px solid var(--accent);border-top:2px solid var(--accent);transform:rotate(45deg);margin-right:4px;opacity:.7;transition:transform .15s,opacity .15s}
+.linkList a:hover::after{opacity:1;transform:translateX(3px) rotate(45deg)}
 .linkList a:hover b{color:var(--accent)}
 .linkList b{font-size:1rem}.linkList span{color:var(--muted);font-size:.88rem}
 .trustPts{list-style:none;margin:0;padding:0;display:grid;gap:10px}
@@ -566,7 +621,7 @@ a:focus-visible,button:focus-visible,summary:focus-visible,select:focus-visible,
   header .tabs .tabPartner{margin-left:18px;padding:7px 16px}
   main>section.card{max-width:1160px;margin:0 auto 32px;box-sizing:border-box;padding:28px 40px 12px;border:none;border-radius:0;background:none;box-shadow:none}
   main>section.card>h1,main>section.card>h2{letter-spacing:-.01em}
-  #s-check,#s-shot,#s-result,#s-help,#s-steps,#s-privacy{max-width:820px !important}
+  #s-check,#s-shot,#s-result,#s-help,#s-steps,#s-privacy,#s-contact{max-width:820px !important}
   main>#s-result{margin:0 auto 32px;padding:0 40px;box-sizing:border-box}
   #s-shot .shot{margin-top:6px}
   #s-check .qtop{background:var(--bg)}
@@ -1347,7 +1402,7 @@ svg.leaflet-image-layer.leaflet-interactive path {
   <h1>Found a room in Barcelona? Check it before you pay.</h1>
   <p class="muted lead">12 quick questions show which scam warning signs a listing has, and what to check before you send money.</p>
   <button class="btn" onclick="startCheck()">Check a listing · 2 minutes</button>
-  <p class="heroSub"><a href="#" onclick="show('s-steps');return false">New to renting here? Read how to rent safely →</a></p>
+  <p class="heroSub"><a href="#" onclick="show('s-steps');return false">New to renting here? Read how to rent safely</a></p>
   <p class="flow" aria-label="How it works"><span>Answer 12 questions</span><span>See the warning signs</span><span>Know what to check</span></p>
   <ul class="trustRow"><li>Free</li><li>No sign-up</li><li>Nothing saved unless you send feedback</li></ul>
 
@@ -1355,8 +1410,8 @@ svg.leaflet-image-layer.leaflet-interactive path {
     <section class="hBlock" aria-labelledby="hTools">
       <h2 id="hTools" class="hH">Also useful before you pay</h2>
       <div class="toolPair">
-        <button class="tool" onclick="goPrice()"><span class="ti" aria-hidden="true">💶</span><span><b>Check a rent</b><small>Compare a listing's price with typical prices for its area, or for residences and studios.</small></span><span class="go" aria-hidden="true">→</span></button>
-        <button class="tool" onclick="goAreas()"><span class="ti" aria-hidden="true">🗺️</span><span><b>Explore areas</b><small>12 neighbourhoods on a map, with what they're like and your commute to campus.</small></span><span class="go" aria-hidden="true">→</span></button>
+        <button class="tool" onclick="goPrice()"><span class="ti" aria-hidden="true">💶</span><span><b>Check a rent</b><small>Compare a listing's price with typical prices for its area, or for residences and studios.</small></span><span class="go" aria-hidden="true"></span></button>
+        <button class="tool" onclick="goAreas()"><span class="ti" aria-hidden="true">🗺️</span><span><b>Explore areas</b><small>12 neighbourhoods on a map, with what they're like and your commute to campus.</small></span><span class="go" aria-hidden="true"></span></button>
       </div>
     </section>
 
@@ -1380,8 +1435,8 @@ svg.leaflet-image-layer.leaflet-interactive path {
       <div class="faq">
     <details><summary>Does Checkie tell me if a listing is safe?</summary><p>No. It shows which common scam patterns appear and what to check. A listing with no warning signs can still be a scam, so always see the room (or a live video call) and read a contract before paying.</p></details>
     <details><summary>Why not just ask a senior, or a chatbot?</summary><p>Do ask seniors too: they know the city. Checkie adds a consistent check of 12 common scam patterns and typical prices for 12 areas, any time of day. Unlike pasting a listing into a chatbot, your answers stay on your device, and Checkie gives you ready-made messages for the landlord (English or Spanish) and your university.</p></details>
-    <details><summary>What does Checkie save about me?</summary><p>Nothing from the check itself: your answers stay in your browser, and your chosen campus is remembered only on your device. If you choose to send feedback, what you type is saved, together with your result level, how many screenshots you added and, unless you untick the box, which warning signs you answered Yes or Not sure to. It never includes your name, email or the listing. Our website host, Netlify, records the IP address of anyone who sends a form, and feedback is kept there until I delete it; there is no fixed deletion schedule yet. <a href="#" onclick="show('s-privacy');return false">Full details of what goes where →</a></p></details>
-    <details><summary>Who made Checkie?</summary><p>An exchange student in Barcelona, as an independent student project. It isn't a company, it doesn't sell rooms, and it never takes money from landlords, agencies or housing platforms.</p></details>
+    <details><summary>What does Checkie save about me?</summary><p>Nothing from the check itself: your answers stay in your browser, and your chosen campus is remembered only on your device. If you choose to send feedback, what you type is saved, together with your result level, how many screenshots you added and, unless you untick the box, which warning signs you answered Yes or Not sure to. It never includes your name, email or the listing. Our website host, Netlify, records the IP address of anyone who sends a form, and feedback is kept there until I delete it; there is no fixed deletion schedule yet. <a href="#" onclick="show('s-privacy');return false">Full details of what goes where</a></p></details>
+    <details><summary>Who made Checkie?</summary><p>Gau Yi Chi, an exchange student at Esade, as an independent student project. It isn't a company, it doesn't sell rooms, and it never takes money from landlords, agencies or housing platforms. Questions or ideas: <a href="#" onclick="show('s-contact');return false">contact us</a>.</p></details>
     <details><summary>Is Checkie part of my university?</summary><p>No. Checkie is an independent student project and isn't affiliated with any university. The contacts it shows are each university's public international office details.</p></details>
     <details><summary>Is it free?</summary><p>Yes, always, for every student. Checkie never takes money from landlords, agencies or housing platforms.</p></details>
   </div>
@@ -1396,7 +1451,7 @@ svg.leaflet-image-layer.leaflet-interactive path {
     <div class="progress"><div id="bar"></div></div>
   </div>
   <p class="muted" style="font-size:.86rem;margin:10px 0 4px">Answer what you know about the listing. Tap <b>Why?</b> for an example. "Not sure" is a fine answer.</p>
-  <p class="muted" style="font-size:.84rem;margin:0 0 6px">Rather ask a person? <a href="#" onclick="show('s-help');return false" style="color:var(--accent);font-weight:600">Contact your university's international office →</a></p>
+  <p class="muted" style="font-size:.84rem;margin:0 0 6px">Rather ask a person? <a href="#" onclick="show('s-help');return false" style="color:var(--accent);font-weight:600">Contact your university's international office</a></p>
   <p class="muted learnNote" id="qLearnNote" hidden></p>
   <div id="qList" class="qlist"></div>
   <div id="qPriceSlot" hidden></div>
@@ -1409,7 +1464,7 @@ svg.leaflet-image-layer.leaflet-interactive path {
   <div class="progress"><div style="width:100%"></div></div>
   <div class="kicker">Last step · optional</div>
   <h2>Add screenshots of the listing</h2>
-  <p class="muted">Optional. The ad, the chat with the landlord, the payment request: up to 10 images, shown next to your result so you can compare them with what Checkie flagged. They stay on your device. <a href="#" onclick="result();return false" style="color:var(--accent);font-weight:600">Skip and see my result →</a></p>
+  <p class="muted">Optional. The ad, the chat with the landlord, the payment request: up to 10 images, shown next to your result so you can compare them with what Checkie flagged. They stay on your device. <a href="#" onclick="result();return false" style="color:var(--accent);font-weight:600">Skip and see my result</a></p>
   <div class="shot" id="dropZone">
     <label for="shotIn" class="dz" id="dzLabel">
       <span class="dz-icon">⬆</span>
@@ -1474,27 +1529,27 @@ svg.leaflet-image-layer.leaflet-interactive path {
     <div id="helpOut" hidden>
       <div class="office"><b id="offName"></b>
         <div class="mailrow" id="offMailRow"><span class="mail" id="offMail"></span><button class="copy" id="offCopy">Copy email</button></div>
-        <a id="offLink" target="_blank" rel="noopener">Official contact page ↗</a>
+        <a id="offLink" target="_blank" rel="noopener">Official contact page</a>
       </div>
       <p style="font-weight:600;font-size:.92rem;margin:14px 0 6px">Ready-made message</p>
-      <textarea id="offMsg" rows="9"></textarea>
+      <textarea id="offMsg" rows="14"></textarea>
       <button class="btn ghost" id="msgCopy" style="margin-top:8px">Copy message</button>
-      <small class="muted" style="display:block;font-size:.78rem;margin-top:6px">You can edit the message before copying it. Checkie doesn't send anything: you send it from your own email.</small>
+      <small class="muted" style="display:block;font-size:.78rem;margin-top:6px">Fill in the parts in [brackets] before you send it, so the office has everything it needs to answer. Checkie doesn't send anything: you send it from your own email.</small>
     </div>
     <p class="muted" id="helpOther" hidden style="font-size:.85rem;margin:10px 0 0">For another university, look for its "international office" or "incoming students" page.</p>
     <p class="muted" style="font-size:.78rem;margin:12px 0 0;border-top:1px solid var(--line);padding-top:10px">Checkie isn't affiliated with these universities. These are their public contacts. Human review of screenshots is only planned, with partner universities, and isn't available yet.</p>
   </div>
   <div class="card fb" id="fbCard" style="margin-top:14px">
     <h2>How was this check?</h2>
-    <p class="muted" style="margin:-2px 0 12px;font-size:.9rem">Optional. It doesn't ask for your name or email, and other students never see it. It helps improve Checkie for the next person.</p>
-    <p style="font-weight:600;margin:0 0 6px;font-size:.95rem">While looking for a room in Barcelona, have you come across a listing with any of these warning signs?</p><p class="muted" style="margin:-2px 0 8px;font-size:.82rem">For example: asked to pay before a viewing, no real video of the room, photos that didn't look real, or no exact address.</p>
+    <p class="muted" style="margin:-2px 0 12px;font-size:.9rem">Sending feedback is up to you and takes about a minute. If you send it, only the rating is required; everything else is optional. It doesn't ask for your name or email, and other students never see it.</p>
+    <p style="font-weight:600;margin:0 0 6px;font-size:.95rem"><span class="opt">Optional</span>While looking for a room in Barcelona, have you come across a listing with any of these warning signs?</p><p class="muted" style="margin:-2px 0 8px;font-size:.82rem">For example: asked to pay before a viewing, no real video of the room, photos that didn't look real, or no exact address.</p>
     <div class="chips" id="fbPaid" style="margin-bottom:14px"><button class="chip2" data-v="yes" aria-pressed="false">Yes</button><button class="chip2" data-v="no" aria-pressed="false">No</button><button class="chip2" data-v="not_looking" aria-pressed="false">I'm not looking for a room</button></div>
-    <p style="font-weight:600;margin:0 0 6px;font-size:.95rem">How useful was this check?</p>
+    <p style="font-weight:600;margin:0 0 6px;font-size:.95rem" id="fbRateQ"><span class="req">Required</span>How useful was this check?</p>
     <div class="stars" id="fbStars" role="radiogroup" aria-label="How useful was this check, 1 to 5"></div>
     <div class="fbscale"><span>Not useful</span><span>Very useful</span></div>
-    <p style="font-weight:600;margin:14px 0 6px;font-size:.95rem">What would make it better?</p>
+    <p style="font-weight:600;margin:14px 0 6px;font-size:.95rem"><span class="opt">Optional</span>What would make it better? <span class="muted" style="font-weight:400;font-size:.85rem">Tick any that apply.</span></p>
     <div class="chips" id="fbChips"></div>
-    <label for="fbText" style="display:block;font-weight:600;margin:14px 0 6px;font-size:.95rem">Anything else?</label>
+    <label for="fbText" style="display:block;font-weight:600;margin:14px 0 6px;font-size:.95rem"><span class="opt">Optional</span>Anything else?</label>
     <textarea id="fbText" rows="3" maxlength="500" placeholder="A scam trick we missed, a confusing question, an area to add…"></textarea>
     <small class="muted" style="display:block;margin-top:4px;font-size:.78rem">Please don't include names, phone numbers or addresses. Only what you send here is saved.</small>
     <div class="consent">
@@ -1508,17 +1563,15 @@ svg.leaflet-image-layer.leaflet-interactive path {
         <p><b>Untick</b> to send only the answers above. Because Checkie collects no names, a sent answer can't be traced back to you later, so this is the moment to choose.</p>
       </details>
     </div>
-    <button class="btn" id="fbSend" disabled>Send feedback</button>
+    <button class="btn" id="fbSend" disabled aria-describedby="fbNeed">Send feedback</button>
+    <p class="muted" id="fbNeed" style="font-size:.82rem;margin:6px 0 0">Choose a rating from 1 to 5 to send.</p>
     <p class="err" id="fbErr" hidden style="display:block"></p>
     <p class="muted" id="fbOff" hidden style="font-size:.82rem;margin:8px 0 0">Feedback can't be sent from this copy of Checkie.</p>
     <p class="muted" id="fbHostNote" hidden style="font-size:.78rem;margin:8px 0 0">What you send is stored by Checkie's website host, Netlify, which also records your IP address. It's kept until I delete it; there's no fixed deletion schedule yet. Checkie never asks for your name, email or the listing.</p>
   </div>
   <div class="card hidden" id="fbThanks" style="margin-top:14px;text-align:center">
     <h2 style="color:var(--ok)">Thanks for the feedback.</h2>
-    <p class="muted" style="margin:0 0 12px">It's counted with other students' answers, and a person reviews the counts before anything on Checkie changes.</p>
-    <p style="font-weight:600;margin:0 0 8px">Know someone looking for a room in Barcelona?</p>
-    <button class="btn" id="shareBtn" style="margin-top:0">Copy the Checkie link to share</button>
-    <p class="muted" id="shareLink" hidden style="font-size:.85rem;margin:8px 0 0;user-select:all;word-break:break-all"></p>
+    <p class="muted" style="margin:0">It's counted with other students' answers, and a person reviews the counts before anything on Checkie changes.</p>
   </div>
 
   <div class="shareCard"><div><b>Know someone else looking for a room?</b><p class="muted">Send them Checkie before they pay a deposit.</p></div><button class="btn soft" id="shareRes">Send Checkie to a friend</button></div>
@@ -1642,6 +1695,8 @@ svg.leaflet-image-layer.leaflet-interactive path {
   <p>No accounts, no cookies set by Checkie, no advertising, no analytics or tracking scripts. Fonts and the map code are built into the page.</p>
   <h2 class="sec2">Deleting feedback</h2>
   <p>Feedback has no name or email, so Checkie can't find one person's entry. Use the box before sending to choose what goes in it.</p>
+  <h2 class="sec2">Questions</h2>
+  <p>Email <a href="mailto:yichi.gau@alumni.esade.edu">yichi.gau@alumni.esade.edu</a> (Gau Yi Chi, who runs Checkie).</p>
 </section>
 
 <!-- Screen: renting guide -->
@@ -1711,7 +1766,7 @@ svg.leaflet-image-layer.leaflet-interactive path {
   <span class="pill">For international offices</span>
   <h1 class="uniH">A pre-arrival housing-safety resource for incoming students</h1>
   <p class="muted lead">Checkie is a free, independent web tool students use before paying for a room they found online. It shows common rental-scam warning signs, what to verify, and points uncertain cases to your international office. It adds to your housing guidance; it doesn't replace your team.</p>
-  <div class="uniCtas"><a class="btn uniBtn" href="#demoBand" onclick="document.getElementById('demoBand').scrollIntoView({behavior:'smooth'});return false">Request a pilot conversation</a><a class="uniLink" href="#" onclick="show('s-intro');return false">See what students see →</a></div>
+  <div class="uniCtas"><a class="btn uniBtn" href="#demoBand" onclick="document.getElementById('demoBand').scrollIntoView({behavior:'smooth'});return false">Request a pilot conversation</a><a class="uniLink" href="#" onclick="show('s-intro');return false">See what students see</a></div>
 
   <div class="uniFacts">
     <div><b>Who it's for</b><span>Incoming international and exchange students searching for rooms in Barcelona, often from abroad.</span></div>
@@ -1810,7 +1865,7 @@ svg.leaflet-image-layer.leaflet-interactive path {
   <div class="ctaBand" id="demoBand">
     <h2>Interested in a pilot?</h2>
     <p>Send a short enquiry. You'll get a reply by email with a brief overview and a proposed pilot outline.</p>
-    <button class="ctaBtn" id="demoOpen">Request a pilot conversation <span aria-hidden="true">→</span></button>
+    <button class="ctaBtn" id="demoOpen">Request a pilot conversation</button>
   </div>
   <div class="demoForm" id="demoForm" hidden>
     <label>University<input id="dUni" maxlength="120" autocomplete="organization"></label>
@@ -1826,15 +1881,36 @@ svg.leaflet-image-layer.leaflet-interactive path {
     <p class="err" id="demoErr" hidden></p>
   </div>
   <div class="tip" id="demoThanks" hidden>✅ <b>Enquiry sent.</b> I'll reply to your work email within a few working days with a short overview and a proposed pilot outline. Nothing else happens until you reply, and you won't be added to any list.</div>
+  <p class="muted" style="font-size:.88rem;margin-top:12px">Prefer email? Write to <a href="mailto:yichi.gau@alumni.esade.edu?subject=Checkie%20for%20universities">yichi.gau@alumni.esade.edu</a>.</p>
+</section>
+
+<section class="card hidden" id="s-contact">
+  <span class="pill">Contact</span>
+  <h1>Contact us</h1>
+  <p class="muted lead">Checkie is an independent student project made by Gau Yi Chi, an exchange student at Esade. It isn't a company and isn't affiliated with any university, housing platform or landlord.</p>
+  <div class="contactBox">
+    <span class="cLabel">Email</span>
+    <a class="cMail" href="mailto:yichi.gau@alumni.esade.edu?subject=Checkie">yichi.gau@alumni.esade.edu</a>
+    <button class="btn ghost mini" id="cCopy" type="button">Copy email</button>
+  </div>
+  <h2 class="sec2">Write to me about</h2>
+  <ul class="cList">
+    <li><b>A scam pattern Checkie missed</b>, or a question that was hard to understand.</li>
+    <li><b>Something on the site that is wrong or out of date</b>, such as a price range or a university contact.</li>
+    <li><b>Your data</b>: what Checkie stores is described on <a href="#" onclick="show('s-privacy');return false">What goes where</a>. Feedback has no name or email, so I can't look up one person's entry.</li>
+    <li><b>Universities</b>: you can email me directly, or use the <a href="#" onclick="show('s-uni');setTimeout(()=>document.getElementById('demoBand').scrollIntoView({behavior:'smooth'}),80);return false">pilot conversation form</a>.</li>
+  </ul>
+  <div class="tip">I can't check a specific listing for you or tell you a listing is safe. If you're worried about a room right now, use <a href="#" onclick="startCheck();return false">the 12-question check</a> and contact your <a href="#" onclick="show('s-help');return false">university's international office</a>. If you've already paid, see <a href="#" onclick="show('s-steps');setTimeout(()=>document.getElementById('paidGuide').scrollIntoView({behavior:'smooth'}),80);return false">what to do now</a>.</div>
+  <p class="muted" style="font-size:.85rem;margin-top:14px">I reply as soon as I can, usually within a few days. Please don't send passport copies, bank details or other personal documents.</p>
 </section>
 
 <footer class="siteFoot">
   <div class="fCols">
     <div><b>For students</b><a href="#" onclick="startCheck();return false">Check a listing</a><a href="#" onclick="goPrice();return false">Check a rent</a><a href="#" onclick="goAreas();return false">Areas map</a><a href="#" onclick="show('s-steps');return false">Renting guide</a><a href="#" onclick="show('s-help');return false">Ask your university</a></div>
     <div><b>For universities</b><a href="#" onclick="show('s-uni');return false">Introducing Checkie to incoming students</a><a href="#" onclick="show('s-uni');setTimeout(()=>document.getElementById('demoBand').scrollIntoView({behavior:'smooth'}),80);return false">Request a pilot conversation</a></div>
-    <div><b>About</b><a href="#" onclick="show('s-privacy');return false">Data and privacy</a><a href="https://github.com/clxiree/checkie" target="_blank" rel="noopener">Source and documentation</a></div>
+    <div><b>About</b><a href="#" onclick="show('s-contact');return false">Contact us</a><a href="#" onclick="show('s-privacy');return false">Data and privacy</a><a href="https://github.com/clxiree/checkie" target="_blank" rel="noopener">Source and documentation</a></div>
   </div>
-  <p>Checkie is an independent student project by an exchange student in Barcelona. Not affiliated with any university, housing platform or landlord. It never tells you a listing is safe.</p>
+  <p>Checkie is an independent student project by Gau Yi Chi, an exchange student at Esade · <a href="mailto:yichi.gau@alumni.esade.edu">yichi.gau@alumni.esade.edu</a> · Not affiliated with any university, housing platform or landlord. It never tells you a listing is safe.</p>
 </footer>
 </main>
 
@@ -1846,9 +1922,12 @@ const QUESTIONS = [{"ic": "💸", "t": "Did they ask you to pay before you've se
 const OPTS = [["yes","Yes","✓"],["no","No","✕"],["unsure","Not sure","?"]];
 let i = 0; const ans = [];
 
-function show(id){ ["s-intro","s-check","s-shot","s-result","s-guide","s-uni","s-steps","s-help","s-privacy"].forEach(s=>document.getElementById(s).classList.toggle("hidden", s!==id)); window.scrollTo(0,0);
+// Each page gets an address (#areas, #guide…) so a refresh stays on the same page
+const PAGE_HASH={"s-intro":"","s-check":"#check","s-shot":"#check","s-result":"#check","s-guide":"#areas","s-steps":"#guide","s-uni":"#universities","s-help":"#ask","s-privacy":"#data","s-contact":"#contact"};
+function show(id){ ["s-intro","s-check","s-shot","s-result","s-guide","s-uni","s-steps","s-help","s-privacy","s-contact"].forEach(s=>document.getElementById(s).classList.toggle("hidden", s!==id)); window.scrollTo(0,0);
   const tab={"s-check":"s-intro","s-shot":"s-intro","s-result":"s-intro"}[id]||id;
   placeHelp(id);
+  try{ const h=PAGE_HASH[id]; if(h!==undefined && location.hash!==h) history.replaceState(null,"",h||location.pathname+location.search); }catch(e){}
   document.querySelectorAll(".tabs button").forEach(b=>{ if(b.dataset.tab===tab) b.setAttribute("aria-current","page"); else b.removeAttribute("aria-current"); }); }
 document.addEventListener("DOMContentLoaded",()=>{ const b=document.querySelector('.tabs [data-tab="s-intro"]'); if(b) b.setAttribute("aria-current","page"); });
 (function hdrH(){ const f=()=>{ const h=document.querySelector("header"); if(h) document.documentElement.style.setProperty("--hdr",h.offsetHeight+"px"); }; window.addEventListener("resize",f); document.addEventListener("DOMContentLoaded",f); f(); })();
@@ -1906,10 +1985,10 @@ const LL_ASK=[
  ["Could we arrange a viewing (in person or a live video call) before I pay anything?","¿Podemos organizar una visita (en persona o por videollamada en directo) antes de hacer cualquier pago?"],
  ["Is someone able to show me the room in person or on a live video call?","¿Hay alguien que me pueda enseñar la habitación en persona o por videollamada en directo?"],
  ["Can I pay by bank transfer to an account in the owner's or agency's name?","¿Puedo pagar por transferencia bancaria a una cuenta a nombre del propietario o de la agencia?"],
- ["Could you confirm the monthly rent, what's included (bills) and the room size?","¿Me puede confirmar el alquiler mensual, qué incluye (gastos) y el tamaño de la habitación?"],
- ["I'd like a day to review everything before deciding. Is that OK?","Me gustaría tener un día para revisarlo todo antes de decidir. ¿Le parece bien?"],
+ ["Could you confirm the monthly rent, what is included (bills) and the room size?","¿Me puede confirmar el alquiler mensual, qué incluye (gastos) y el tamaño de la habitación?"],
+ ["I would like a day to review everything before deciding. Is that okay with you?","Me gustaría tener un día para revisarlo todo antes de decidir. ¿Le parece bien?"],
  ["Could you send me the contract to read before I pay?","¿Me puede enviar el contrato para leerlo antes de pagar?"],
- ["I'm happy to show my ID when we sign the contract.","Puedo mostrar mi documento de identidad cuando firmemos el contrato."],
+ ["I am happy to show my ID when we sign the contract.","Puedo mostrar mi documento de identidad cuando firmemos el contrato."],
  ["Can we keep talking through the platform's messages?","¿Podemos seguir hablando por los mensajes de la plataforma?"],
  ["Could you share the full address (building, floor and door)?","¿Me puede dar la dirección completa (número, piso y puerta)?"],
  ["Could we do a short live video call of the room?","¿Podemos hacer una videollamada corta en directo para ver la habitación?"],
@@ -1924,7 +2003,7 @@ function landlordMsg(){
   [0,5,8].forEach(k=>{ if(!picks.includes(k) && ans[k]!=="no") picks.push(k); });   // viewing, contract, address, unless the student said these are already fine
   const lines=picks.slice(0,5).map(k=>"- "+LL_ASK[k][L]);
   if(lines.length<5) lines.push("- "+LL_OWNER[L]);
-  return (L? "Hola, me interesa la habitación. Antes de seguir, ¿me podría ayudar con algunas cosas?" : "Hi, I'm interested in the room. Before going ahead, could you help me with a few things?")+"\n\n"+lines.join("\n")+"\n\n"+(L?"¡Gracias!":"Thank you!");
+  return (L? "Hola, me interesa la habitación. Antes de seguir, ¿me podría ayudar con algunas cosas?" : "Hi, I am interested in the room. Before going ahead, could you help me with a few things?")+"\n\n"+lines.join("\n")+"\n\n"+(L?"¡Gracias!":"Thank you!");
 }
 function renderLL(){ const t=document.getElementById("llMsg"); if(t) t.value=landlordMsg();
   document.querySelectorAll(".langT button").forEach(b=>b.setAttribute("aria-pressed",String(b.dataset.lang===llLang))); }
@@ -1947,12 +2026,12 @@ function renderNext(yes, unsure){
   const add=(html)=>{ const li=document.createElement("li"); li.innerHTML=html; ul.appendChild(li); };
   if(yes.length>=3) add("<b>Don't send any money.</b> Several common scam patterns are present.");
   if(yes.length) add("<b>Work through the points above</b> before you pay or share documents.");
-  add('<b>Ask the landlord</b> the questions above. <a href="#" onclick="document.getElementById(\'askLL\').scrollIntoView({behavior:\'smooth\',block:\'center\'});return false">Copy the message ↑</a>');
+  add('<b>Ask the landlord</b> the questions above. <a class="nx" href="#" onclick="document.getElementById(\'askLL\').scrollIntoView({behavior:\'smooth\',block:\'center\'});return false">Copy the message</a>');
   add("<b>Always, before paying:</b> see the room (in person or a live video call), read a written contract, and pay only to an account in the landlord's or agency's name.");
   const priceAns=ans[3];
-  if(priceAns!=="no") add('<b>Check the price</b> against the area. <a href="#" onclick="goPrice();return false">Open the price check →</a>');
-  add((yes.length||unsure.length>=2 ? "<b>Still unsure? Ask a real person.</b> " : "<b>Questions?</b> ")+'Your university\'s international office can help. <a href="#" onclick="document.getElementById(\'helpCard\').scrollIntoView({behavior:\'smooth\',block:\'start\'});return false">Get their contact and a ready-made message ↓</a>');
-  add('<b>Already paid?</b> <a href="#" onclick="show(\'s-steps\');setTimeout(()=>document.getElementById(\'paidGuide\').scrollIntoView({behavior:\'smooth\'}),80);return false">See what to do now →</a>');
+  if(priceAns!=="no") add('<b>Check the price</b> against the area. <a class="nx" href="#" onclick="goPrice();return false">Open the price check</a>');
+  add((yes.length||unsure.length>=2 ? "<b>Still unsure? Ask a real person.</b> " : "<b>Questions?</b> ")+'Your university\'s international office can help, and Checkie gives you a ready-made message. <a href="#" onclick="document.getElementById(\'helpCard\').scrollIntoView({behavior:\'smooth\',block:\'start\'});return false" class="nx">Get their contact</a>');
+  add('<b>Already paid?</b> <a href="#" onclick="show(\'s-steps\');setTimeout(()=>document.getElementById(\'paidGuide\').scrollIntoView({behavior:\'smooth\'}),80);return false" class="nx">See what to do</a>');
   n.appendChild(ul);
   const note=document.createElement("p"); note.className="muted rsNote"; note.textContent="These are warning signs, not proof of fraud. Checkie never says a listing is safe, and it doesn't judge any person.";
   n.appendChild(note);
@@ -2139,61 +2218,156 @@ wirePriceCheck(document.getElementById("pcGuide"));
   wirePriceCheck(document.getElementById("pcQ"),{inQuestion:true});
 })();
 
-// ---------- Interactive map (Leaflet + OpenStreetMap/CARTO tiles); falls back to the drawn map ----------
+// ---------- Interactive map (Leaflet + OpenStreetMap tiles); falls back to the drawn map ----------
+// Design: calm default (area names only, overlapping areas grouped), one selected area at a time
+// (filled chip + soft halo + a compact card in the corner), one control group, prices on hover/zoom/selection.
 (function initLeaflet(){
   if(typeof L==="undefined") return; // map library blocked or offline: keep the drawn map
   const el=document.getElementById("lmap"); el.hidden=false; document.getElementById("svgMapWrap").hidden=true;
-  document.getElementById("mapHelp").textContent="Tap an area to see its price.";
+  document.getElementById("mapHelp").textContent="Tap an area to see its price and what it's like. Zoom in to see all prices.";
   const BCN=[41.392,2.160], BCNZ=window.innerWidth<600?12.5:13;
-  const map=L.map(el,{scrollWheelZoom:true,zoomControl:false,tap:true,zoomSnap:0.5,minZoom:11,maxZoom:17,
-    maxBounds:[[41.25,1.95],[41.56,2.35]],maxBoundsViscosity:0.8}).setView(BCN,BCNZ); window._lmap=map;
-  L.control.zoom({position:"topright"}).addTo(map);
-  // Google-Maps-style extra controls: reset view and full screen
-  const Ctl=L.Control.extend({options:{position:"topright"},onAdd(){ const d=L.DomUtil.create("div","leaflet-bar mapctl");
-    d.innerHTML='<a href="#" title="Back to Barcelona" role="button" aria-label="Back to Barcelona" data-c="reset">⌂</a><a href="#" title="Full screen" role="button" aria-label="Full screen" data-c="fs">⛶</a>';
-    L.DomEvent.disableClickPropagation(d);
-    d.querySelector('[data-c="reset"]').onclick=e=>{ e.preventDefault(); fitAll(); };
-    d.querySelector('[data-c="fs"]').onclick=e=>{ e.preventDefault(); const on=!el.classList.contains("fs"); el.classList.toggle("fs",on); document.body.classList.toggle("noscroll",on); e.currentTarget.textContent=on?"✕":"⛶"; setTimeout(()=>map.invalidateSize(),50); };
+  const coarse=window.matchMedia&&matchMedia("(pointer: coarse)").matches;
+  const still=()=>window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const map=L.map(el,{scrollWheelZoom:true,zoomControl:false,zoomSnap:0.5,minZoom:11,maxZoom:17,
+    maxBounds:[[41.25,1.95],[41.56,2.35]],maxBoundsViscosity:0.8,fadeAnimation:!still(),zoomAnimation:!still()}).setView(BCN,BCNZ); window._lmap=map;
+  map.attributionControl.setPrefix(false);
+  // One control group: zoom (hidden on touch screens, where you pinch), back to the city, full screen
+  const Ctl=L.Control.extend({options:{position:"topright"},onAdd(){ const d=L.DomUtil.create("div","mctl");
+    d.innerHTML=(coarse?'':'<button type="button" data-c="in" aria-label="Zoom in" title="Zoom in">+</button><button type="button" data-c="out" aria-label="Zoom out" title="Zoom out">−</button><i></i>')+
+      '<button type="button" data-c="reset" aria-label="Back to all areas" title="Back to all areas"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 9.5 10 4l7 5.5M5.5 8v7.5h9V8" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round"/></svg></button>'+
+      '<button type="button" data-c="fs" aria-label="Full screen" title="Full screen"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 8V4h4M12 4h4v4M16 12v4h-4M8 16H4v-4" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg></button>';
+    L.DomEvent.disableClickPropagation(d); L.DomEvent.disableScrollPropagation(d);
+    const q=s=>d.querySelector('[data-c="'+s+'"]');
+    if(q("in")){ q("in").onclick=()=>map.zoomIn(); q("out").onclick=()=>map.zoomOut(); }
+    q("reset").onclick=()=>{ map.stop(); closeCard(true); fitAll(); };
+    q("fs").onclick=()=>{ const on=!el.classList.contains("fs"); el.classList.toggle("fs",on); document.body.classList.toggle("noscroll",on);
+      q("fs").setAttribute("aria-label",on?"Exit full screen":"Full screen"); q("fs").title=on?"Exit full screen":"Full screen";
+      q("fs").innerHTML=on?'<svg viewBox="0 0 20 20" aria-hidden="true"><path d="M5 5l10 10M15 5 5 15" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>':'<svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 8V4h4M12 4h4v4M16 12v4h-4M8 16H4v-4" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>';
+      setTimeout(()=>{ map.invalidateSize(); layout(); },60); };
     return d; }});
   map.addControl(new Ctl());
-  function fitAll(){ map.fitBounds(L.latLngBounds(AREAS.map(a=>[a.lat,a.lng])),{padding:[30,30]}); }
-  document.addEventListener("keydown",e=>{ if(e.key==="Escape" && el.classList.contains("fs")) el.querySelector('[data-c="fs"]').click(); });
+  const fsBtn=()=>el.querySelector('[data-c="fs"]');
+  function fitAll(){ map.fitBounds(L.latLngBounds(AREAS.map(a=>[a.lat,a.lng])),{paddingTopLeft:[30,30],paddingBottomRight:[coarse?60:52,30],animate:!still()}); }
+  document.addEventListener("keydown",e=>{ if(e.key!=="Escape") return; if(card.classList.contains("show")) closeCard(); else if(el.classList.contains("fs")) fsBtn().click(); });
   const tiles=L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png",{maxZoom:19,
-    attribution:'&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a> contributors'}).addTo(map);
+    attribution:'&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a>'}).addTo(map);
   // If map tiles can't load here (some previews block them), go back to the drawn map
   let tOk=0,tErr=0; tiles.on("tileload",()=>tOk++); tiles.on("tileerror",()=>{ tErr++; if(tErr>=4 && tOk===0){ el.hidden=true; document.getElementById("svgMapWrap").hidden=false; document.getElementById("mapHelp").textContent="Tap a landmark to see the area. Dots mark where each area is; the green pin is your campus. (The zoomable map needs the live website.)"; } });
-  const marks={};
-  function pillHTML(a){ const on=current&&current.id===a.id, fl=window._pcFlag===a.id, z=map.getZoom(), c=(on?' on':'')+(fl?' flag':'');
-    const FULLZ = window.innerWidth<600 ? 14 : 13;
-    if(z<=11.5 && !on) return '<span class="pdot'+c+'"></span>';                     // zoomed out: dots only
-    if(z<FULLZ && !on) return '<span class="ppill sm'+c+'">'+a.n+'</span>';          // middle: area name only
-    return '<span class="ppill'+c+'">'+a.n+'<small>'+a.pr+'/mo</small></span>'; }
-  AREAS.forEach(a=>{ const m=L.marker([a.lat,a.lng],{icon:L.divIcon({className:"",html:pillHTML(a),iconSize:null}),keyboard:true,title:a.n+", "+a.pr}).addTo(map); m.bindTooltip(a.n+" · "+a.pr,{direction:"top",offset:[0,-8]});
-    m.on("click",()=>{ openArea(a,innerWidth>=900); refresh(); m.unbindPopup(); m.bindPopup(popHTML(a),{className:"apop",maxWidth:260,minWidth:220,offset:[0,-6],autoPanPadding:[20,20]}).openPopup(); }); marks[a.id]=m; });
+
+  // ----- markers -----
+  let sel=null;                       // the area the student picked (none until they pick one)
+  const marks={}, groupOf={};
+  const halo=L.circle(BCN,{radius:700,color:"#1f5f5b",weight:1.5,opacity:.55,fillColor:"#1f5f5b",fillOpacity:.09,interactive:false});
   function esc(t){ return String(t).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c])); }
-  function popHTML(a){
+  const short=pr=>pr.replace(/\s/g,"");
+  AREAS.forEach(a=>{ const m=L.marker([a.lat,a.lng],{icon:L.divIcon({className:"mkw",html:"",iconSize:null}),keyboard:true,riseOnHover:true}).addTo(map);
+    m.on("click",()=>{ const g=groupOf[a.id]; if(g && g.length>1 && !(sel&&g.some(x=>x.id===sel.id)) && map.getZoom()<map.getMaxZoom()-1){ zoomToGroup(g); return; } pick(a,true); });
+    marks[a.id]=m;
+    const e=m.getElement(); if(e) e.addEventListener("keydown",ev=>{ if(ev.key==="Enter"||ev.key===" "){ ev.preventDefault(); m.fire("click"); } }); });
+  function zoomToGroup(g){ map.flyToBounds(L.latLngBounds(g.map(x=>[x.lat,x.lng])).pad(0.6),{maxZoom:14.5,duration:still()?0:.6}); }
+
+  // Measure label widths once (same font as the chips)
+  const cv=document.createElement("canvas").getContext("2d");
+  const tw=(t,w)=>{ cv.font=(w||600)+" 12.5px -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif"; return cv.measureText(t).width; };
+  function priority(){ const list=AREAS.slice();
+    const near=campus&&!campus.custom&&campus.lat? (a=>km(a,campus)) : (a=>AREAS.indexOf(a));
+    list.sort((x,y)=>near(x)-near(y));
+    const top=[sel, AREAS.find(a=>a.id===window._pcFlag)].filter(Boolean);
+    return top.concat(list.filter(a=>!top.includes(a))); }
+  // Lay out chips: full chips (name + price) when zoomed in, name-only otherwise; areas whose chips would
+  // overlap are grouped under the first one ("Sant Antoni +2"); tapping a group zooms into it.
+  function layout(){
+    const z=map.getZoom(), full=z>=(innerWidth<600?14.5:14), placed=[];
+    Object.keys(groupOf).forEach(k=>delete groupOf[k]);
+    priority().forEach(a=>{
+      const p=map.latLngToContainerPoint([a.lat,a.lng]), isSel=sel&&sel.id===a.id, showPr=full||isSel;
+      const w=tw(a.n)+(showPr?tw(" "+short(a.pr),500)+6:0)+30, h=30;
+      const box={x1:p.x-w/2-4,x2:p.x+w/2+4,y1:p.y-h/2-3,y2:p.y+h/2+3,a,members:[a]};
+      const hit=placed.find(b=>!(box.x2<b.x1||box.x1>b.x2||box.y2<b.y1||box.y1>b.y2));
+      if(hit && !isSel){ hit.members.push(a); return; }
+      placed.push(box); });
+    placed.forEach(b=>{ b.members.forEach(m=>groupOf[m.id]=b.members); });
+    AREAS.forEach(a=>{ const b=placed.find(x=>x.a===a), m=marks[a.id], e=m.getElement(); if(!e) return;
+      if(!b){ e.style.display="none"; e.setAttribute("aria-hidden","true"); e.tabIndex=-1; return; }
+      e.style.display=""; e.removeAttribute("aria-hidden"); e.tabIndex=0;
+      const isSel=sel&&sel.id===a.id, fl=window._pcFlag===a.id, n=b.members.length-1, showPr=full||isSel;
+      const n2=isSel?0:n; const cls="mk"+(isSel?" on":"")+(fl?" flag":"")+(showPr?" full":"")+(n2?" grp":"");
+      const html='<span class="'+cls+'"><i aria-hidden="true"></i><b>'+esc(a.n)+'</b><em>'+esc(short(a.pr))+'</em>'+(n2?'<u>+'+n2+'</u>':'')+'</span>';
+      if(e.innerHTML!==html) e.innerHTML=html;
+      e.setAttribute("role","button");
+      e.setAttribute("aria-label", n2? a.n+" and "+n+" nearby area"+(n>1?"s":"")+" ("+b.members.slice(1).map(x=>x.n).join(", ")+"). Zoom in" : a.n+", rooms "+a.pr+" a month"+(isSel?", selected":""));
+      e.removeAttribute("title");
+      m.setZIndexOffset(isSel?1000:fl?900:n?500:0);
+    });
+  }
+  map.on("zoomend",layout); window.addEventListener("resize",()=>{ clearTimeout(window._mlT); window._mlT=setTimeout(layout,150); });
+
+  // ----- compact area card (corner on computers, bottom sheet on phones) -----
+  const card=L.DomUtil.create("div","mcard",el); card.setAttribute("role","dialog"); card.setAttribute("aria-label","Area details");
+  L.DomEvent.disableClickPropagation(card); L.DomEvent.disableScrollPropagation(card);
+  function cardHTML(a){
     let travel="";
-    if(campus && !campus.custom){ const m=estMin(km(a,campus)), f=feas(m); travel='<div class="pt"><span>~'+m+' min (rough estimate) to '+esc(campus.n.split(" – ")[0])+'</span><span class="feas '+f[0]+'">'+f[1]+'</span></div>'; }
-    return '<div class="pp"><div class="ph"><b>'+esc(a.n)+'</b><span>'+esc(a.pr)+'<small>/mo</small></span></div>'+
+    if(campus && !campus.custom && campus.lat){ const m=estMin(km(a,campus)), f=feas(m); travel='<div class="mt"><span>~'+m+' min to '+esc(campus.n.split(" – ")[0])+' <small>(rough estimate)</small></span><span class="feas '+f[0]+'">'+f[1]+'</span></div>'; }
+    return '<button type="button" class="mx" aria-label="Close">×</button>'+
+      '<div class="mh"><b>'+esc(a.n)+'</b><span>'+esc(a.pr)+'<small>/mo</small></span></div>'+
       '<span class="tag '+esc(a.tag||"")+'">'+esc(a.tl||a.g)+'</span><p>'+esc(a.vibe)+'</p>'+travel+
-      '<div class="pa"><button onclick="document.getElementById(\'aDetail\').scrollIntoView({behavior:\'smooth\',block:\'nearest\'})">Full details</button>'+
-      (campus?'<a href="'+esc(mapsUrl(a))+'" target="_blank" rel="noopener">Route ↗</a>':'')+'</div></div>'; }
+      '<div class="ma"><button type="button" class="mfull">Full details</button>'+(campus&&campus.lat?'<a href="'+esc(mapsUrl(a))+'" target="_blank" rel="noopener">Route</a>':'')+'</div>'; }
+  function openCard(a){ card.innerHTML=cardHTML(a); card.classList.add("show");
+    card.querySelector(".mx").onclick=()=>closeCard(true);
+    card.querySelector(".mfull").onclick=()=>window.areaFull(a.id); }
+  function closeCard(deselect){ card.classList.remove("show"); if(deselect){ sel=null; halo.remove(); layout(); } }
+  map.on("click",()=>{ if(card.classList.contains("show")) closeCard(true); });
+  // keep the picked area visible next to the card (no big jumps: only pan if it would be hidden)
+  function reveal(a){ const p=map.latLngToContainerPoint([a.lat,a.lng]), s=map.getSize(), r=card.getBoundingClientRect(), m=el.getBoundingClientRect();
+    const phone=innerWidth<600||el.clientWidth<520;
+    const pad=phone? {tl:[24,60],br:[24,r.height+28]} : {tl:[24,24],br:[24,24]};
+    let dx=0,dy=0;
+    if(p.x<pad.tl[0]) dx=p.x-pad.tl[0]; else if(p.x>s.x-pad.br[0]) dx=p.x-(s.x-pad.br[0]);
+    if(p.y<pad.tl[1]) dy=p.y-pad.tl[1]; else if(p.y>s.y-pad.br[1]) dy=p.y-(s.y-pad.br[1]);
+    if(!phone){ const chip=(marks[a.id].getElement()||{}).firstChild; if(chip){ const k=chip.getBoundingClientRect();   // chip under the card? slide it out sideways
+      const kx1=k.left-m.left-dx, kx2=k.right-m.left-dx, ky1=k.top-m.top-dy, ky2=k.bottom-m.top-dy, c1=r.left-m.left-12, c2=r.right-m.left+12, c3=r.top-m.top-12, c4=r.bottom-m.top+12;
+      if(kx2>c1 && kx1<c2 && ky2>c3 && ky1<c4) dx-= (c2-kx1+8); } }
+    if(dx||dy) map.panBy([dx,dy],{animate:!still(),duration:.35}); }
+  function pick(a,fromMap){ sel=a; halo.setLatLng([a.lat,a.lng]).addTo(map); layout(); openCard(a);
+    if(fromMap) pinTap(a);
+    requestAnimationFrame(()=>reveal(a)); }
+  window._lmapPick=pick;
+
+  // Area details below the map (phones), so "Full details" never sends you far up the page
+  const slot=document.createElement("div"); slot.id="aDetailMap"; el.after(slot);
+  const calm=()=>still()?"auto":"smooth";
+  function pinTap(a){ const d=document.getElementById("aDetail");
+    if(innerWidth>=900){ openArea(a,false,true); return; }      // list sits beside the map: open it there, don't move the page
+    if(d.parentNode===slot && !d.hidden) areaDetail(a);          // card already under the map: just switch area
+  }
+  window.areaFull=function(id){ const a=AREAS.find(x=>x.id===id); if(!a) return; const d=document.getElementById("aDetail");
+    if(el.classList.contains("fs")) fsBtn().click();   // leave full screen first
+    closeCard(false);
+    if(innerWidth>=900){ openArea(a,false,true); requestAnimationFrame(()=>{ if(!d.hidden) d.scrollIntoView({behavior:calm(),block:"nearest"}); }); return; }
+    document.querySelectorAll(".arow.open").forEach(x=>x.classList.remove("open"));
+    areaDetail(a); slot.appendChild(d); d.hidden=false; d.classList.add("inl");
+    requestAnimationFrame(()=>d.scrollIntoView({behavior:calm(),block:"nearest"}));
+  };
+  window._lmapRefresh=layout;
+
+  // ----- campus -----
   let cm=null;
-  function refresh(){ AREAS.forEach(a=>marks[a.id].setIcon(L.divIcon({className:"",html:pillHTML(a),iconSize:null}))); }
-  window._lmapRefresh=refresh; map.on("zoomend",refresh);
   window._lmapCampus=function(c){ if(cm){ map.removeLayer(cm); cm=null; }
-    if(c && !c.custom && c.lat){ cm=L.marker([c.lat,c.lng],{icon:L.divIcon({className:"",html:'<span class="cpin">🎓 '+c.n.replace(/</g,"")+'</span>',iconSize:null}),zIndexOffset:1000}).addTo(map);
-      updCampusBtn(); }
-    else updCampusBtn(); };
-  const cbtn=L.DomUtil.create("button","campusBtn",el); L.DomEvent.disableClickPropagation(cbtn); cbtn.hidden=true;
-  cbtn.onclick=()=>{ if(!campus||!campus.lat) return; if(map.getBounds().contains([campus.lat,campus.lng])) fitAll(); else map.fitBounds(L.latLngBounds([[campus.lat,campus.lng],BCN]).pad(0.15)); };
+    if(c && !c.custom && c.lat){ cm=L.marker([c.lat,c.lng],{icon:L.divIcon({className:"mkw",html:'<span class="cpin"><i aria-hidden="true">🎓</i>'+esc(c.n.split(" – ")[0])+'</span>',iconSize:null}),zIndexOffset:1200,keyboard:false,interactive:false}).addTo(map); }
+    updCampusBtn(); layout(); if(sel && card.classList.contains("show")) openCard(sel); };
+  const cbtn=L.DomUtil.create("button","campusBtn",el); cbtn.type="button"; L.DomEvent.disableClickPropagation(cbtn); cbtn.hidden=true;
+  cbtn.onclick=()=>{ if(!campus||!campus.lat) return; if(map.getBounds().contains([campus.lat,campus.lng])) fitAll(); else map.flyToBounds(L.latLngBounds([[campus.lat,campus.lng],BCN]).pad(0.15),{duration:still()?0:.6}); };
   function updCampusBtn(){ const c=campus; if(!c||c.custom||!c.lat){ cbtn.hidden=true; return; } cbtn.hidden=false;
-    cbtn.textContent = map.getBounds().contains([c.lat,c.lng]) ? "⌂ Back to the city" : "🎓 Show my campus"; }
+    cbtn.textContent = map.getBounds().contains([c.lat,c.lng]) ? "Show all areas" : "🎓 Show my campus"; }
   map.on("moveend",updCampusBtn);
-  const _ad=areaDetail; areaDetail=function(a){ _ad(a); try{ refresh(); }catch(e){} };
+
+  // Keep the map in step with the list: opening an area there selects it here; closing it clears it
+  const _ad=areaDetail; areaDetail=function(a){ _ad(a); setTimeout(()=>{ try{ const d=document.getElementById("aDetail"); if(!d.hidden && d.parentNode!==slot){ sel=a; halo.setLatLng([a.lat,a.lng]).addTo(map); if(card.classList.contains("show")) openCard(a); } layout(); }catch(e){} },0); };
+  const _dh=detailHome; detailHome=function(){ _dh(); try{ if(!card.classList.contains("show")){ sel=null; halo.remove(); layout(); } }catch(e){} };
   const _sc=setCampus; setCampus=function(c){ _sc(c); try{ window._lmapCampus(c); }catch(e){} };
   if(campus) window._lmapCampus(campus);
-  let firstShow=true; const _show=show; show=function(id){ _show(id); if(id==="s-guide") setTimeout(()=>{ map.invalidateSize(); if(firstShow){ firstShow=false; fitAll(); } },60); };
+  let firstShow=true; const _show=show; show=function(id){ _show(id); if(id==="s-guide") setTimeout(()=>{ map.invalidateSize(); if(firstShow){ firstShow=false; fitAll(); } layout(); },60); };
+  map.whenReady(()=>setTimeout(layout,0));
 })();
 
 // ---------- Campus distance & travel feasibility ----------
@@ -2217,17 +2391,17 @@ function travelHTML(a){
 var current=AREAS[0];
 const _areaDetail=areaDetail; areaDetail=function(a){ current=a; _areaDetail(a); };
 function detailHome(){ const d=document.getElementById("aDetail"), h=document.getElementById("aDetailHome"); d.classList.remove("inl"); d.hidden=true; if(d.previousElementSibling!==h) h.after(d); document.querySelectorAll(".arow.open").forEach(x=>x.classList.remove("open")); }
-function openArea(a,scroll){ const r=document.querySelector('#areaList .arow[data-id="'+a.id+'"]'); if(!r) return;
-  if(!r.classList.contains("open")) toggleInline(r,a,!scroll);
+function openArea(a,scroll,noPan){ const r=document.querySelector('#areaList .arow[data-id="'+a.id+'"]'); if(!r) return;
+  if(!r.classList.contains("open")) toggleInline(r,a,!scroll,noPan);
   if(scroll){ const b=r.getBoundingClientRect(), hdr=(document.querySelector("header")||{offsetHeight:0}).offsetHeight;
     if(b.top<hdr+8 || b.top>innerHeight-120) r.scrollIntoView({behavior:"smooth",block:"start"}); } }
-function toggleInline(r,a,quiet){
+function toggleInline(r,a,quiet,noPan){
   const d=document.getElementById("aDetail");
   if(r.classList.contains("open")){ detailHome(); return; }   // second tap closes it
   document.querySelectorAll(".arow.open").forEach(x=>x.classList.remove("open"));
   const y=r.getBoundingClientRect().top;
   areaDetail(a); r.after(d); d.hidden=false; d.classList.add("inl"); r.classList.add("open");
-  if(window._lmap && a.lat!=null) window._lmap.panTo([a.lat,a.lng]);
+  if(window._lmap && a.lat!=null && !noPan) window._lmap.panTo([a.lat,a.lng]);
   if(quiet) return;   // opened from the map on a phone: don't move the page
   const dy=r.getBoundingClientRect().top-y; if(Math.abs(dy)>1) window.scrollBy(0,dy);    // keep the tapped row where it was (no jump)
   // then glide just enough to show the whole card, never past the tapped row
@@ -2357,7 +2531,7 @@ function flaggedList(v){ return QUESTIONS.filter((_,k)=>ans[k]===v).map(Q=>Q.fla
 // ---------- Feedback (saved privately for the owner via the artifact "db" capability) ----------
 var fbDb=null, fbUser=null, fbNetlify=false, fb={rating:0,tags:[],paid:null};
 const FB_TAGS=["Clearer questions","More scam examples","More areas & prices","Better AI check","Spanish / other languages","Faster to use"];
-function fbValid(){ document.getElementById("fbSend").disabled = !((fbDb||fbNetlify) && (fb.rating || fb.tags.length || fb.paid || document.getElementById("fbText").value.trim())); }
+function fbValid(){ const ok=!!fb.rating; document.getElementById("fbSend").disabled = !((fbDb||fbNetlify) && ok); const n=document.getElementById("fbNeed"); if(n) n.hidden=ok || !(fbDb||fbNetlify); }
 (function fbUI(){
   const st=document.getElementById("fbStars");
   for(let n=1;n<=5;n++){ const b=document.createElement("button"); b.className="star"; b.textContent=n; b.setAttribute("role","radio"); b.setAttribute("aria-checked","false"); b.setAttribute("aria-label",n+" out of 5");
@@ -2403,15 +2577,54 @@ function copyText(text, btn, el){
   try{ navigator.clipboard.writeText(text).then(done).catch(()=>{ if(el){ el.focus(); el.select && el.select(); } btn.textContent="Select and copy"; }); }
   catch(e){ if(el){ el.focus(); el.select && el.select(); } }
 }
+// One plain-English question per warning sign, so the office knows exactly what to answer
+const OFFICE_Q=[
+ "The landlord wants me to pay before I have seen the room. Is that normal in Barcelona, and how can I see the room safely first?",
+ "The landlord says they are abroad and will send the keys after I pay. Is this a pattern you have seen before?",
+ "They want me to pay in an unusual way. Which payment methods are safe for a deposit?",
+ "The rent is much lower than similar rooms in the area. Does this price look realistic to you?",
+ "They are pressuring me to pay quickly. How much time is it reasonable to ask for?",
+ "There is no written contract before I pay. What should a rental contract include, and could someone look at it with me?",
+ "They asked for my passport or ID before a viewing. Should I send it?",
+ "They moved our conversation off the housing website. Should I be worried?",
+ "They will not give me the exact address. How can I check that the address is real?",
+ "They will not do a live video call of the room. How else can I check that the room exists?",
+ "They are asking for more than two months of rent upfront. What is a normal amount to pay before moving in?",
+ "They are charging an extra fee they have not explained. Is this fee normal?"];
 function helpMessage(c){
+  const uni=c.n.split(" – ")[0];
   const direct=(document.getElementById("helpCard")||{dataset:{}}).dataset.mode==="direct";
-  if(direct || !ans.some(Boolean)) return "Subject: Question about a room listing before I pay a deposit\n\nHello,\n\nI'm an incoming student at "+c.n.split(" – ")[0]+" and I've found a room in Barcelona. Before paying anything, I'd like to check it is genuine.\n\nThe listing: [paste the link, or describe it: area, price, platform]\nWhat worries me: [e.g. they want a deposit before a viewing]\n\nCould you tell me whether this looks like something I should avoid, or who I can ask about student housing?\n\nThank you,\n[Your name]";
-  const yes=QUESTIONS.filter((_,k)=>ans[k]==="yes").map(Q=>"- "+Q.flag);
-  const uns=QUESTIONS.filter((_,k)=>ans[k]==="unsure").map(Q=>"- Not sure: "+Q.flag);
-  const lvl=(document.getElementById("resTitle")||{}).textContent||"";
-  return "Subject: Question about a room listing before I pay a deposit\n\nHello,\n\nI'm an incoming student at "+c.n.split(" – ")[0]+" and I'm about to rent a room in Barcelona. Before paying, I ran the listing through Checkie, a scam-pattern check. Its result was: "+lvl+".\n\n"+
-  ((yes.length||uns.length) ? "What it flagged:\n"+yes.concat(uns).join("\n")+"\n\n" : "")+
-  "Could you tell me whether this looks like something I should avoid, or who I can ask about student housing?\n\nThank you,\n[Your name]";
+  const sign=["","Kind regards,","[Your full name]","[Your programme, e.g. Exchange semester, Bachelor in Business]","[Your arrival date in Barcelona]"].join("\n");
+  const details=["Listing details:","- Link or platform: [paste the link, or the website / group where you found it]","- Area and monthly rent: [e.g. Gràcia, €450 a month]","- What the landlord is asking me to do, and by when: [e.g. pay a €600 deposit by Friday]","- Have I paid anything yet: [No / Yes, €___]"];
+  if(direct || !ans.some(Boolean)){
+    return ["Subject: Advice needed before I pay for a room in Barcelona","","Hello,","",
+      "I am an incoming student at "+uni+" and I am looking for a room in Barcelona. Before I pay anything, I would like your advice on a listing.","",
+      "My question:","1. [What worries you, e.g. they want a deposit before I can see the room]","",
+      ...details,"",
+      "If your office has a list of trusted student housing, or someone who can review a listing or contract, I would be grateful if you could point me to it.",
+      sign].join("\n");
+  }
+  const yesK=[], unsK=[]; QUESTIONS.forEach((_,k)=>{ if(ans[k]==="yes") yesK.push(k); else if(ans[k]==="unsure") unsK.push(k); });
+  const qs=yesK.concat(unsK).slice(0,3).map((k,i)=>(i+1)+". "+OFFICE_Q[k]);
+  // fill in area and rent if the student used the price check inside question 4
+  try{ const r=document.querySelector('#pcQ [data-pc="rent"]'), ar=document.querySelector('#pcQ [data-pc="area"]'), ty=document.querySelector('#pcQ [data-pc="type"]');
+    const a=AREAS.find(x=>x.id===(ar&&ar.value)), rent=r&&+r.value;
+    if(rent>0){ const what=ty&&ty.value==="res"?"Student residence":ty&&ty.value==="studio"?"Studio":(a?a.n:"[area]");
+      details[2]="- Area and monthly rent: "+what+", €"+Math.round(rent)+" a month"; } }catch(e){}
+  const lvl=((document.getElementById("resTitle")||{}).textContent||"").trim();
+  const urgent=yesK.length>=3;
+  const found = (yesK.length||unsK.length)
+    ? ["What Checkie found:","Checkie is a free self-check of 12 common rental scam warning signs. It shows warning signs, not proof of fraud."+(lvl?" Result: "+lvl+".":""),
+       ...(yesK.length?["","Warning signs I answered Yes to:",...yesK.map(k=>"- "+QUESTIONS[k].flag.replace(/\.$/,""))]:[]),
+       ...(unsK.length?["","Signs I was not sure about:",...unsK.map(k=>"- "+QUESTIONS[k].flag.replace(/\.$/,""))]:[])]
+    : ["What Checkie found:","Checkie is a free self-check of 12 common rental scam warning signs. I answered No to all of them, but I would still like to check before paying."];
+  return ["Subject: "+(urgent?"Urgent: advice":"Advice")+" needed before I pay for a room in Barcelona","","Hello,","",
+    "I am an incoming student at "+uni+" and I am about to rent a room in Barcelona. Before I pay anything, I would like your advice"+(urgent?", as the listing shows several common scam warning signs":"")+".","",
+    (qs.length>1?"My questions:":"My question:"),...(qs.length?qs:["1. Is there anything I should check before paying?"]),"",
+    ...details,"",
+    ...found,"",
+    "If your office has a list of trusted student housing, or someone who can review a listing or contract, I would be grateful if you could point me to it.",
+    sign].join("\n");
 }
 function renderHelp(){
   const sel=document.getElementById("helpSel"), out=document.getElementById("helpOut"), other=document.getElementById("helpOther");
@@ -2421,9 +2634,10 @@ function renderHelp(){
   document.getElementById("offName").textContent=c.office.o;
   const row=document.getElementById("offMailRow");
   if(c.office.email){ row.hidden=false; document.getElementById("offMail").textContent=c.office.email; } else { row.hidden=true; }
-  const a=document.getElementById("offLink"); a.href=c.office.url; a.textContent = c.office.email ? "Official contact page ↗" : "Find the right contact on the official page ↗";
+  const a=document.getElementById("offLink"); a.href=c.office.url; a.textContent = c.office.email ? "Official contact page" : "Find the right contact on the official page";
   document.getElementById("offMsg").value=helpMessage(c);
 }
+(function initContact(){ const b=document.getElementById("cCopy"); if(b) b.onclick=e=>copyText("yichi.gau@alumni.esade.edu",e.currentTarget,null); })();
 (function initHelp(){
   const sel=document.getElementById("helpSel");
   CAMPUSES.forEach(c=>{ const o=document.createElement("option"); o.value=c.id; o.textContent=c.n; sel.appendChild(o); });
@@ -2447,6 +2661,17 @@ function renderHelp(){
   b.onclick=()=>{ const show=()=>{ const l=document.getElementById("shareLink"); l.textContent=url; l.hidden=false; };
     try{ navigator.clipboard.writeText(url).then(()=>{ b.textContent="Link copied. Paste it in your group chat"; show(); }).catch(show); }catch(e){ show(); } };
 })();
+
+// ---------- Refresh: reopen the page the student was on (answers are never saved, so a check starts fresh) ----------
+(function restorePage(){
+  const back={"#check":"s-check","#areas":"s-guide","#guide":"s-steps","#universities":"s-uni","#demoBand":"s-uni","#ask":"s-help","#data":"s-privacy","#contact":"s-contact"};
+  window.addEventListener("hashchange",()=>{ const t=back[location.hash]; if(t && document.getElementById(t).classList.contains("hidden")) (t==="s-check"&&typeof startCheck==="function")?startCheck():show(t); else if(location.hash==="" ) show("s-intro"); });
+  const id=back[location.hash]; if(!id) return;
+  let y=0; try{ const v=JSON.parse(sessionStorage.getItem("checkieScroll")||"null"); if(v && v.h===location.hash) y=v.y; }catch(e){}
+  const go=()=>{ if(id==="s-check" && typeof startCheck==="function") startCheck(); else show(id); if(y) setTimeout(()=>window.scrollTo(0,y),120); };
+  if(document.readyState==="loading") document.addEventListener("DOMContentLoaded",go); else go();
+})();
+window.addEventListener("pagehide",()=>{ try{ sessionStorage.setItem("checkieScroll",JSON.stringify({h:location.hash,y:Math.round(scrollY)})); }catch(e){} });
 </script>
 <form name="checkie-demo" method="POST" data-netlify="true" netlify-honeypot="bot-field" hidden>
   <input type="hidden" name="form-name" value="checkie-demo">
