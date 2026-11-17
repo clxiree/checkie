@@ -650,6 +650,13 @@ a.nx:focus-visible{outline:3px solid var(--ochre);outline-offset:2px}
 }
 .langPick{margin-left:auto;display:flex;align-items:center;gap:4px;font-size:.85rem}
 .langPick select{font:600 .82rem -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;color:var(--ink);background:#fffdf8;border:1px solid var(--line);border-radius:999px;padding:6px 10px;cursor:pointer;max-width:9.5rem}
+/* language picker: one neat pill — icon, label and chevron centred on one line */
+.langPick{display:inline-flex;align-items:center;gap:8px;height:38px;padding:0 12px 0 12px;background:#fffdf8;border:1px solid var(--line);border-radius:999px;cursor:pointer;box-sizing:border-box;transition:border-color .15s}
+.langPick:hover,.langPick:focus-within{border-color:var(--accent)}
+.langPick .langIc{display:flex;align-items:center;justify-content:center;width:18px;height:18px;color:var(--accent);flex:none}
+.langPick .langIc svg{width:18px;height:18px;display:block}
+.langPick select{appearance:none;-webkit-appearance:none;-moz-appearance:none;border:none;background:transparent url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 8'%3E%3Cpath d='M1 1.5l5 5 5-5' fill='none' stroke='%231d2a33' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") no-repeat right center/11px 8px;padding:0 20px 0 0;margin:0;height:100%;line-height:36px;border-radius:0;outline:none;max-width:none;font:600 .88rem -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;color:var(--ink);text-align:left}
+.langPick select::-ms-expand{display:none}
 .i18nNote{font-size:.82rem;margin:0 0 12px;padding:7px 12px;border-radius:10px;background:#fff6e0;border:1px solid #ecd9a8;color:var(--ink)}
 :lang(zh) body,:lang(zh) button,:lang(zh) select,:lang(zh) textarea{word-break:normal;line-break:strict}
 .kit .matHead{flex-wrap:wrap;gap:8px}.kitLangs{display:flex;flex-wrap:wrap;gap:4px}
@@ -1357,7 +1364,7 @@ svg.leaflet-image-layer.leaflet-interactive path {
 <main>
 <header><svg onclick="show('s-intro')" style="cursor:pointer" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="48" height="48" role="img" aria-label="Checkie logo"><path d="M11 57 V24 q7 -11 14 -4 q7 7 14 0 q7 -7 14 4 V57" fill="#f4ead8" stroke="#1f5f5b" stroke-width="2.6" stroke-linejoin="round"/><path d="M8 57 H56" stroke="#1f5f5b" stroke-width="2.6" stroke-linecap="round"/><path d="M17 37 V31 a3.5 3.5 0 0 1 7 0 V37 M29 37 V30 a3.5 3.5 0 0 1 7 0 V37 M41 37 V31 a3.5 3.5 0 0 1 7 0 V37" fill="none" stroke="#1f5f5b" stroke-width="2" stroke-linejoin="round"/><path d="M15 40 h11 M28 40 h9 M39 40 h11" stroke="#c8643b" stroke-width="2.2" stroke-linecap="round"/><path d="M26 57 V50 a6 6 0 0 1 12 0 V57" fill="#c8643b"/><circle cx="53" cy="12" r="8" fill="#e3b44f" stroke="#fffdf8" stroke-width="2"/><path d="M49.2 12.2 l2.6 2.6 l4.8 -5.2" fill="none" stroke="#1f5f5b" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
 <div class="brand"><b>Checkie</b><span data-i18n="brandSub">Check before you pay</span></div>
-<label class="langPick"><span class="langIc" aria-hidden="true">🌐</span><select id="langSel" aria-label="Language / Idioma / 语言"><option value="en">English</option><option value="es">Español</option><option value="ca">Català</option><option value="zh-Hans">简体中文</option><option value="zh-Hant">繁體中文</option></select></label>
+<label class="langPick"><span class="langIc" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.6 2.6 3.9 5.6 3.9 9s-1.3 6.4-3.9 9c-2.6-2.6-3.9-5.6-3.9-9S9.4 5.6 12 3z"/></svg></span><select id="langSel" aria-label="Language / Idioma"><option value="en">English</option><option value="es">Español</option><option value="ca">Català</option></select></label>
 <nav class="tabs" aria-label="Main">
   <button data-tab="s-intro" onclick="show('s-intro')" data-i18n="tabCheck">Check</button>
   <button data-tab="s-guide" onclick="show('s-guide')" data-i18n="tabAreas">Areas</button>
@@ -2042,7 +2049,7 @@ function T(k,v){ const r=I18N.ui[k]; let s=r?(LANG==="en"?r[0]:(r[I18N.langs.ind
 function QX(k,f){ const Q=QUESTIONS[k]; if(LANG==="en") return Q[f]; const L=I18N.q[LANG]; return (L&&L[k]&&L[k][f])||Q[f]; }
 function qIdx(Q){ return QUESTIONS.indexOf(Q); }
 function applyLang(lang, rerender){
-  if(lang!=="en" && I18N.langs.indexOf(lang)<0) lang="en";
+  if(lang!=="en" && ["es","ca"].indexOf(lang)<0) lang="en"; // site offers English, Spanish and Catalan only
   LANG=lang; document.documentElement.lang = lang==="zh-Hans"?"zh-Hans":lang==="zh-Hant"?"zh-Hant":lang;
   const li=I18N.langs.indexOf(lang);
   document.querySelectorAll("[data-i18n]").forEach(el=>{ const k=el.dataset.i18n;
@@ -2848,7 +2855,7 @@ function fullTranslate(){ const root=document.body; if(!root) return;
   let lang="en";
   try{ const q=new URLSearchParams(location.search).get("lang"); const saved=localStorage.getItem("checkieLang");
     const nav=(navigator.language||"").toLowerCase();
-    const guess = nav.startsWith("ca")?"ca": nav.startsWith("es")?"es": (nav.startsWith("zh-tw")||nav.startsWith("zh-hk")||nav.startsWith("zh-hant"))?"zh-Hant": nav.startsWith("zh")?"zh-Hans":"en";
+    const guess = nav.startsWith("ca")?"ca": nav.startsWith("es")?"es": "en";
     lang = q || saved || guess; }catch(e){}
   const go=()=>{ applyLang(lang,false); const sel=document.getElementById("langSel"); if(sel) sel.onchange=()=>applyLang(sel.value,true); };
   if(document.readyState==="loading") document.addEventListener("DOMContentLoaded",go); else go();
