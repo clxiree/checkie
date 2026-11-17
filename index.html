@@ -647,6 +647,40 @@ a.nx:focus-visible{outline:3px solid var(--ochre);outline-offset:2px}
   #s-guide>.btn,#s-uni>.btn,#s-steps>.btn{max-width:360px;display:inline-block;margin-right:8px}
   footer{max-width:1160px;margin:20px auto 0}
 }
+.langPick{margin-left:auto;display:flex;align-items:center;gap:4px;font-size:.85rem}
+.langPick select{font:600 .82rem -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;color:var(--ink);background:#fffdf8;border:1px solid var(--line);border-radius:999px;padding:6px 10px;cursor:pointer;max-width:9.5rem}
+.i18nNote{font-size:.82rem;margin:0 0 12px;padding:7px 12px;border-radius:10px;background:#fff6e0;border:1px solid #ecd9a8;color:var(--ink)}
+:lang(zh) body,:lang(zh) button,:lang(zh) select,:lang(zh) textarea{word-break:normal;line-break:strict}
+.kit .matHead{flex-wrap:wrap;gap:8px}.kitLangs{display:flex;flex-wrap:wrap;gap:4px}
+.kitLangs button{border:1px solid var(--line);background:#fffdf8;border-radius:999px;padding:4px 10px;font:600 .78rem -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;color:var(--ink);cursor:pointer}
+.kitLangs button[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:#fff}
+.kitLbl{display:block;font-weight:600;font-size:.85rem;margin:8px 0 4px}
+.kitRow{display:flex;gap:8px;align-items:center;flex-wrap:wrap}.kitRow input{flex:1;min-width:0;padding:8px 10px;border:1px solid var(--line);border-radius:10px;font:inherit;background:#fff}
+#kitBody{width:100%;box-sizing:border-box;font:inherit;font-size:.88rem;line-height:1.5;padding:10px;border:1px solid var(--line);border-radius:10px;background:#fff;resize:vertical}
+.kitWhen{margin-top:12px;font-size:.88rem}.kitWhen ul{margin:4px 0 0;padding-left:20px}
+.pf{margin:10px 0 12px;border:1px solid var(--line);border-radius:14px;background:#fffdf8}
+.pfToggle{width:100%;text-align:left;border:none;background:none;padding:12px 14px;font:inherit;font-size:.92rem;color:var(--ink);cursor:pointer}
+.pfOpt{font-size:.72rem;color:var(--muted);font-weight:600;margin-left:4px;text-transform:uppercase;letter-spacing:.06em}
+#pfBody{padding:0 14px 14px}.pfIntro,.pfPriv{font-size:.84rem;margin:0 0 8px}
+#pfText{width:100%;box-sizing:border-box;font:inherit;font-size:.9rem;padding:10px;border:1px solid var(--line);border-radius:10px;background:#fff;resize:vertical}
+.pfMsg{font-size:.86rem;margin:10px 0 0;padding:8px 12px;border-radius:10px;background:#eef5f2;border:1px solid #cfe2da}
+.pfMsg.err{background:#fff6e0;border-color:#ecd9a8}
+.pfSug{margin:8px 0 0;padding:8px 10px;border-radius:10px;background:#f3f0fb;border:1px solid #ddd5f3;font-size:.82rem;line-height:1.45}
+.pfSug q{font-style:italic}.pfSug .pfCh{display:block;color:var(--muted);margin-top:2px}
+.scamHelp{margin:14px 0 4px;padding:14px;border:1px solid var(--line);border-radius:14px;background:#fffdf8}
+.shH{margin:0 0 4px;font-size:1.02rem}
+.shPay{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px}
+.shPay button,.shLang button{border:1px solid var(--line);background:#fff;border-radius:999px;padding:7px 12px;font:600 .82rem -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;color:var(--ink);cursor:pointer}
+.shPay button[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:#fff}
+.shNow{background:#fdecea;border:1px solid #f1c3bd;border-radius:12px;padding:10px 12px;margin:4px 0 10px}.shNow ol{margin:6px 0 0;padding-left:20px}.shNow li{margin:4px 0}
+.shWarn{font-size:.85rem;background:#fff6e0;border:1px solid #ecd9a8;border-radius:10px;padding:8px 12px;margin:0 0 10px}
+.shForm summary{cursor:pointer;font-weight:600;font-size:.9rem;margin-bottom:8px}
+.shGrid{display:grid;grid-template-columns:1fr 1fr;gap:8px}.shGrid label{display:flex;flex-direction:column;font-size:.8rem;font-weight:600;gap:3px}.shGrid .wide{grid-column:1/-1}
+.shGrid input,.shGrid textarea{font:inherit;font-weight:400;font-size:.88rem;padding:7px 9px;border:1px solid var(--line);border-radius:9px;background:#fff;min-width:0}
+@media (max-width:520px){.shGrid{grid-template-columns:1fr}}
+.shLang{margin:12px 0 6px}.shMsg{margin-top:10px}.shMsg textarea{width:100%;box-sizing:border-box;font:inherit;font-size:.86rem;line-height:1.45;padding:10px;border:1px solid var(--line);border-radius:10px;background:#fff;resize:vertical}
+.trendList{margin:6px 0 4px;padding-left:20px}.trendList li{margin:4px 0}.trendList .tp{color:var(--muted);font-size:.85em;margin-left:6px}
+.trendMeta{font-size:.8rem;margin:4px 0 0}
 </style>
 <!-- Leaflet 1.9.4 (BSD-2-Clause, (c) Volodymyr Agafonkin), included in the page so the map works without loading other files -->
 <style>/* required styles */
@@ -1321,12 +1355,13 @@ svg.leaflet-image-layer.leaflet-interactive path {
 <body>
 <main>
 <header><svg onclick="show('s-intro')" style="cursor:pointer" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="48" height="48" role="img" aria-label="Checkie logo"><path d="M11 57 V24 q7 -11 14 -4 q7 7 14 0 q7 -7 14 4 V57" fill="#f4ead8" stroke="#1f5f5b" stroke-width="2.6" stroke-linejoin="round"/><path d="M8 57 H56" stroke="#1f5f5b" stroke-width="2.6" stroke-linecap="round"/><path d="M17 37 V31 a3.5 3.5 0 0 1 7 0 V37 M29 37 V30 a3.5 3.5 0 0 1 7 0 V37 M41 37 V31 a3.5 3.5 0 0 1 7 0 V37" fill="none" stroke="#1f5f5b" stroke-width="2" stroke-linejoin="round"/><path d="M15 40 h11 M28 40 h9 M39 40 h11" stroke="#c8643b" stroke-width="2.2" stroke-linecap="round"/><path d="M26 57 V50 a6 6 0 0 1 12 0 V57" fill="#c8643b"/><circle cx="53" cy="12" r="8" fill="#e3b44f" stroke="#fffdf8" stroke-width="2"/><path d="M49.2 12.2 l2.6 2.6 l4.8 -5.2" fill="none" stroke="#1f5f5b" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
-<div class="brand"><b>Checkie</b><span>Check before you pay</span></div>
+<div class="brand"><b>Checkie</b><span data-i18n="brandSub">Check before you pay</span></div>
+<label class="langPick"><span class="langIc" aria-hidden="true">🌐</span><select id="langSel" aria-label="Language / Idioma / 语言"><option value="en">English</option><option value="es">Español</option><option value="ca">Català</option><option value="zh-Hans">简体中文</option><option value="zh-Hant">繁體中文</option></select></label>
 <nav class="tabs" aria-label="Main">
-  <button data-tab="s-intro" onclick="show('s-intro')">Check</button>
-  <button data-tab="s-guide" onclick="show('s-guide')">Areas</button>
-  <button data-tab="s-steps" onclick="show('s-steps')">Guide</button>
-  <button data-tab="s-uni" class="tabPartner" onclick="show('s-uni')">For universities</button>
+  <button data-tab="s-intro" onclick="show('s-intro')" data-i18n="tabCheck">Check</button>
+  <button data-tab="s-guide" onclick="show('s-guide')" data-i18n="tabAreas">Areas</button>
+  <button data-tab="s-steps" onclick="show('s-steps')" data-i18n="tabGuide">Guide</button>
+  <button data-tab="s-uni" class="tabPartner" onclick="show('s-uni')" data-i18n="tabUni">For universities</button>
 </nav></header>
 
 
@@ -1399,40 +1434,45 @@ svg.leaflet-image-layer.leaflet-interactive path {
   </g>
 </svg>
 </div>
-  <span class="pill">For international &amp; exchange students · Barcelona</span>
-  <h1>Found a room in Barcelona? Check it before you pay.</h1>
-  <p class="muted lead">12 quick questions show which scam warning signs a listing has, and what to check before you send money.</p>
-  <button class="btn" onclick="startCheck()">Check a listing · 2 minutes</button>
-  <p class="heroSub"><a href="#" onclick="show('s-steps');return false">New to renting here? Read how to rent safely</a></p>
-  <p class="flow" aria-label="How it works"><span>Answer 12 questions</span><span>See the warning signs</span><span>Know what to check</span></p>
-  <ul class="trustRow"><li>Free</li><li>No sign-up</li><li>Nothing saved unless you send feedback</li></ul>
+  <span class="pill" data-i18n="pill">For international &amp; exchange students · Barcelona</span>
+  <h1 data-i18n="h1">Found a room in Barcelona? Check it before you pay.</h1>
+  <p class="muted lead" data-i18n="lead">12 quick questions show which scam warning signs a listing has, and what to check before you send money.</p>
+  <button class="btn" onclick="startCheck()" data-i18n="startBtn">Check a listing · 2 minutes</button>
+  <p class="heroSub"><a href="#" onclick="show('s-steps');return false" data-i18n="heroSub">New to renting here? Read how to rent safely</a></p>
+  <p class="flow" aria-label="How it works"><span data-i18n="flow1">Answer 12 questions</span><span data-i18n="flow2">See the warning signs</span><span data-i18n="flow3">Know what to check</span></p>
+  <ul class="trustRow"><li data-i18n="trust1">Free</li><li data-i18n="trust2">No sign-up</li><li data-i18n="trust3">Nothing saved unless you send feedback</li></ul>
 
   <div class="homeMore">
     <section class="hBlock" aria-labelledby="hTools">
-      <h2 id="hTools" class="hH">Also useful before you pay</h2>
+      <h2 id="hTools" class="hH" data-i18n="hTools">Also useful before you pay</h2>
       <div class="toolPair">
-        <button class="tool" onclick="goPrice()"><span class="ti" aria-hidden="true">💶</span><span><b>Check a rent</b><small>Compare a listing's price with typical prices for its area, or for residences and studios.</small></span><span class="go" aria-hidden="true"></span></button>
-        <button class="tool" onclick="goAreas()"><span class="ti" aria-hidden="true">🗺️</span><span><b>Explore areas</b><small>12 neighbourhoods on a map, with what they're like and your commute to campus.</small></span><span class="go" aria-hidden="true"></span></button>
+        <button class="tool" onclick="goPrice()"><span class="ti" aria-hidden="true">💶</span><span data-i18n="tool1"><b>Check a rent</b><small>Compare a listing's price with typical prices for its area, or for residences and studios.</small></span><span class="go" aria-hidden="true"></span></button>
+        <button class="tool" onclick="goAreas()"><span class="ti" aria-hidden="true">🗺️</span><span data-i18n="tool2"><b>Explore areas</b><small>12 neighbourhoods on a map, with what they're like and your commute to campus.</small></span><span class="go" aria-hidden="true"></span></button>
       </div>
     </section>
 
     <section class="hBlock" aria-labelledby="hHelp">
-      <h2 id="hHelp" class="hH">Need more guidance?</h2>
+      <h2 id="hHelp" class="hH" data-i18n="hHelp">Need more guidance?</h2>
       <ul class="linkList">
-        <li><a href="#" onclick="show('s-steps');return false"><b>How to rent safely in Barcelona</b><span>8 steps from budget to moving in, plus Spanish rental words</span></a></li>
-        <li><a href="#" onclick="show('s-help');return false"><b>Ask your university</b><span>Your international office's contact and a message you can send, no check needed</span></a></li>
-        <li><a href="#" onclick="show('s-steps');setTimeout(()=>document.getElementById('paidGuide').scrollIntoView({behavior:'smooth'}),80);return false"><b>Already paid and worried?</b><span>What to do right now</span></a></li>
+        <li><a href="#" onclick="show('s-steps');return false" data-i18n="help1"><b>How to rent safely in Barcelona</b><span>8 steps from budget to moving in, plus Spanish rental words</span></a></li>
+        <li><a href="#" onclick="show('s-help');return false" data-i18n="help2"><b>Ask your university</b><span>Your international office's contact and a message you can send, no check needed</span></a></li>
+        <li><a href="#" onclick="show('s-steps');setTimeout(()=>document.getElementById('paidGuide').scrollIntoView({behavior:'smooth'}),80);return false" data-i18n="help3"><b>Already paid and worried?</b><span>What to do right now</span></a></li>
       </ul>
     </section>
 
+    <section class="hBlock" aria-labelledby="hTrend">
+      <h2 id="hTrend" class="hH" data-i18n="trendH">Warning signs students report most</h2>
+      <div class="trendBox" data-trend="home"></div>
+    </section>
+
     <section class="hBlock" aria-labelledby="hTrust">
-      <h2 id="hTrust" class="hH">What Checkie can and can't do</h2>
+      <h2 id="hTrust" class="hH" data-i18n="hTrust">What Checkie can and can't do</h2>
       <ul class="trustPts">
-        <li><b>It flags warning signs, not verdicts.</b> It can't confirm a listing is real, and no result means a listing is safe.</li>
-        <li><b>Your answers stay on your device</b> unless you choose to send feedback. <a href="#" onclick="show('s-privacy');return false">What goes where</a></li>
-        <li><b>Independent.</b> A student project, not linked to any university, and it never takes money from landlords, agencies or platforms.</li>
+        <li data-i18n="trustPt1"><b>It flags warning signs, not verdicts.</b> It can't confirm a listing is real, and no result means a listing is safe.</li>
+        <li data-i18n="trustPt2"><b>Your answers stay on your device</b> unless you choose to send feedback. <a href="#" onclick="show('s-privacy');return false">What goes where</a></li>
+        <li data-i18n="trustPt3"><b>Independent.</b> A student project, not linked to any university, and it never takes money from landlords, agencies or platforms.</li>
       </ul>
-      <h3 class="hSub">Questions students ask</h3>
+      <h3 class="hSub" data-i18n="faqHead">Questions students ask</h3>
       <div class="faq">
     <details><summary>Does Checkie tell me if a listing is safe?</summary><p>No. It shows which common scam patterns appear and what to check. A listing with no warning signs can still be a scam, so always see the room (or a live video call) and read a contract before paying.</p></details>
     <details><summary>Why not just ask a senior, or a chatbot?</summary><p>Do ask seniors too: they know the city. Checkie adds a consistent check of 12 common scam patterns and typical prices for 12 areas, any time of day. Unlike pasting a listing into a chatbot, your answers stay on your device, and Checkie gives you ready-made messages for the landlord (English or Spanish) and your university.</p></details>
@@ -1448,17 +1488,27 @@ svg.leaflet-image-layer.leaflet-interactive path {
 <!-- Screen 2: questions -->
 <section class="card hidden" id="s-check">
   <div class="qtop">
-    <div class="qtopRow"><b>12 quick questions</b><span id="qCount">0 of 12 answered</span></div>
+    <div class="qtopRow"><b data-i18n="qtopTitle">12 quick questions</b><span id="qCount">0 of 12 answered</span></div>
     <div class="progress"><div id="bar"></div></div>
   </div>
-  <p class="scopeNote">Checkie checks <b>rooms and flats to rent in Barcelona</b>. It can't check other things, such as a bike, tickets or a job offer.</p>
-<p class="muted" style="font-size:.86rem;margin:10px 0 4px">Answer what you know about the listing. Tap <b>Why?</b> for an example. "Not sure" is a fine answer.</p>
-  <p class="muted" style="font-size:.84rem;margin:0 0 6px">Rather ask a person? <a href="#" onclick="show('s-help');return false" style="color:var(--accent);font-weight:600">Contact your university's international office</a></p>
+  <p class="scopeNote" data-i18n="scopeNote">Checkie checks <b>rooms and flats to rent in Barcelona</b>. It can't check other things, such as a bike, tickets or a job offer.</p>
+<p class="muted" style="font-size:.86rem;margin:10px 0 4px" data-i18n="checkHelp1">Answer what you know about the listing. Tap <b>Why?</b> for an example. "Not sure" is a fine answer.</p>
+  <p class="muted" style="font-size:.84rem;margin:0 0 6px" data-i18n="checkHelp2">Rather ask a person? <a href="#" onclick="show('s-help');return false" style="color:var(--accent);font-weight:600">Contact your university's international office</a></p>
+  <div class="pf" id="pfBox" hidden>
+    <button class="pfToggle" id="pfToggle" aria-expanded="false" aria-controls="pfBody"></button>
+    <div id="pfBody" hidden>
+      <p class="muted pfIntro" id="pfIntro"></p>
+      <textarea id="pfText" rows="5" maxlength="6000"></textarea>
+      <p class="muted pfPriv" id="pfPriv"></p>
+      <button class="btn" id="pfGo" style="margin:4px 0 0"></button>
+      <p class="pfMsg" id="pfMsg" role="status" hidden></p>
+    </div>
+  </div>
   <p class="muted learnNote" id="qLearnNote" hidden></p>
   <div id="qList" class="qlist"></div>
   <div id="qPriceSlot" hidden></div>
   <button class="btn" id="nextBtn" onclick="afterQuestions()">Continue</button>
-  <button class="btn ghost" onclick="show('s-intro')">Back</button>
+  <button class="btn ghost" onclick="show('s-intro')" data-i18n="backBtn">Back</button>
 </section>
 
 <!-- Screen 2b: optional screenshot, last step before result -->
@@ -1493,11 +1543,11 @@ svg.leaflet-image-layer.leaflet-interactive path {
     <div id="flagWrap"><ul class="flags" id="flagList" hidden></ul>
       <div id="resYes"></div><div id="resUnsure"></div></div>
     <div class="askLL" id="askLL">
-      <div class="askHead"><h3 class="rsHead" style="margin:0">Ask the landlord</h3>
+      <div class="askHead"><h3 class="rsHead" style="margin:0" data-i18n="askHead">Ask the landlord</h3>
         <div class="langT" role="group" aria-label="Message language"><button data-lang="en" aria-pressed="true">English</button><button data-lang="es" aria-pressed="false">Español</button></div></div>
-      <p class="muted" style="font-size:.85rem;margin:4px 0 8px">Copy this into your chat with them. A genuine landlord can usually answer these; refusing or rushing you is a warning sign.</p>
+      <p class="muted" style="font-size:.85rem;margin:4px 0 8px" data-i18n="askIntro">Copy this into your chat with them. A genuine landlord can usually answer these; refusing or rushing you is a warning sign.</p>
       <textarea id="llMsg" rows="7"></textarea>
-      <button class="btn ghost" id="llCopy" style="margin-top:8px">Copy message</button>
+      <button class="btn ghost" id="llCopy" style="margin-top:8px" data-i18n="llCopy">Copy message</button>
     </div>
     <div class="nextStep" id="resNext"></div>
     <div class="review" id="aiBox">
@@ -1524,9 +1574,9 @@ svg.leaflet-image-layer.leaflet-interactive path {
   </div>
 
   <div id="helpResultHome"></div><div class="card humanhelp" id="helpCard" style="margin-top:14px">
-    <h2>Need to ask a real person?</h2>
-    <p class="muted" style="margin:-2px 0 12px;font-size:.9rem">Your university's international office helps incoming students. Checkie gets you ready, so your question is short and clear.</p>
-    <label for="helpSel" style="display:block;font-weight:600;font-size:.92rem;margin-bottom:6px">Your university</label>
+    <h2 data-i18n="helpH">Need to ask a real person?</h2>
+    <p class="muted" style="margin:-2px 0 12px;font-size:.9rem" data-i18n="helpIntro">Your university's international office helps incoming students. Checkie gets you ready, so your question is short and clear.</p>
+    <label for="helpSel" style="display:block;font-weight:600;font-size:.92rem;margin-bottom:6px" data-i18n="helpLabel">Your university</label>
     <select id="helpSel"><option value="">Choose your university…</option></select>
     <div id="helpOut" hidden>
       <div class="office"><b id="offName"></b>
@@ -1542,7 +1592,8 @@ svg.leaflet-image-layer.leaflet-interactive path {
     <p class="muted" style="font-size:.78rem;margin:12px 0 0;border-top:1px solid var(--line);padding-top:10px">Checkie isn't affiliated with these universities. These are their public contacts. Human review of screenshots is only planned, with partner universities, and isn't available yet.</p>
   </div>
   <div class="card fb" id="fbCard" style="margin-top:14px">
-    <h2>How was this check?</h2>
+    <h2 data-i18n="fbH">How was this check?</h2>
+    <p class="i18nNote" data-i18n="fbEnNote" hidden></p>
     <p class="muted" style="margin:-2px 0 12px;font-size:.9rem">Sending feedback is up to you and takes about a minute. If you send it, only the rating is required; everything else is optional. It doesn't ask for your name or email, and other students never see it.</p>
     <p style="font-weight:600;margin:0 0 6px;font-size:.95rem"><span class="opt">Optional</span>While looking for a room in Barcelona, have you come across a listing with any of these warning signs?</p><p class="muted" style="margin:-2px 0 8px;font-size:.82rem">For example: asked to pay before a viewing, no real video of the room, photos that didn't look real, or no exact address.</p>
     <div class="chips" id="fbPaid" style="margin-bottom:14px"><button class="chip2" data-v="yes" aria-pressed="false">Yes</button><button class="chip2" data-v="no" aria-pressed="false">No</button><button class="chip2" data-v="not_looking" aria-pressed="false">I'm not looking for a room</button></div>
@@ -1576,13 +1627,14 @@ svg.leaflet-image-layer.leaflet-interactive path {
     <p class="muted" style="margin:0">It's counted with other students' answers, and a person reviews the counts before anything on Checkie changes.</p>
   </div>
 
-  <div class="shareCard"><div><b>Know someone else looking for a room?</b><p class="muted">Send them Checkie before they pay a deposit.</p></div><button class="btn soft" id="shareRes">Send Checkie to a friend</button></div>
-  <button class="btn ghost" onclick="location.reload()" style="margin-top:14px">↻&nbsp; Check another listing</button>
+  <div class="shareCard"><div data-i18n="shareTxt"><b>Know someone else looking for a room?</b><p class="muted">Send them Checkie before they pay a deposit.</p></div><button class="btn soft" id="shareRes" data-i18n="shareRes">Send Checkie to a friend</button></div>
+  <button class="btn ghost" onclick="location.reload()" style="margin-top:14px" data-i18n="checkAnother">↻&nbsp; Check another listing</button>
 </section>
 
 
 <!-- Screen: area & price guide -->
 <section class="card hidden" id="s-guide">
+  <p class="i18nNote" data-i18n="enOnly" hidden></p>
   <span class="pill">Barcelona area &amp; price guide</span>
   <h1>Where to live in Barcelona, and what a room should cost</h1>
   <p class="muted">Typical asking price for a single room in a shared flat, per month. The city average was about <b>€600</b> in mid-2026.</p>
@@ -1671,6 +1723,7 @@ svg.leaflet-image-layer.leaflet-interactive path {
 
 <!-- Screen: ask your university directly -->
 <section class="card hidden" id="s-help">
+  <p class="i18nNote" data-i18n="enOnly" hidden></p>
   <span class="pill">Ask a real person</span>
   <h1 style="font-size:1.6rem">Ask your university before you pay</h1>
   <p class="muted">You don't need to do the check first. Pick your university to get its international office contact and a short message you can edit and send.</p>
@@ -1680,15 +1733,17 @@ svg.leaflet-image-layer.leaflet-interactive path {
 
 <!-- Screen: data and privacy -->
 <section class="card hidden" id="s-privacy">
+  <p class="i18nNote" data-i18n="enOnly" hidden></p>
   <span class="pill">Data and privacy</span>
   <h1>What goes where</h1>
   <p class="muted lead">A plain list of every way data leaves your device when you use Checkie. Checkie is an independent student project; this page describes how the site works and isn't a legal privacy notice.</p>
   <table class="mTable pTable"><thead><tr><th>When you…</th><th>What is sent, and to whom</th></tr></thead><tbody>
-    <tr><td>Answer the 12 questions, use the price check, read the guide</td><td>Nothing. It all runs in your browser.</td></tr>
+    <tr><td>Answer the 12 questions, use the price check, read the guide</td><td>Nothing. It all runs in your browser (unless you use "Paste the listing", below).</td></tr>
     <tr><td>Choose your campus</td><td>Remembered only in your own browser (local storage), so it's there next time. Nothing is sent.</td></tr>
     <tr><td>Open the Areas map</td><td>Your browser loads map images from OpenStreetMap, which sees your IP address like any website. No listing or answers are sent.</td></tr>
     <tr><td>Tap "See the exact route in Google Maps"</td><td>Opens Google Maps with the area and your campus as start and end. Google's own terms apply.</td></tr>
     <tr><td>Send feedback (optional)</td><td>Your feedback answers, your result level, how many screenshots you added (just the number) and, unless you untick the box, which warning signs you answered Yes or Not sure to. Stored by Netlify (the website host, based in the US), which also records your IP address. Never your name, email, the listing or your screenshots. Kept until I delete it; there's no fixed deletion schedule yet.</td></tr>
+    <tr><td>Use "Paste the listing" on the questions page (optional, shown only when switched on)</td><td>The text you paste, with emails, phone numbers and bank account numbers removed first, goes through Checkie's Netlify function to Anthropic's AI to suggest answers. Sent only when you tap the button. Checkie stores nothing; Netlify keeps routine request logs and Anthropic handles the text under its API terms.</td></tr>
     <tr><td>Copy a message to a landlord or your university</td><td>Nothing. You paste and send it yourself.</td></tr>
     <tr><td>Use the AI screenshot check (only in the Claude version of Checkie)</td><td>Your screenshots, answers and area prices go to Claude (Anthropic) through your own Claude account, under Anthropic's terms. Not available on this website.</td></tr>
     <tr><td>University staff send a pilot enquiry</td><td>University, work email, topic and any optional details, stored by Netlify with the IP address, read only by me to reply.</td></tr>
@@ -1703,6 +1758,7 @@ svg.leaflet-image-layer.leaflet-interactive path {
 
 <!-- Screen: renting guide -->
 <section class="card hidden" id="s-steps">
+  <p class="i18nNote" data-i18n="enOnly" hidden></p>
   <span class="pill">Renting guide · Barcelona</span>
   <h1 style="font-size:1.4rem">Finding and confirming a room: 8 steps</h1>
   <p class="muted">Go through these before you pay anything.</p>
@@ -1751,6 +1807,42 @@ svg.leaflet-image-layer.leaflet-interactive path {
     <li><b>Report it</b> to the platform where you found the listing, and to the police: in Catalonia, the Mossos d'Esquadra (in person or online).</li>
     <li><b>Tell your university's international office.</b> They can help with emergency housing. <a href="#" onclick="show('s-help');return false">Get their contact</a>.</li>
   </ol>
+  <div class="scamHelp" id="scamHelp">
+    <h3 class="shH">Get help step by step</h3>
+    <p class="muted" style="font-size:.88rem;margin:0 0 10px">Pick how you paid. Checkie shows what to do first and writes a message to your bank and a summary for the police. Everything you type stays on this page: nothing is sent or saved.</p>
+    <div class="shPay" role="group" aria-label="How did you pay?">
+      <button data-pay="transfer" aria-pressed="false">Bank transfer</button>
+      <button data-pay="card" aria-pressed="false">Card</button>
+      <button data-pay="bizum" aria-pressed="false">Bizum</button>
+      <button data-pay="mt" aria-pressed="false">Western Union / MoneyGram</button>
+      <button data-pay="crypto" aria-pressed="false">Crypto or gift card</button>
+      <button data-pay="id" aria-pressed="false">I only sent my passport / ID</button>
+    </div>
+    <div id="shOut" hidden>
+      <div class="shNow"><b>Do this now</b><ol id="shSteps"></ol></div>
+      <p class="shWarn">⚠️ <b>Beware of "recovery" offers.</b> Anyone who contacts you offering to get your money back for a fee is very likely running a second scam. Only deal with your bank, the payment service and the police.</p>
+      <details class="shForm" open><summary>Your details for the messages (optional, stays on this page)</summary>
+        <div class="shGrid">
+          <label>Your name<input data-f="name" placeholder="Your full name"></label>
+          <label>Your bank / service<input data-f="bank" placeholder="e.g. CaixaBank, Revolut, Western Union"></label>
+          <label>Amount (€)<input data-f="amount" inputmode="decimal" placeholder="e.g. 600"></label>
+          <label>Date you paid<input data-f="date" type="date"></label>
+          <label>Paid to (name shown on the payment)<input data-f="recipient" placeholder="Name of the person or company"></label>
+          <label id="shAcctL">Their account (IBAN)<input data-f="acct" placeholder="IBAN, phone or wallet"></label>
+          <label>Payment reference<input data-f="ref" placeholder="Reference or receipt number"></label>
+          <label>Where you found the room<input data-f="platform" placeholder="e.g. Idealista, a Facebook group"></label>
+          <label>Link to the listing<input data-f="link" placeholder="https://…"></label>
+          <label>How they contacted you<input data-f="contact" placeholder="Their phone, email or username"></label>
+          <label class="wide">What happened after you paid<textarea data-f="what" rows="2" placeholder="e.g. they stopped answering and the address doesn't exist"></textarea></label>
+        </div>
+      </details>
+      <div class="langT shLang" role="group" aria-label="Message language"><button data-shl="en" aria-pressed="true">English</button><button data-shl="es" aria-pressed="false">Español</button></div>
+      <div class="shMsg"><div class="matHead"><b id="shBankT">Message to your bank</b><button class="copy" id="shBankCopy">Copy</button></div><textarea id="shBank" rows="14" readonly></textarea></div>
+      <div class="shMsg"><div class="matHead"><b>Summary for your police report</b><button class="copy" id="shPolCopy">Copy</button></div><textarea id="shPol" rows="14" readonly></textarea>
+        <small class="muted">Print it or show it on your phone when you file the report (denuncia), and bring your passport and your evidence. Ask for a copy of the report: your bank may need it.</small></div>
+    </div>
+  </div>
+
   <h2 class="sec2">Words you'll see in Spanish listings</h2>
   <dl class="gloss">
     <dt>Fianza</dt><dd>Deposit, usually one to two months' rent, returned when you leave if there's no damage.</dd>
@@ -1765,6 +1857,7 @@ svg.leaflet-image-layer.leaflet-interactive path {
 
 <!-- Screen: for universities -->
 <section class="card hidden" id="s-uni">
+  <p class="i18nNote" data-i18n="enOnly" hidden></p>
   <span class="pill">For international offices</span>
   <h1 class="uniH">A pre-arrival housing-safety resource for incoming students</h1>
   <p class="muted lead">Checkie is a free, independent web tool students use before paying for a room they found online. It shows common rental-scam warning signs, what to verify, and points uncertain cases to your international office. It adds to your housing guidance; it doesn't replace your team.</p>
@@ -1772,7 +1865,7 @@ svg.leaflet-image-layer.leaflet-interactive path {
 
   <div class="uniFacts">
     <div><b>Who it's for</b><span>Incoming international and exchange students searching for rooms in Barcelona, often from abroad.</span></div>
-    <div><b>What you do</b><span>Add one paragraph and link to a pre-arrival email. No integration, no accounts.</span></div>
+    <div><b>What you do</b><span>Send our ready-made pre-arrival email (English, Spanish, Catalan or Chinese), or add one paragraph to yours. No integration, no accounts.</span></div>
     <div><b>What it collects</b><span>Nothing from the check itself. Only optional feedback without names or emails; the host records IP addresses.</span></div>
     <div><b>Cost to students</b><span>Free, always. No money from landlords, agencies or platforms.</span></div>
   </div>
@@ -1790,13 +1883,18 @@ svg.leaflet-image-layer.leaflet-interactive path {
   </ul>
   <p class="muted" style="font-size:.88rem">Strongest use case: one link in your pre-arrival email, so students check a listing before paying a deposit and arrive at your office, if needed, with a clear question.</p>
 
+  <h2 class="sec2">Scam trends from Checkie</h2>
+  <p>Students who send feedback can choose to include which warning signs they flagged. Once at least 10 have done so, I count them, review the counts by hand, and publish the signs reported most. Offices can use this in pre-arrival emails and orientation ("this term, students most often met…"). It covers all Checkie users in that period, not only one university's students, and contains no listings or personal data.</p>
+  <div class="trendBox" data-trend="uni"></div>
+
   <h2 class="sec2">What's available today, and what a pilot could add</h2>
   <div class="tiers">
     <div class="tier"><span class="tl">Available now · free for every student</span><ul>
       <li>12-question scam-pattern check with what to verify for each sign</li>
       <li>Price check (room, residence, studio) and area map with commute times</li>
       <li>8-step renting guide, "already paid?" steps, Spanish rental glossary</li>
-      <li>Messages to the landlord (English/Spanish) and to the international office</li></ul></div>
+      <li>Messages to the landlord (English/Spanish) and to the international office</li>
+      <li>The check in English, Spanish, Catalan and Chinese (simplified and traditional)</li></ul></div>
     <div class="tier pro"><span class="tl">Could be added for a partner university</span><ul>
       <li>Your office's preferred contact shown on Checkie <span class="planned">simple to add</span></li>
       <li>A summary of feedback received during the pilot (all users, not only yours) if at least 10 respond <span class="planned">manual</span></li>
@@ -1815,12 +1913,25 @@ svg.leaflet-image-layer.leaflet-interactive path {
   <ol class="paid pilotSteps">
     <li><b>Review</b> this page, the <a href="#" onclick="show('s-privacy');return false">data page</a> and the public <a href="https://github.com/clxiree/checkie/blob/main/architecturedoc.md" target="_blank" rel="noopener">architecture document</a>.</li>
     <li><b>Agree the scope</b>: intake, office contact, dates.</li>
-    <li><b>Include</b> the paragraph below in your pre-arrival email or orientation.</li>
+    <li><b>Send</b> the pre-arrival email below, or include the short paragraph in your own email or orientation.</li>
     <li><b>Students use Checkie on their own</b>; those who need help contact your office through your usual channels.</li>
     <li><b>Debrief</b> using the measures below, then decide whether to continue.</li>
   </ol>
 
   <h2 class="sec2">Ready-to-use materials</h2>
+  <div class="mat kit" id="emailKit">
+    <div class="matHead"><b>Pre-arrival email kit</b><span class="kitLangs" role="group" aria-label="Email language"><button data-kl="en" aria-pressed="true">English</button><button data-kl="es" aria-pressed="false">Español</button><button data-kl="ca" aria-pressed="false">Català</button><button data-kl="zh-Hans" aria-pressed="false">简体中文</button><button data-kl="zh-Hant" aria-pressed="false">繁體中文</button></span></div>
+    <p class="muted" style="font-size:.85rem;margin:2px 0 10px">A complete email your office can send to admitted students, ready to edit. Fill in the parts in [brackets]. Each language version links to Checkie in that language. Translations other than English were drafted with AI, so a native speaker in your office should read them before sending.</p>
+    <label class="kitLbl" for="kitSubj">Subject</label>
+    <div class="kitRow"><input id="kitSubj" type="text" readonly><button class="copy" id="kitSubjCopy">Copy subject</button></div>
+    <label class="kitLbl" for="kitBody">Email</label>
+    <textarea id="kitBody" rows="18" readonly></textarea>
+    <div class="kitRow" style="margin-top:8px"><button class="btn ghost" id="kitBodyCopy" style="margin:0">Copy email</button><a class="uniLink" id="kitMail" href="#">Open in my email app</a></div>
+    <div class="kitWhen"><b>When to send it</b><ul>
+      <li>With the acceptance or welcome email, when students start looking for rooms.</li>
+      <li>Again 4 to 6 weeks before arrival, when most students are booking a room.</li>
+      <li>In orientation slides, with the QR code below, for students still searching after arrival.</li></ul></div>
+  </div>
   <div class="mat"><div class="matHead"><b>Pre-arrival email paragraph</b><button class="copy" data-copy="matEmail">Copy</button></div>
     <p id="matEmail">Looking for a room in Barcelona? Before you pay any deposit, check the listing with Checkie, a free, independent tool that shows common rental scam warning signs and what to verify: https://symphonious-jelly-dabdfa.netlify.app. Checkie can't confirm that a listing is genuine; if anything looks wrong, contact us before sending money.</p></div>
   <div class="mat"><div class="matHead"><b>Short orientation announcement</b><button class="copy" data-copy="matOrient">Copy</button></div>
@@ -1887,6 +1998,7 @@ svg.leaflet-image-layer.leaflet-interactive path {
 </section>
 
 <section class="card hidden" id="s-contact">
+  <p class="i18nNote" data-i18n="enOnly" hidden></p>
   <span class="pill">Contact</span>
   <h1>Contact us</h1>
   <p class="muted lead">Checkie is an independent student project made by Gau Yi Chi, an exchange student at Esade. It isn't a company and isn't affiliated with any university, housing platform or landlord.</p>
@@ -1921,6 +2033,30 @@ svg.leaflet-image-layer.leaflet-interactive path {
 
 
 const QUESTIONS = [{"ic": "💸", "t": "Did they ask you to pay before you've seen the room?", "d": "A deposit, booking fee or \"reservation\" before a viewing in person or on a live video call. Not counted: a booking fee paid by card on an official student residence's own website, after they have sent you the contract.", "ex": "\"Send €300 today to hold the room for you.\"", "flag": "Payment requested before any viewing.", "why": "This is one of the most common rental scam patterns. Once the money is sent, it is very hard to get back.", "do": "Don't pay anything until you've seen the room, in person or on a live video call, and read the contract."}, {"ic": "✈️", "t": "Is the landlord \"abroad\" and unable to show it?", "d": "They say they'll post the keys, or someone will hand them over after you pay.", "ex": "\"I'm working in London, I'll send the keys by courier.\"", "flag": "Landlord 'abroad', keys sent after payment.", "why": "A real owner or agency can arrange a viewing or a live video call.", "do": "Ask for a viewing with someone there, or a live video call of the room. If they refuse, don't pay."}, {"ic": "🏦", "t": "Do they want an unusual way to pay?", "d": "Money-transfer services, crypto, gift cards, or a bank account outside Spain.", "ex": "\"Please use Western Union, it's faster for me.\"", "flag": "Unusual or untraceable payment method.", "why": "These payments are almost impossible to reverse. Legitimate rentals use a bank transfer to a Spanish account in the owner's or agency's name.", "do": "Pay only by bank transfer to an account in the landlord's or agency's name, ideally a Spanish one. Never Western Union, crypto or gift cards."}, {"ic": "🏷️", "t": "Is it much cheaper than similar rooms nearby?", "d": "Typical single room in a shared flat (2026): about €400–550 in Sants, Horta-Guinardó and Sant Andreu; €450–750 in Gràcia, Poblenou, El Raval, Poble-sec and Sant Antoni; €550–800 in Eixample, El Born, Les Corts and Sarrià. Answer Yes if the rent is clearly below the range for its area. (Student residences and studios cost more.)", "ex": "A room in Eixample for €300 a month.", "flag": "Price well below the area.", "why": "A price that looks too good is used to make you rush before you compare.", "do": "Compare the rent with the area using the price check, and ask why it's cheaper (size, shared bathroom, bills)."}, {"ic": "⏱️", "t": "Are they rushing you to decide?", "d": "Pressure to pay today, or being told lots of other people want it.", "ex": "\"5 people are interested, pay now or lose it.\"", "flag": "Pressure to pay quickly.", "why": "Urgency stops you from checking. A genuine offer can wait a day for a viewing.", "do": "Take a day to check. A genuine landlord can wait for a viewing; if they won't, walk away."}, {"ic": "📄", "t": "No written contract before paying?", "d": "You haven't seen a contract with the owner's name and the room's address.", "ex": "\"We'll sign everything when you arrive.\"", "flag": "No written contract before payment.", "why": "You should read the contract, with the owner's identity and the address, before paying anything.", "do": "Ask for the contract before paying, and check it names the landlord, the exact address, the rent, the deposit and the dates."}, {"ic": "🪪", "t": "Do they want your passport or ID before you've seen it?", "d": "A photo or scan of your passport, ID card or residence permit, just to \"reserve\" or \"send the contract\".", "ex": "\"Send me a photo of your passport so I can hold the room.\"", "flag": "ID requested before any viewing.", "why": "Copies of your ID can be used for identity fraud. You normally show ID when you sign the contract, not before.", "do": "Don't send your passport or ID yet: you normally show it when you sign. If you already sent it, keep an eye out for misuse."}, {"ic": "💬", "t": "Did they move the chat off the website?", "d": "They asked to continue on WhatsApp, Telegram or private email instead of the platform's messages.", "ex": "\"Let's talk on WhatsApp, it's easier.\"", "flag": "Conversation moved off the platform.", "why": "Off the platform you lose its moderation, records and any buyer protection, which is why scammers prefer it.", "do": "Keep the conversation on the platform, or screenshot everything if you do move."}, {"ic": "📍", "t": "Won't they give you the exact address?", "d": "You only have a neighbourhood or a street name, not the building number and floor.", "ex": "\"I'll send you the address after the deposit.\"", "flag": "No exact address before payment.", "why": "Without the address you can't check that the building exists or matches the photos, for example on Google Street View.", "do": "Ask for the full address (building, floor, door) and look it up on Google Street View."}, {"ic": "📸", "t": "Do they avoid a live video call of the room?", "d": "They only send photos, or the photos look like a hotel or appear on other listings.", "ex": "\"My camera is broken, but the photos are recent.\"", "flag": "No live video tour; photos can't be verified.", "why": "Stolen photos are common. Ask for a live video call and search the photos with a reverse image search.", "do": "Ask for a live video call, and search the photos with a reverse image search (Google Lens or TinEye)."}, {"ic": "💶", "t": "Are they asking for more than two months' rent upfront?", "d": "Deposit, first month and extra guarantees added together, before you move in.", "ex": "\"Three months in advance plus deposit to confirm.\"", "flag": "Large upfront payment.", "why": "Deposits of one to two months are typical. Big upfront sums increase what you lose if the listing isn't real.", "do": "Ask why so much is needed upfront. One to two months' deposit is typical; pay more only after viewing and signing."}, {"ic": "🧾", "t": "Are they charging you an extra fee you don't understand?", "d": "An \"admin\", \"booking\", \"key\" or agency fee, especially before you've signed anything. The deposit or a reservation payment is not an extra fee; answer the payment questions above for those.", "ex": "\"Just €150 admin fee and I'll email you the contract.\"", "flag": "Unexplained extra fee.", "why": "Fake fees are a common add-on. For a standard rental of a home, Spain's 2023 housing law says the landlord pays the agency's fees, so ask what any fee to you is for.", "do": "Ask in writing what the fee is for. For a standard home rental, the landlord pays the agency's fees."}];
+
+// ---------- Languages (added 17 Nov 2026). English is the original text in the page; others are AI-drafted translations. ----------
+const I18N={"langs": ["es", "ca", "zh-Hans", "zh-Hant"], "html": {"tabCheck": ["Comprobar", "Comprova", "检查", "檢查"], "tabAreas": ["Zonas", "Zones", "区域", "區域"], "tabGuide": ["Guía", "Guia", "指南", "指南"], "tabUni": ["Para universidades", "Per a universitats", "面向大学", "面向大學"], "brandSub": ["Comprueba antes de pagar", "Comprova abans de pagar", "付款前先检查", "付款前先檢查"], "pill": ["Para estudiantes internacionales y de intercambio · Barcelona", "Per a estudiants internacionals i d'intercanvi · Barcelona", "面向国际生和交换生 · 巴塞罗那", "面向國際生和交換生 · 巴塞隆納"], "h1": ["¿Has encontrado una habitación en Barcelona? Compruébala antes de pagar.", "Has trobat una habitació a Barcelona? Comprova-la abans de pagar.", "在巴塞罗那找到房间了？付款前先检查一下。", "在巴塞隆納找到房間了嗎？付款前先檢查一下。"], "lead": ["12 preguntas rápidas te muestran qué señales de estafa tiene un anuncio y qué comprobar antes de enviar dinero.", "12 preguntes ràpides et mostren quins senyals d'estafa té un anunci i què has de comprovar abans d'enviar diners.", "12 个简单问题，告诉你这条房源有哪些常见的诈骗警示信号，以及转账前需要核实什么。", "12 個簡單問題，告訴你這則房源有哪些常見的詐騙警訊，以及匯款前需要確認什麼。"], "startBtn": ["Comprobar un anuncio · 2 minutos", "Comprova un anunci · 2 minuts", "检查一条房源 · 2 分钟", "檢查一則房源 · 2 分鐘"], "heroSub": ["¿Primera vez alquilando aquí? Lee cómo alquilar de forma segura", "És la primera vegada que lloges aquí? Llegeix com llogar amb seguretat", "第一次在这里租房？看看如何安全租房", "第一次在這裡租房？看看如何安全租屋"], "flow1": ["Responde 12 preguntas", "Respon 12 preguntes", "回答 12 个问题", "回答 12 個問題"], "flow2": ["Mira las señales de alerta", "Mira els senyals d'alerta", "查看警示信号", "查看警訊"], "flow3": ["Sabe qué comprobar", "Sàpigues què has de comprovar", "知道要核实什么", "知道要確認什麼"], "trust1": ["Gratis", "Gratuït", "免费", "免費"], "trust2": ["Sin registro", "Sense registre", "无需注册", "無需註冊"], "trust3": ["No se guarda nada salvo que envíes tu opinión", "No es desa res tret que enviïs la teva opinió", "除非你提交反馈，否则不保存任何内容", "除非你送出意見回饋，否則不會儲存任何內容"], "hTools": ["También útil antes de pagar", "També útil abans de pagar", "付款前还可以用", "付款前還可以用"], "tool1": ["<b>Comprobar un alquiler</b><small>Compara el precio de un anuncio con los precios habituales de su zona, o de residencias y estudios.</small>", "<b>Comprova un lloguer</b><small>Compara el preu d'un anunci amb els preus habituals de la seva zona, o de residències i estudis.</small>", "<b>查房租</b><small>把房源价格和该区域、学生公寓或单间公寓的常见价格作比较。</small>", "<b>查租金</b><small>把房源價格和該區域、學生宿舍或套房的常見價格做比較。</small>"], "tool2": ["<b>Explorar zonas</b><small>12 barrios en un mapa, cómo son y cuánto tardas al campus.</small>", "<b>Explora zones</b><small>12 barris en un mapa, com són i quant trigues al campus.</small>", "<b>了解区域</b><small>地图上的 12 个街区：各区特点以及到校园的通勤时间。</small>", "<b>認識區域</b><small>地圖上的 12 個街區：各區特色以及到校園的通勤時間。</small>"], "hHelp": ["¿Necesitas más orientación?", "Necessites més orientació?", "需要更多帮助？", "需要更多協助？"], "help1": ["<b>Cómo alquilar de forma segura en Barcelona</b><span>8 pasos, del presupuesto a la mudanza, y vocabulario de alquiler en español</span>", "<b>Com llogar amb seguretat a Barcelona</b><span>8 passos, del pressupost a la mudança, i vocabulari de lloguer en castellà</span>", "<b>如何在巴塞罗那安全租房</b><span>从预算到入住的 8 个步骤，外加西班牙语租房词汇</span>", "<b>如何在巴塞隆納安全租屋</b><span>從預算到入住的 8 個步驟，外加西班牙文租屋詞彙</span>"], "help2": ["<b>Pregunta a tu universidad</b><span>El contacto de tu oficina internacional y un mensaje que puedes enviar, sin hacer la comprobación</span>", "<b>Pregunta a la teva universitat</b><span>El contacte de la teva oficina internacional i un missatge que pots enviar, sense fer la comprovació</span>", "<b>询问你的大学</b><span>国际办公室的联系方式和一封可直接发送的消息，无需先做检查</span>", "<b>詢問你的大學</b><span>國際事務處的聯絡方式和一封可直接寄出的訊息，不必先做檢查</span>"], "help3": ["<b>¿Ya has pagado y estás preocupado?</b><span>Qué hacer ahora mismo</span>", "<b>Ja has pagat i estàs preocupat?</b><span>Què fer ara mateix</span>", "<b>已经付款，担心被骗？</b><span>现在该怎么做</span>", "<b>已經付款，擔心被騙？</b><span>現在該怎麼做</span>"], "hTrust": ["Qué puede y qué no puede hacer Checkie", "Què pot i què no pot fer Checkie", "Checkie 能做什么、不能做什么", "Checkie 能做什麼、不能做什麼"], "trustPt1": ["<b>Señala alertas, no da veredictos.</b> No puede confirmar que un anuncio sea real, y ningún resultado significa que un anuncio sea seguro.", "<b>Assenyala alertes, no dona veredictes.</b> No pot confirmar que un anunci sigui real, i cap resultat no vol dir que un anunci sigui segur.", "<b>它只提示警示信号，不下结论。</b>它无法确认房源是否真实，任何结果都不代表房源是安全的。", "<b>它只提示警訊，不下定論。</b>它無法確認房源是否真實，任何結果都不代表房源是安全的。"], "trustPt2": ["<b>Tus respuestas se quedan en tu dispositivo</b> salvo que decidas enviar tu opinión. <a href=\"#\" onclick=\"show('s-privacy');return false\">Qué datos van a dónde (en inglés)</a>", "<b>Les teves respostes es queden al teu dispositiu</b> tret que decideixis enviar la teva opinió. <a href=\"#\" onclick=\"show('s-privacy');return false\">Quines dades van on (en anglès)</a>", "<b>你的回答只保存在你的设备上</b>，除非你选择提交反馈。<a href=\"#\" onclick=\"show('s-privacy');return false\">数据去向说明（英文）</a>", "<b>你的回答只會留在你的裝置上</b>，除非你選擇送出意見回饋。<a href=\"#\" onclick=\"show('s-privacy');return false\">資料去向說明（英文）</a>"], "trustPt3": ["<b>Independiente.</b> Un proyecto de estudiante, sin vínculo con ninguna universidad, que nunca acepta dinero de propietarios, agencias ni plataformas.", "<b>Independent.</b> Un projecte d'estudiant, sense vincle amb cap universitat, que mai no accepta diners de propietaris, agències ni plataformes.", "<b>独立。</b>这是一个学生项目，与任何大学无关，也从不接受房东、中介或平台的钱。", "<b>獨立。</b>這是一個學生專案，與任何大學無關，也從不收取房東、仲介或平台的錢。"], "faqHead": ["Preguntas frecuentes (en inglés)", "Preguntes freqüents (en anglès)", "常见问题（英文）", "常見問題（英文）"], "qtopTitle": ["12 preguntas rápidas", "12 preguntes ràpides", "12 个简单问题", "12 個簡單問題"], "scopeNote": ["Checkie comprueba <b>habitaciones y pisos de alquiler en Barcelona</b>. No puede comprobar otras cosas, como una bici, entradas o una oferta de trabajo.", "Checkie comprova <b>habitacions i pisos de lloguer a Barcelona</b>. No pot comprovar altres coses, com ara una bici, entrades o una oferta de feina.", "Checkie 只检查<b>巴塞罗那的出租房间和公寓</b>，无法检查其他东西，例如自行车、门票或工作机会。", "Checkie 只檢查<b>巴塞隆納的出租房間和公寓</b>，無法檢查其他東西，例如腳踏車、門票或工作機會。"], "checkHelp1": ["Responde lo que sepas del anuncio. Toca <b>¿Por qué?</b> para ver un ejemplo. «No lo sé» también es una buena respuesta.", "Respon el que sàpigues de l'anunci. Toca <b>Per què?</b> per veure'n un exemple. «No ho sé» també és una bona resposta.", "根据你对房源的了解来回答。点<b>为什么？</b>查看例子。“不确定”也是可以的回答。", "依你對房源的了解來回答。點<b>為什麼？</b>查看例子。「不確定」也是可以的回答。"], "checkHelp2": ["¿Prefieres preguntar a una persona? <a href=\"#\" onclick=\"show('s-help');return false\" style=\"color:var(--accent);font-weight:600\">Contacta con la oficina internacional de tu universidad</a>", "Prefereixes preguntar a una persona? <a href=\"#\" onclick=\"show('s-help');return false\" style=\"color:var(--accent);font-weight:600\">Contacta amb l'oficina internacional de la teva universitat</a>", "更想问真人？<a href=\"#\" onclick=\"show('s-help');return false\" style=\"color:var(--accent);font-weight:600\">联系你大学的国际办公室</a>", "想問真人？<a href=\"#\" onclick=\"show('s-help');return false\" style=\"color:var(--accent);font-weight:600\">聯絡你大學的國際事務處</a>"], "backBtn": ["Volver", "Torna", "返回", "返回"], "askHead": ["Pregunta al propietario", "Pregunta al propietari", "问问房东", "問問房東"], "askIntro": ["Copia esto en tu chat con el propietario. Un propietario de verdad normalmente puede responder; negarse o meterte prisa es una señal de alerta.", "Copia això al teu xat amb el propietari. Un propietari de debò normalment pot respondre; negar-s'hi o fer-te pressa és un senyal d'alerta.", "把这段话复制到你和房东的聊天中（消息为英文或西班牙语，方便本地房东阅读）。真正的房东通常能回答这些问题；拒绝回答或催你付款都是警示信号。", "把這段話複製到你和房東的聊天中（訊息為英文或西班牙文，方便當地房東閱讀）。真正的房東通常能回答這些問題；拒絕回答或催你付款都是警訊。"], "llCopy": ["Copiar mensaje", "Copia el missatge", "复制消息", "複製訊息"], "helpH": ["¿Necesitas preguntar a una persona?", "Necessites preguntar a una persona?", "需要问真人吗？", "需要問真人嗎？"], "helpIntro": ["La oficina internacional de tu universidad ayuda a los estudiantes que llegan. Checkie te prepara para que tu pregunta sea breve y clara. (El mensaje está en inglés.)", "L'oficina internacional de la teva universitat ajuda els estudiants que arriben. Checkie et prepara perquè la teva pregunta sigui breu i clara. (El missatge és en anglès.)", "你大学的国际办公室会帮助新来的学生。Checkie 帮你做好准备，让你的问题简短清楚。（消息为英文。）", "你大學的國際事務處會協助新來的學生。Checkie 幫你做好準備，讓你的問題簡短清楚。（訊息為英文。）"], "helpLabel": ["Tu universidad", "La teva universitat", "你的大学", "你的大學"], "fbH": ["¿Qué te ha parecido esta comprobación?", "Què t'ha semblat aquesta comprovació?", "这次检查怎么样？", "這次檢查如何？"], "fbEnNote": ["El formulario de opinión está en inglés por ahora.", "El formulari d'opinió és en anglès de moment.", "反馈表暂时只有英文版。", "意見回饋表暫時只有英文版。"], "shareTxt": ["<b>¿Conoces a alguien que busca habitación?</b><p class=\"muted\">Envíale Checkie antes de que pague una fianza.</p>", "<b>Coneixes algú que busca habitació?</b><p class=\"muted\">Envia-li Checkie abans que pagui una fiança.</p>", "<b>认识也在找房的人吗？</b><p class=\"muted\">在他们付押金之前，把 Checkie 发给他们。</p>", "<b>認識也在找房的人嗎？</b><p class=\"muted\">在他們付押金之前，把 Checkie 傳給他們。</p>"], "shareRes": ["Enviar Checkie a un amigo", "Envia Checkie a un amic", "把 Checkie 发给朋友", "把 Checkie 傳給朋友"], "checkAnother": ["↻&nbsp; Comprobar otro anuncio", "↻&nbsp; Comprova un altre anunci", "↻&nbsp; 检查另一条房源", "↻&nbsp; 檢查另一則房源"], "enOnly": ["Esta página solo está en inglés por ahora.", "Aquesta pàgina només està en anglès de moment.", "此页面暂时只有英文版。", "此頁面暫時只有英文版。"]}, "ui": {"yes": ["Yes", "Sí", "Sí", "是", "是"], "no": ["No", "No", "No", "否", "否"], "unsure": ["Not sure", "No lo sé", "No ho sé", "不确定", "不確定"], "count": ["{n} of {t} answered", "{n} de {t} respondidas", "{n} de {t} respostes", "已回答 {n}/{t}", "已回答 {n}/{t}"], "seeResult": ["See my result", "Ver mi resultado", "Mostra el meu resultat", "查看结果", "查看結果"], "seeResultLeft": ["See my result ({left} unanswered won't count)", "Ver mi resultado ({left} sin responder no cuentan)", "Mostra el meu resultat ({left} sense resposta no compten)", "查看结果（{left} 题未答，不计入）", "查看結果（{left} 題未答，不計入）"], "why": ["Why?", "¿Por qué?", "Per què?", "为什么？", "為什麼？"], "hide": ["Hide", "Ocultar", "Amaga", "收起", "收起"], "soundsLike": ["Sounds like", "Suena como", "Sona com", "例如", "例如"], "priceBtn": ["💶 Compare the price with the area", "💶 Compara el precio con la zona", "💶 Compara el preu amb la zona", "💶 和该区域价格比较", "💶 和該區域價格比較"], "stopT": ["Stop before you pay", "Detente antes de pagar", "Atura't abans de pagar", "付款前请停下", "付款前請先停下"], "stopP": ["{n} common scam patterns are present. Don't send money until you've seen the room and have a written contract.", "Hay {n} patrones de estafa habituales. No envíes dinero hasta haber visto la habitación y tener un contrato por escrito.", "Hi ha {n} patrons d'estafa habituals. No enviïs diners fins que hagis vist l'habitació i tinguis un contracte per escrit.", "出现了 {n} 个常见诈骗模式。在看过房间并拿到书面合同之前，不要转账。", "出現了 {n} 個常見詐騙模式。在看過房間並拿到書面合約之前，不要匯款。"], "warnT": ["Be careful", "Ten cuidado", "Vés amb compte", "请小心", "請小心"], "warnP": ["Some warning signs, or things you couldn't confirm. Verify them before paying anything.", "Hay algunas señales de alerta, o cosas que no has podido confirmar. Compruébalas antes de pagar nada.", "Hi ha alguns senyals d'alerta, o coses que no has pogut confirmar. Comprova-les abans de pagar res.", "有一些警示信号，或你无法确认的情况。付款前请先核实。", "有一些警訊，或你無法確認的情況。付款前請先確認。"], "okT": ["No common patterns found", "No se han encontrado patrones habituales", "No s'han trobat patrons habituals", "未发现常见诈骗模式", "未發現常見詐騙模式"], "okP": ["That does not mean it's safe. Still see the room and get a written contract first.", "Eso no significa que sea seguro. Aun así, mira la habitación y pide un contrato por escrito antes.", "Això no vol dir que sigui segur. Tot i així, mira l'habitació i demana un contracte per escrit abans.", "这并不代表它是安全的。仍要先看房并拿到书面合同。", "這並不代表它是安全的。仍要先看房並拿到書面合約。"], "notSurePre": ["Not sure: ", "No lo sé: ", "No ho sé: ", "不确定：", "不確定："], "signsYesT": ["Warning signs you found", "Señales de alerta que has encontrado", "Senyals d'alerta que has trobat", "你发现的警示信号", "你發現的警訊"], "doVerb": ["What to do", "Qué hacer", "Què fer", "怎么做", "怎麼做"], "signsUnsureT": ["Things you weren't sure about", "Cosas de las que no estabas seguro", "Coses de què no estaves segur", "你不确定的事项", "你不確定的事項"], "findVerb": ["How to find out", "Cómo averiguarlo", "Com esbrinar-ho", "如何确认", "如何確認"], "nextT": ["What to do next", "Qué hacer ahora", "Què fer ara", "下一步", "下一步"], "nDontSend": ["<b>Don't send any money.</b> Several common scam patterns are present.", "<b>No envíes dinero.</b> Hay varios patrones de estafa habituales.", "<b>No enviïs diners.</b> Hi ha diversos patrons d'estafa habituals.", "<b>不要转任何钱。</b>出现了多个常见诈骗模式。", "<b>不要匯任何錢。</b>出現了多個常見詐騙模式。"], "nWork": ["<b>Work through the points above</b> before you pay or share documents.", "<b>Revisa los puntos de arriba</b> antes de pagar o compartir documentos.", "<b>Revisa els punts de dalt</b> abans de pagar o compartir documents.", "<b>逐一处理上面的问题</b>，然后再付款或提供证件。", "<b>逐一處理上面的問題</b>，然後再付款或提供證件。"], "nAsk": ["<b>Ask the landlord</b> the questions above.", "<b>Haz al propietario</b> las preguntas de arriba.", "<b>Fes al propietari</b> les preguntes de dalt.", "<b>向房东提出</b>上面的问题。", "<b>向房東提出</b>上面的問題。"], "nAskLink": ["Copy the message", "Copiar el mensaje", "Copia el missatge", "复制消息", "複製訊息"], "nAlways": ["<b>Always, before paying:</b> see the room (in person or a live video call), read a written contract, and pay only to an account in the landlord's or agency's name.", "<b>Siempre, antes de pagar:</b> mira la habitación (en persona o por videollamada en directo), lee un contrato por escrito y paga solo a una cuenta a nombre del propietario o de la agencia.", "<b>Sempre, abans de pagar:</b> mira l'habitació (en persona o per videotrucada en directe), llegeix un contracte per escrit i paga només a un compte a nom del propietari o de l'agència.", "<b>付款前务必：</b>亲自或通过实时视频看房，阅读书面合同，并且只付款到房东或中介名下的账户。", "<b>付款前務必：</b>親自或透過即時視訊看房，閱讀書面合約，並且只匯款到房東或仲介名下的帳戶。"], "nPrice": ["<b>Check the price</b> against the area.", "<b>Comprueba el precio</b> con el de la zona.", "<b>Comprova el preu</b> amb el de la zona.", "<b>对比该区域的价格。</b>", "<b>對比該區域的價格。</b>"], "nPriceLink": ["Open the price check", "Abrir la comparación de precios", "Obre la comparació de preus", "打开价格对比", "打開價格對比"], "nStill": ["<b>Still unsure? Ask a real person.</b> ", "<b>¿Sigues con dudas? Pregunta a una persona.</b> ", "<b>Encara tens dubtes? Pregunta a una persona.</b> ", "<b>还是不确定？问问真人。</b>", "<b>還是不確定？問問真人。</b>"], "nQuestions": ["<b>Questions?</b> ", "<b>¿Tienes preguntas?</b> ", "<b>Tens preguntes?</b> ", "<b>有疑问？</b>", "<b>有疑問？</b>"], "nOffice": ["Your university's international office can help, and Checkie gives you a ready-made message.", "La oficina internacional de tu universidad puede ayudarte, y Checkie te da un mensaje ya preparado.", "L'oficina internacional de la teva universitat et pot ajudar, i Checkie et dona un missatge ja preparat.", "你大学的国际办公室可以帮忙，Checkie 会给你一封写好的消息。", "你大學的國際事務處可以協助，Checkie 會給你一封寫好的訊息。"], "nOfficeLink": ["Get their contact", "Ver su contacto", "Mostra'n el contacte", "查看联系方式", "查看聯絡方式"], "nPaid": ["<b>Already paid?</b>", "<b>¿Ya has pagado?</b>", "<b>Ja has pagat?</b>", "<b>已经付款了？</b>", "<b>已經付款了？</b>"], "nPaidLink": ["See what to do", "Mira qué hacer", "Mira què has de fer", "看看该怎么做", "看看該怎麼做"], "nNote": ["These are warning signs, not proof of fraud. Checkie never says a listing is safe, and it doesn't judge any person.", "Son señales de alerta, no pruebas de fraude. Checkie nunca dice que un anuncio sea seguro y no juzga a ninguna persona.", "Són senyals d'alerta, no proves de frau. Checkie mai no diu que un anunci sigui segur i no jutja cap persona.", "这些只是警示信号，不是诈骗的证据。Checkie 从不说房源是安全的，也不评判任何人。", "這些只是警訊，不是詐騙的證據。Checkie 從不說房源是安全的，也不評判任何人。"], "shareText": ["Found a room in Barcelona? Check it before you pay: a free 2-minute check for common rental scam signs.", "¿Has encontrado habitación en Barcelona? Compruébala antes de pagar: una comprobación gratuita de 2 minutos de las señales de estafa más habituales.", "Has trobat habitació a Barcelona? Comprova-la abans de pagar: una comprovació gratuïta de 2 minuts dels senyals d'estafa més habituals.", "在巴塞罗那找到房间了？付款前先检查：2 分钟免费检查常见的租房诈骗信号。", "在巴塞隆納找到房間了嗎？付款前先檢查：2 分鐘免費檢查常見的租屋詐騙警訊。"], "shareCopied": ["Link copied. Paste it in your group chat", "Enlace copiado. Pégalo en tu chat de grupo", "Enllaç copiat. Enganxa'l al teu xat de grup", "链接已复制，粘贴到你的群聊里吧", "連結已複製，貼到你的群組聊天吧"]}, "q": {"es": [{"t": "¿Te han pedido pagar antes de ver la habitación?", "d": "Una fianza, una tasa de reserva o una «reserva» antes de una visita en persona o por videollamada en directo. No cuenta: una tasa de reserva pagada con tarjeta en la web oficial de una residencia de estudiantes, después de que te hayan enviado el contrato.", "ex": "Envíame 300 € hoy para que te guarde la habitación.", "flag": "Te piden pagar antes de cualquier visita.", "why": "Es uno de los patrones de estafa de alquiler más comunes. Una vez enviado el dinero, es muy difícil recuperarlo.", "do": "No pagues nada hasta haber visto la habitación, en persona o por videollamada en directo, y haber leído el contrato."}, {"t": "¿El propietario está «en el extranjero» y no puede enseñarla?", "d": "Dice que te enviará las llaves por correo, o que alguien te las dará cuando pagues.", "ex": "Estoy trabajando en Londres, te enviaré las llaves por mensajería.", "flag": "Propietario «en el extranjero», llaves enviadas tras el pago.", "why": "Un propietario o una agencia de verdad puede organizar una visita o una videollamada en directo.", "do": "Pide una visita con alguien presente, o una videollamada en directo de la habitación. Si se niegan, no pagues."}, {"t": "¿Quieren que pagues de una forma poco habitual?", "d": "Servicios de envío de dinero, criptomonedas, tarjetas regalo o una cuenta bancaria fuera de España.", "ex": "Usa Western Union, por favor, así me llega antes.", "flag": "Forma de pago poco habitual o imposible de rastrear.", "why": "Estos pagos son casi imposibles de recuperar. Los alquileres legítimos usan una transferencia bancaria a una cuenta española a nombre del propietario o de la agencia.", "do": "Paga solo por transferencia bancaria a una cuenta a nombre del propietario o de la agencia, idealmente española. Nunca por Western Union, criptomonedas ni tarjetas regalo."}, {"t": "¿Es mucho más barata que habitaciones parecidas de la zona?", "d": "Precio habitual de una habitación individual en piso compartido (2026): unos 400–550 € en Sants, Horta-Guinardó y Sant Andreu; 450–750 € en Gràcia, Poblenou, El Raval, Poble-sec y Sant Antoni; 550–800 € en Eixample, El Born, Les Corts y Sarrià. Responde Sí si el alquiler está claramente por debajo del rango de su zona. (Las residencias de estudiantes y los estudios cuestan más.)", "ex": "Una habitación en el Eixample por 300 € al mes.", "flag": "Precio muy por debajo de la zona.", "why": "Un precio demasiado bueno sirve para que te des prisa antes de comparar.", "do": "Compara el alquiler con la zona usando la comparación de precios, y pregunta por qué es más barato (tamaño, baño compartido, gastos)."}, {"t": "¿Te meten prisa para decidir?", "d": "Presión para pagar hoy, o te dicen que hay mucha gente interesada.", "ex": "Hay 5 personas interesadas, paga ahora o la pierdes.", "flag": "Presión para pagar rápido.", "why": "Las prisas impiden que compruebes. Una oferta de verdad puede esperar un día para una visita.", "do": "Tómate un día para comprobarlo. Un propietario de verdad puede esperar a una visita; si no quiere, déjalo."}, {"t": "¿No hay contrato por escrito antes de pagar?", "d": "No has visto un contrato con el nombre del propietario y la dirección de la habitación.", "ex": "Lo firmamos todo cuando llegues.", "flag": "Sin contrato por escrito antes del pago.", "why": "Deberías leer el contrato, con la identidad del propietario y la dirección, antes de pagar nada.", "do": "Pide el contrato antes de pagar y comprueba que indique el propietario, la dirección exacta, el alquiler, la fianza y las fechas."}, {"t": "¿Te piden el pasaporte o el DNI antes de verla?", "d": "Una foto o copia de tu pasaporte, documento de identidad o permiso de residencia, solo para «reservar» o «enviar el contrato».", "ex": "Mándame una foto de tu pasaporte para que pueda guardarte la habitación.", "flag": "Te piden documentación antes de cualquier visita.", "why": "Las copias de tu documentación pueden usarse para suplantar tu identidad. Normalmente se enseña al firmar el contrato, no antes.", "do": "No envíes todavía tu pasaporte ni tu documentación: normalmente se enseña al firmar. Si ya la enviaste, estate atento a posibles usos indebidos."}, {"t": "¿Han sacado la conversación fuera de la web?", "d": "Te pidieron seguir por WhatsApp, Telegram o correo personal en vez de por los mensajes de la plataforma.", "ex": "Hablemos por WhatsApp, es más fácil.", "flag": "Conversación fuera de la plataforma.", "why": "Fuera de la plataforma pierdes su moderación, el registro de mensajes y cualquier protección al comprador; por eso los estafadores lo prefieren.", "do": "Mantén la conversación en la plataforma o, si te cambias, haz capturas de todo."}, {"t": "¿No te dan la dirección exacta?", "d": "Solo tienes el barrio o el nombre de la calle, no el número del edificio ni el piso.", "ex": "Te envío la dirección después de la fianza.", "flag": "Sin dirección exacta antes del pago.", "why": "Sin la dirección no puedes comprobar que el edificio exista o coincida con las fotos, por ejemplo en Google Street View.", "do": "Pide la dirección completa (número, piso y puerta) y búscala en Google Street View."}, {"t": "¿Evitan hacer una videollamada en directo de la habitación?", "d": "Solo envían fotos, o las fotos parecen de un hotel o aparecen en otros anuncios.", "ex": "Tengo la cámara rota, pero las fotos son recientes.", "flag": "Sin videollamada en directo; las fotos no se pueden verificar.", "why": "Las fotos robadas son habituales. Pide una videollamada en directo y busca las fotos con una búsqueda inversa de imágenes.", "do": "Pide una videollamada en directo y busca las fotos con una búsqueda inversa de imágenes (Google Lens o TinEye)."}, {"t": "¿Te piden más de dos meses de alquiler por adelantado?", "d": "Fianza, primer mes y garantías adicionales sumados, antes de entrar a vivir.", "ex": "Tres meses por adelantado más la fianza para confirmar.", "flag": "Pago por adelantado elevado.", "why": "Lo habitual es una fianza de uno a dos meses. Las sumas grandes por adelantado aumentan lo que pierdes si el anuncio no es real.", "do": "Pregunta por qué hace falta tanto por adelantado. Lo habitual es una fianza de uno a dos meses; paga más solo después de visitar y firmar."}, {"t": "¿Te cobran un gasto adicional que no entiendes?", "d": "Un gasto de «gestión», «reserva», «llaves» o de agencia, sobre todo antes de firmar nada. La fianza o un pago de reserva no son un gasto adicional; para eso, responde las preguntas de pago de arriba.", "ex": "Solo 150 € de gastos de gestión y te mando el contrato por correo.", "flag": "Gasto adicional sin explicar.", "why": "Los gastos falsos son un añadido habitual. En el alquiler de una vivienda habitual, la ley de vivienda de 2023 establece que los honorarios de la agencia los paga el propietario, así que pregunta para qué es cualquier gasto que te cobren.", "do": "Pregunta por escrito para qué es el gasto. En el alquiler de una vivienda habitual, los honorarios de la agencia los paga el propietario."}], "ca": [{"t": "T'han demanat pagar abans de veure l'habitació?", "d": "Una fiança, una taxa de reserva o una «reserva» abans d'una visita en persona o per videotrucada en directe. No compta: una taxa de reserva pagada amb targeta al web oficial d'una residència d'estudiants, després que t'hagin enviat el contracte.", "ex": "Envia'm 300 € avui perquè et guardi l'habitació.", "flag": "Et demanen pagar abans de cap visita.", "why": "És un dels patrons d'estafa de lloguer més habituals. Un cop enviats els diners, és molt difícil recuperar-los.", "do": "No paguis res fins que hagis vist l'habitació, en persona o per videotrucada en directe, i hagis llegit el contracte."}, {"t": "El propietari és «a l'estranger» i no te la pot ensenyar?", "d": "Diu que t'enviarà les claus per correu, o que algú te les donarà quan paguis.", "ex": "Treballo a Londres, t'enviaré les claus per missatgeria.", "flag": "Propietari «a l'estranger», claus enviades després del pagament.", "why": "Un propietari o una agència de debò pot organitzar una visita o una videotrucada en directe.", "do": "Demana una visita amb algú present, o una videotrucada en directe de l'habitació. Si s'hi neguen, no paguis."}, {"t": "Volen que paguis d'una manera poc habitual?", "d": "Serveis d'enviament de diners, criptomonedes, targetes regal o un compte bancari fora d'Espanya.", "ex": "Fes servir Western Union, si us plau, així m'arriba abans.", "flag": "Forma de pagament poc habitual o impossible de rastrejar.", "why": "Aquests pagaments són gairebé impossibles de recuperar. Els lloguers legítims fan servir una transferència bancària a un compte espanyol a nom del propietari o de l'agència.", "do": "Paga només per transferència bancària a un compte a nom del propietari o de l'agència, idealment espanyol. Mai per Western Union, criptomonedes ni targetes regal."}, {"t": "És molt més barata que habitacions semblants de la zona?", "d": "Preu habitual d'una habitació individual en un pis compartit (2026): uns 400–550 € a Sants, Horta-Guinardó i Sant Andreu; 450–750 € a Gràcia, Poblenou, el Raval, Poble-sec i Sant Antoni; 550–800 € a l'Eixample, el Born, les Corts i Sarrià. Respon Sí si el lloguer és clarament per sota del rang de la seva zona. (Les residències d'estudiants i els estudis costen més.)", "ex": "Una habitació a l'Eixample per 300 € al mes.", "flag": "Preu molt per sota de la zona.", "why": "Un preu massa bo serveix perquè et donis pressa abans de comparar.", "do": "Compara el lloguer amb la zona amb la comparació de preus, i pregunta per què és més barat (mida, bany compartit, despeses)."}, {"t": "Et fan pressa per decidir?", "d": "Pressió per pagar avui, o et diuen que hi ha molta gent interessada.", "ex": "Hi ha 5 persones interessades, paga ara o la perds.", "flag": "Pressió per pagar ràpid.", "why": "Les presses t'impedeixen comprovar. Una oferta de debò pot esperar un dia per a una visita.", "do": "Pren-te un dia per comprovar-ho. Un propietari de debò pot esperar una visita; si no vol, deixa-ho estar."}, {"t": "No hi ha contracte per escrit abans de pagar?", "d": "No has vist un contracte amb el nom del propietari i l'adreça de l'habitació.", "ex": "Ho signem tot quan arribis.", "flag": "Sense contracte per escrit abans del pagament.", "why": "Hauries de llegir el contracte, amb la identitat del propietari i l'adreça, abans de pagar res.", "do": "Demana el contracte abans de pagar i comprova que indiqui el propietari, l'adreça exacta, el lloguer, la fiança i les dates."}, {"t": "Et demanen el passaport o el DNI abans de veure-la?", "d": "Una foto o còpia del teu passaport, document d'identitat o permís de residència, només per «reservar» o «enviar el contracte».", "ex": "Envia'm una foto del teu passaport perquè et pugui guardar l'habitació.", "flag": "Et demanen documentació abans de cap visita.", "why": "Les còpies de la teva documentació es poden fer servir per suplantar la teva identitat. Normalment s'ensenya en signar el contracte, no abans.", "do": "No enviïs encara el teu passaport ni la teva documentació: normalment s'ensenya en signar. Si ja la vas enviar, estigues atent a possibles usos indeguts."}, {"t": "Han tret la conversa fora del web?", "d": "Et van demanar continuar per WhatsApp, Telegram o correu personal en lloc dels missatges de la plataforma.", "ex": "Parlem per WhatsApp, és més fàcil.", "flag": "Conversa fora de la plataforma.", "why": "Fora de la plataforma perds la seva moderació, el registre de missatges i qualsevol protecció al comprador; per això els estafadors ho prefereixen.", "do": "Mantén la conversa a la plataforma o, si canvies, fes captures de tot."}, {"t": "No et donen l'adreça exacta?", "d": "Només tens el barri o el nom del carrer, no el número de l'edifici ni el pis.", "ex": "T'envio l'adreça després de la fiança.", "flag": "Sense adreça exacta abans del pagament.", "why": "Sense l'adreça no pots comprovar que l'edifici existeixi o coincideixi amb les fotos, per exemple a Google Street View.", "do": "Demana l'adreça completa (número, pis i porta) i busca-la a Google Street View."}, {"t": "Eviten fer una videotrucada en directe de l'habitació?", "d": "Només envien fotos, o les fotos semblen d'un hotel o surten en altres anuncis.", "ex": "Tinc la càmera espatllada, però les fotos són recents.", "flag": "Sense videotrucada en directe; les fotos no es poden verificar.", "why": "Les fotos robades són habituals. Demana una videotrucada en directe i busca les fotos amb una cerca inversa d'imatges.", "do": "Demana una videotrucada en directe i busca les fotos amb una cerca inversa d'imatges (Google Lens o TinEye)."}, {"t": "Et demanen més de dos mesos de lloguer per avançat?", "d": "Fiança, primer mes i garanties addicionals sumats, abans d'entrar a viure.", "ex": "Tres mesos per avançat més la fiança per confirmar.", "flag": "Pagament per avançat elevat.", "why": "L'habitual és una fiança d'un a dos mesos. Les sumes grans per avançat augmenten el que perds si l'anunci no és real.", "do": "Pregunta per què cal tant per avançat. L'habitual és una fiança d'un a dos mesos; paga'n més només després de visitar i signar."}, {"t": "Et cobren una despesa addicional que no entens?", "d": "Una despesa de «gestió», «reserva», «claus» o d'agència, sobretot abans de signar res. La fiança o un pagament de reserva no són una despesa addicional; per a això, respon les preguntes de pagament de dalt.", "ex": "Només 150 € de despeses de gestió i t'envio el contracte per correu.", "flag": "Despesa addicional sense explicar.", "why": "Les despeses falses són un afegit habitual. En el lloguer d'un habitatge habitual, la llei d'habitatge del 2023 estableix que els honoraris de l'agència els paga el propietari, així que pregunta per a què és qualsevol despesa que et cobrin.", "do": "Pregunta per escrit per a què és la despesa. En el lloguer d'un habitatge habitual, els honoraris de l'agència els paga el propietari."}], "zh-Hans": [{"t": "对方是否在你看房之前就要求付款？", "d": "在亲自看房或实时视频看房之前，就要求押金、预订费或“订金”。不算在内：在学生公寓官方网站上、收到合同之后用银行卡支付的预订费。", "ex": "今天转 300 欧元，我就帮你留着这个房间。", "flag": "看房前就要求付款。", "why": "这是最常见的租房诈骗模式之一。钱一旦转出，就很难追回。", "do": "在亲自或通过实时视频看过房间、并读过合同之前，不要付任何钱。"}, {"t": "房东是否说自己“在国外”，没法带你看房？", "d": "对方说会把钥匙寄给你，或者等你付款后再找人把钥匙交给你。", "ex": "我在伦敦工作，会用快递把钥匙寄给你。", "flag": "房东“在国外”，付款后才寄钥匙。", "why": "真正的房东或中介可以安排看房或实时视频看房。", "do": "要求有人在场带你看房，或者实时视频看房。如果对方拒绝，就不要付款。"}, {"t": "对方是否要求用不寻常的方式付款？", "d": "汇款服务（如西联汇款）、加密货币、礼品卡，或西班牙境外的银行账户。", "ex": "请用西联汇款，这样我收得更快。", "flag": "不寻常或无法追踪的付款方式。", "why": "这类付款几乎无法撤回。正规的租房会通过银行转账，付到房东或中介名下的西班牙账户。", "do": "只通过银行转账付款，付到房东或中介名下的账户，最好是西班牙账户。绝不要用西联汇款、加密货币或礼品卡。"}, {"t": "价格是否比附近类似的房间便宜很多？", "d": "合租公寓单人间的常见价格（2026）：Sants、Horta-Guinardó、Sant Andreu 约 400–550 欧元；Gràcia、Poblenou、El Raval、Poble-sec、Sant Antoni 约 450–750 欧元；Eixample、El Born、Les Corts、Sarrià 约 550–800 欧元。如果租金明显低于该区域的范围，请回答“是”。（学生公寓和单间公寓更贵。）", "ex": "Eixample 的一个房间，每月 300 欧元。", "flag": "价格远低于该区域水平。", "why": "好得不真实的价格，是为了让你在比较之前就匆忙决定。", "do": "用价格对比工具把租金和该区域比较，并问清楚为什么便宜（面积、共用卫生间、水电费）。"}, {"t": "对方是否催你尽快决定？", "d": "施压让你今天付款，或说有很多人都想要。", "ex": "有 5 个人感兴趣，现在付款，不然就没了。", "flag": "催促你尽快付款。", "why": "紧迫感会让你来不及核实。真实的房源可以等一天让你看房。", "do": "给自己一天时间核实。真正的房东可以等你看房；如果对方不肯等，就放弃。"}, {"t": "付款前没有书面合同？", "d": "你还没看到写有房东姓名和房间地址的合同。", "ex": "等你到了我们再签所有文件。", "flag": "付款前没有书面合同。", "why": "在付任何钱之前，你应该先读合同，确认房东身份和地址。", "do": "付款前先要合同，并确认上面写明房东、具体地址、租金、押金和日期。"}, {"t": "对方是否在你看房前就要你的护照或身份证件？", "d": "只是为了“预订”或“发合同”，就要你护照、身份证或居留卡的照片或扫描件。", "ex": "发一张你的护照照片给我，我好帮你留房。", "flag": "看房前就要求证件。", "why": "你的证件复印件可能被用于身份盗用。通常是签合同时才出示证件，而不是之前。", "do": "先不要发护照或证件：通常签合同时才出示。如果已经发了，请留意是否被冒用。"}, {"t": "对方是否把聊天转到了网站以外？", "d": "对方要求改用 WhatsApp、Telegram 或私人邮箱联系，而不是平台内的消息。", "ex": "我们用 WhatsApp 聊吧，比较方便。", "flag": "聊天被转到平台以外。", "why": "离开平台后，你会失去平台的监管、聊天记录和买家保障，这正是骗子喜欢这样做的原因。", "do": "尽量在平台内沟通；如果转到别处，把所有内容截图保存。"}, {"t": "对方不肯给你具体地址？", "d": "你只知道街区或街道名，不知道门牌号和楼层。", "ex": "付了押金后我再把地址发给你。", "flag": "付款前没有具体地址。", "why": "没有地址，你就无法核实这栋楼是否存在、是否和照片一致，例如用 Google 街景查看。", "do": "要求完整地址（门牌号、楼层、房门号），并在 Google 街景上查看。"}, {"t": "对方是否回避实时视频看房？", "d": "对方只发照片，或者照片看起来像酒店，或也出现在其他房源里。", "ex": "我的摄像头坏了，不过照片都是最近拍的。", "flag": "没有实时视频看房，照片无法核实。", "why": "盗用照片很常见。要求实时视频看房，并用以图搜图核查照片。", "do": "要求实时视频看房，并用以图搜图（Google Lens 或 TinEye）查找照片来源。"}, {"t": "对方是否要求预付超过两个月的租金？", "d": "入住前，押金、首月租金和额外担保金加在一起。", "ex": "先付三个月租金加押金才能确认。", "flag": "预付金额过高。", "why": "押金通常是一到两个月的租金。预付越多，房源若是假的，你损失就越大。", "do": "问清楚为什么要预付这么多。押金通常为一到两个月；只有在看房并签约后才考虑多付。"}, {"t": "对方是否收取你不明白的额外费用？", "d": "“手续费”、“预订费”、“钥匙费”或中介费，尤其是在你签任何东西之前。押金或订金不算额外费用；这些请回答上面关于付款的问题。", "ex": "只要付 150 欧元手续费，我就把合同发到你邮箱。", "flag": "未说明用途的额外费用。", "why": "虚假费用是常见的附加手段。根据西班牙 2023 年住房法，标准住宅租赁的中介费由房东承担，所以要问清楚向你收取的任何费用是做什么用的。", "do": "书面询问这笔费用的用途。标准住宅租赁的中介费由房东承担。"}], "zh-Hant": [{"t": "對方是否在你看房之前就要求付款？", "d": "在親自看房或即時視訊看房之前，就要求押金、預訂費或「訂金」。不算在內：在學生宿舍官方網站上、收到合約之後以信用卡支付的預訂費。", "ex": "今天匯 300 歐元，我就幫你保留這個房間。", "flag": "看房前就要求付款。", "why": "這是最常見的租屋詐騙模式之一。錢一旦匯出，就很難追回。", "do": "在親自或透過即時視訊看過房間、並讀過合約之前，不要付任何錢。"}, {"t": "房東是否說自己「在國外」，沒辦法帶你看房？", "d": "對方說會把鑰匙寄給你，或等你付款後再找人把鑰匙交給你。", "ex": "我在倫敦工作，會用快遞把鑰匙寄給你。", "flag": "房東「在國外」，付款後才寄鑰匙。", "why": "真正的房東或仲介可以安排看房或即時視訊看房。", "do": "要求有人在場帶你看房，或即時視訊看房。如果對方拒絕，就不要付款。"}, {"t": "對方是否要求用不尋常的方式付款？", "d": "匯款服務（如西聯匯款）、加密貨幣、禮品卡，或西班牙境外的銀行帳戶。", "ex": "請用西聯匯款，這樣我收得比較快。", "flag": "不尋常或無法追蹤的付款方式。", "why": "這類付款幾乎無法撤回。正規的租屋會透過銀行轉帳，匯到房東或仲介名下的西班牙帳戶。", "do": "只透過銀行轉帳付款，匯到房東或仲介名下的帳戶，最好是西班牙帳戶。絕不要用西聯匯款、加密貨幣或禮品卡。"}, {"t": "價格是否比附近類似的房間便宜很多？", "d": "合租公寓單人房的常見價格（2026）：Sants、Horta-Guinardó、Sant Andreu 約 400–550 歐元；Gràcia、Poblenou、El Raval、Poble-sec、Sant Antoni 約 450–750 歐元；Eixample、El Born、Les Corts、Sarrià 約 550–800 歐元。如果租金明顯低於該區域的範圍，請回答「是」。（學生宿舍和套房更貴。）", "ex": "Eixample 的一個房間，每月 300 歐元。", "flag": "價格遠低於該區域水準。", "why": "好得不真實的價格，是為了讓你在比較之前就匆忙決定。", "do": "用價格對比工具把租金和該區域比較，並問清楚為什麼便宜（面積、共用衛浴、水電費）。"}, {"t": "對方是否催你盡快決定？", "d": "施壓要你今天付款，或說有很多人都想要。", "ex": "有 5 個人有興趣，現在付款，不然就沒了。", "flag": "催促你盡快付款。", "why": "緊迫感會讓你來不及確認。真實的房源可以等一天讓你看房。", "do": "給自己一天時間確認。真正的房東可以等你看房；如果對方不肯等，就放棄。"}, {"t": "付款前沒有書面合約？", "d": "你還沒看到寫有房東姓名和房間地址的合約。", "ex": "等你到了我們再簽所有文件。", "flag": "付款前沒有書面合約。", "why": "在付任何錢之前，你應該先讀合約，確認房東身分和地址。", "do": "付款前先要合約，並確認上面寫明房東、確切地址、租金、押金和日期。"}, {"t": "對方是否在你看房前就要你的護照或身分證件？", "d": "只是為了「預訂」或「寄合約」，就要你護照、身分證或居留證的照片或掃描檔。", "ex": "傳一張你的護照照片給我，我好幫你保留房間。", "flag": "看房前就要求證件。", "why": "你的證件影本可能被用於冒用身分。通常是簽合約時才出示證件，而不是之前。", "do": "先不要傳護照或證件：通常簽合約時才出示。如果已經傳了，請留意是否被冒用。"}, {"t": "對方是否把聊天轉到網站以外？", "d": "對方要求改用 WhatsApp、Telegram 或私人信箱聯絡，而不是平台內的訊息。", "ex": "我們用 WhatsApp 聊吧，比較方便。", "flag": "聊天被轉到平台以外。", "why": "離開平台後，你會失去平台的監管、對話紀錄和買家保障，這正是詐騙者喜歡這樣做的原因。", "do": "盡量在平台內溝通；如果轉到別處，把所有內容截圖保存。"}, {"t": "對方不肯給你確切地址？", "d": "你只知道街區或街道名，不知道門牌號碼和樓層。", "ex": "付了押金後我再把地址傳給你。", "flag": "付款前沒有確切地址。", "why": "沒有地址，你就無法確認這棟樓是否存在、是否和照片一致，例如用 Google 街景查看。", "do": "要求完整地址（門牌、樓層、房號），並在 Google 街景上查看。"}, {"t": "對方是否迴避即時視訊看房？", "d": "對方只傳照片，或照片看起來像飯店，或也出現在其他房源裡。", "ex": "我的鏡頭壞了，不過照片都是最近拍的。", "flag": "沒有即時視訊看房，照片無法確認。", "why": "盜用照片很常見。要求即時視訊看房，並用以圖搜圖查證照片。", "do": "要求即時視訊看房，並用以圖搜圖（Google Lens 或 TinEye）查找照片來源。"}, {"t": "對方是否要求預付超過兩個月的租金？", "d": "入住前，押金、首月租金和額外保證金加在一起。", "ex": "先付三個月租金加押金才能確認。", "flag": "預付金額過高。", "why": "押金通常是一到兩個月的租金。預付越多，房源若是假的，你的損失就越大。", "do": "問清楚為什麼要預付這麼多。押金通常為一到兩個月；只有在看房並簽約後才考慮多付。"}, {"t": "對方是否收取你不明白的額外費用？", "d": "「手續費」、「預訂費」、「鑰匙費」或仲介費，尤其是在你簽任何東西之前。押金或訂金不算額外費用；這些請回答上面關於付款的問題。", "ex": "只要付 150 歐元手續費，我就把合約寄到你信箱。", "flag": "未說明用途的額外費用。", "why": "虛假費用是常見的附加手法。根據西班牙 2023 年住房法，一般住宅租賃的仲介費由房東負擔，所以要問清楚向你收取的任何費用是做什麼用的。", "do": "以書面詢問這筆費用的用途。一般住宅租賃的仲介費由房東負擔。"}]}};
+let LANG="en";
+function T(k,v){ const r=I18N.ui[k]; let s=r?(LANG==="en"?r[0]:(r[I18N.langs.indexOf(LANG)+1]||r[0])):k; if(v) Object.keys(v).forEach(x=>{ s=s.split("{"+x+"}").join(v[x]); }); return s; }
+function QX(k,f){ const Q=QUESTIONS[k]; if(LANG==="en") return Q[f]; const L=I18N.q[LANG]; return (L&&L[k]&&L[k][f])||Q[f]; }
+function qIdx(Q){ return QUESTIONS.indexOf(Q); }
+function applyLang(lang, rerender){
+  if(lang!=="en" && I18N.langs.indexOf(lang)<0) lang="en";
+  LANG=lang; document.documentElement.lang = lang==="zh-Hans"?"zh-Hans":lang==="zh-Hant"?"zh-Hant":lang;
+  const li=I18N.langs.indexOf(lang);
+  document.querySelectorAll("[data-i18n]").forEach(el=>{ const k=el.dataset.i18n;
+    if(!("en" in el.dataset)) el.dataset.en = el.innerHTML;
+    const tr=I18N.html[k]; const v = lang==="en" ? el.dataset.en : (tr ? tr[li] : el.dataset.en);
+    if(el.classList.contains("i18nNote")){ el.hidden = lang==="en"; el.innerHTML = lang==="en" ? "" : v; } else el.innerHTML=v; });
+  const sel=document.getElementById("langSel"); if(sel && sel.value!==lang) sel.value=lang;
+  if(typeof llLang!=="undefined") llLang = (lang==="es"||lang==="ca") ? "es" : "en";
+  try{ localStorage.setItem("checkieLang",lang); }catch(e){}
+  if(typeof renderPFStatic==="function") renderPFStatic();
+  if(typeof renderTrends==="function") renderTrends();
+  if(rerender){ const vis=id=>{ const e=document.getElementById(id); return e && !e.classList.contains("hidden"); };
+    if(vis("s-check")) renderList();
+    if(vis("s-result")) refreshResultText(); }
+}
 const OPTS = [["yes","Yes","✓"],["no","No","✕"],["unsure","Not sure","?"]];
 let i = 0; const ans = [];
 
@@ -1945,34 +2081,35 @@ function goPrice(){ show("s-guide"); setTimeout(()=>{ const el=document.getEleme
 function goAreas(){ show("s-guide"); setTimeout(()=>{ const el=document.querySelector(".gmap"); el.scrollIntoView({behavior:"smooth",block:"start"}); flash(document.getElementById("lmap").hidden?document.getElementById("svgMapWrap"):document.getElementById("lmap")); const h=el.querySelector("h3"); if(h) h.focus({preventScroll:true}); },80); }
 function startCheck(){ i=0; show("s-check"); renderList(); }
 let LEARNED=null;
-try{ if(/^https?:$/.test(location.protocol)) fetch("learned.json",{cache:"no-store"}).then(r=>r.ok?r.json():null).then(j=>{ if(j && j.version===1 && Array.isArray(j.mostReported)) LEARNED=j; }).catch(()=>{}); }catch(e){}
-function setAns(k,v){ ans[k]=v; const r=document.querySelector('.qrow[data-k="'+k+'"]'); if(r){ r.dataset.a=v; r.querySelectorAll(".seg button").forEach(b=>b.setAttribute("aria-pressed",b.dataset.v===v?"true":"false")); } updCount(); }
+try{ if(/^https?:$/.test(location.protocol)) fetch("learned.json",{cache:"no-store"}).then(r=>r.ok?r.json():null).then(j=>{ if(j && j.version===1 && Array.isArray(j.mostReported)) LEARNED=j; if(typeof renderTrends==="function") renderTrends(); }).catch(()=>{}); }catch(e){}
+function setAns(k,v){ ans[k]=v; if(typeof PF!=="undefined" && PF[k]){ setTimeout(renderList,0); } const r=document.querySelector('.qrow[data-k="'+k+'"]'); if(r){ r.dataset.a=v; r.querySelectorAll(".seg button").forEach(b=>b.setAttribute("aria-pressed",b.dataset.v===v?"true":"false")); } updCount(); }
 function updCount(){ const n=QUESTIONS.filter((_,k)=>ans[k]).length, left=QUESTIONS.length-n;
-  document.getElementById("qCount").textContent=n+" of "+QUESTIONS.length+" answered";
+  document.getElementById("qCount").textContent=T("count",{n:n,t:QUESTIONS.length});
   document.getElementById("bar").style.width=(n/QUESTIONS.length*100)+"%";
-  document.getElementById("nextBtn").textContent = left===0 ? "See my result" : "See my result ("+left+" unanswered won't count)"; }
+  document.getElementById("nextBtn").textContent = left===0 ? T("seeResult") : T("seeResultLeft",{left:left}); }
 function renderList(){
   const L=document.getElementById("qList"); L.innerHTML="";
   const live = LEARNED && LEARNED.answers>=LEARNED.minAnswers;
   QUESTIONS.forEach((Q,k)=>{
-    const w = live && LEARNED.wording && LEARNED.wording[String(k)] || {};
+    const w = LANG==="en" && live && LEARNED.wording && LEARNED.wording[String(k)] || {};
     const r=document.createElement("div"); r.className="qrow"; r.dataset.k=k; if(ans[k]) r.dataset.a=ans[k];
     const head=document.createElement("div"); head.className="qline";
     const ic=document.createElement("span"); ic.className="qic2"; ic.textContent=Q.ic; ic.setAttribute("aria-hidden","true");
     const tx=document.createElement("div"); tx.className="qt";
-    const t=document.createElement("b"); t.textContent=Q.t; tx.appendChild(t);
+    const t=document.createElement("b"); t.textContent=QX(k,"t"); tx.appendChild(t);
     if(live && LEARNED.mostReported.includes(k)){ const tg=document.createElement("span"); tg.className="learnTag sm"; tg.textContent="Often reported"; tx.appendChild(tg); }
-    const d=document.createElement("small"); d.textContent=typeof w.d==="string"?w.d:Q.d; tx.appendChild(d);
-    const wb=document.createElement("button"); wb.className="qwhy"; wb.textContent="Why?"; wb.setAttribute("aria-expanded","false"); tx.appendChild(wb);
+    const d=document.createElement("small"); d.textContent=typeof w.d==="string"?w.d:QX(k,"d"); tx.appendChild(d);
+    const wb=document.createElement("button"); wb.className="qwhy"; wb.textContent=T("why"); wb.setAttribute("aria-expanded","false"); tx.appendChild(wb);
     const more=document.createElement("div"); more.className="qmore"; more.hidden=true;
-    const ex=document.createElement("p"); ex.innerHTML='<span>Sounds like</span> '; const q=document.createElement("q"); q.textContent=(typeof w.ex==="string"?w.ex:Q.ex).replace(/^"|"$/g,""); ex.appendChild(q);
-    const why=document.createElement("p"); why.textContent=Q.why; more.append(ex,why); tx.appendChild(more);
-    wb.onclick=()=>{ more.hidden=!more.hidden; wb.setAttribute("aria-expanded",String(!more.hidden)); wb.textContent=more.hidden?"Why?":"Hide"; };
+    const ex=document.createElement("p"); const sl=document.createElement("span"); sl.textContent=T("soundsLike"); ex.append(sl," "); const q=document.createElement("q"); q.textContent=(typeof w.ex==="string"?w.ex:QX(k,"ex")).replace(/^"|"$/g,""); ex.appendChild(q);
+    const why=document.createElement("p"); why.textContent=QX(k,"why"); more.append(ex,why); tx.appendChild(more);
+    wb.onclick=()=>{ more.hidden=!more.hidden; wb.setAttribute("aria-expanded",String(!more.hidden)); wb.textContent=more.hidden?T("why"):T("hide"); };
     head.append(ic,tx); r.appendChild(head);
-    const seg=document.createElement("div"); seg.className="seg"; seg.setAttribute("role","group"); seg.setAttribute("aria-label","Answer: "+Q.t);
-    OPTS.forEach(([v,l])=>{ const b=document.createElement("button"); b.dataset.v=v; b.className=v; b.textContent=l; b.setAttribute("aria-pressed",ans[k]===v?"true":"false"); b.onclick=()=>setAns(k,v); seg.appendChild(b); });
+    const seg=document.createElement("div"); seg.className="seg"; seg.setAttribute("role","group"); seg.setAttribute("aria-label",QX(k,"t"));
+    OPTS.forEach(([v,l])=>{ const b=document.createElement("button"); b.dataset.v=v; b.className=v; b.textContent=T(v); b.setAttribute("aria-pressed",ans[k]===v?"true":"false"); b.onclick=()=>setAns(k,v); seg.appendChild(b); });
     r.appendChild(seg);
-    if(/Price well below/.test(Q.flag)){ const pl=document.createElement("button"); pl.className="qwhy"; pl.style.margin="8px 0 0"; pl.textContent="💶 Compare the price with the area"; const slot=document.getElementById("qPriceSlot");
+    { const pn=(typeof pfNote==="function")?pfNote(k):null; if(pn) r.appendChild(pn); }
+    if(k===3){ const pl=document.createElement("button"); pl.className="qwhy"; pl.style.margin="8px 0 0"; pl.textContent=T("priceBtn"); const slot=window.__priceSlot||(window.__priceSlot=document.getElementById("qPriceSlot"));
       pl.onclick=()=>{ slot.hidden=!slot.hidden; }; r.appendChild(pl); r.appendChild(slot); slot.hidden=false; }
     L.appendChild(r);
   });
@@ -2016,42 +2153,48 @@ function renderSigns(id, list, title, verb, withWhy){
   const box=document.getElementById(id); box.innerHTML=""; if(!list.length) return;
   const h=document.createElement("h3"); h.className="rsHead"; h.textContent=title+" ("+list.length+")"; box.appendChild(h);
   list.forEach(Q=>{ const d=document.createElement("div"); d.className="rsItem"+(withWhy?" yes":" unsure");
-    const b=document.createElement("b"); b.textContent=Q.flag.replace(/\.$/,""); d.appendChild(b);
-    if(withWhy){ const w=document.createElement("p"); w.className="rsWhy"; w.textContent=Q.why; d.appendChild(w); }
-    const a=document.createElement("p"); a.className="rsDo"; const v=document.createElement("span"); v.textContent=verb+": "; a.append(v, document.createTextNode(Q.do||"")); d.appendChild(a);
+    const b=document.createElement("b"); b.textContent=QX(qIdx(Q),"flag").replace(/[.。]$/,""); d.appendChild(b);
+    if(withWhy){ const w=document.createElement("p"); w.className="rsWhy"; w.textContent=QX(qIdx(Q),"why"); d.appendChild(w); }
+    const a=document.createElement("p"); a.className="rsDo"; const v=document.createElement("span"); v.textContent=verb+(LANG.startsWith("zh")?"：":": "); a.append(v, document.createTextNode(QX(qIdx(Q),"do")||"")); d.appendChild(a);
     box.appendChild(d); });
 }
 function renderNext(yes, unsure){
   const n=document.getElementById("resNext"); n.innerHTML="";
-  const h=document.createElement("h3"); h.className="rsHead"; h.textContent="What to do next"; n.appendChild(h);
+  const h=document.createElement("h3"); h.className="rsHead"; h.textContent=T("nextT"); n.appendChild(h);
   const ul=document.createElement("ol"); ul.className="nextList";
   const add=(html)=>{ const li=document.createElement("li"); li.innerHTML=html; ul.appendChild(li); };
-  if(yes.length>=3) add("<b>Don't send any money.</b> Several common scam patterns are present.");
-  if(yes.length) add("<b>Work through the points above</b> before you pay or share documents.");
-  add('<b>Ask the landlord</b> the questions above. <a class="nx" href="#" onclick="document.getElementById(\'askLL\').scrollIntoView({behavior:\'smooth\',block:\'center\'});return false">Copy the message</a>');
-  add("<b>Always, before paying:</b> see the room (in person or a live video call), read a written contract, and pay only to an account in the landlord's or agency's name.");
+  if(yes.length>=3) add(T("nDontSend"));
+  if(yes.length) add(T("nWork"));
+  add(T("nAsk")+' <a class="nx" href="#" onclick="document.getElementById(\'askLL\').scrollIntoView({behavior:\'smooth\',block:\'center\'});return false">'+T("nAskLink")+'</a>');
+  add(T("nAlways"));
   const priceAns=ans[3];
-  if(priceAns!=="no") add('<b>Check the price</b> against the area. <a class="nx" href="#" onclick="goPrice();return false">Open the price check</a>');
-  add((yes.length||unsure.length>=2 ? "<b>Still unsure? Ask a real person.</b> " : "<b>Questions?</b> ")+'Your university\'s international office can help, and Checkie gives you a ready-made message. <a href="#" onclick="document.getElementById(\'helpCard\').scrollIntoView({behavior:\'smooth\',block:\'start\'});return false" class="nx">Get their contact</a>');
-  add('<b>Already paid?</b> <a href="#" onclick="show(\'s-steps\');setTimeout(()=>document.getElementById(\'paidGuide\').scrollIntoView({behavior:\'smooth\'}),80);return false" class="nx">See what to do</a>');
+  if(priceAns!=="no") add(T("nPrice")+' <a class="nx" href="#" onclick="goPrice();return false">'+T("nPriceLink")+'</a>');
+  add((yes.length||unsure.length>=2 ? T("nStill") : T("nQuestions"))+T("nOffice")+' <a href="#" onclick="document.getElementById(\'helpCard\').scrollIntoView({behavior:\'smooth\',block:\'start\'});return false" class="nx">'+T("nOfficeLink")+'</a>');
+  add(T("nPaid")+' <a href="#" onclick="show(\'s-steps\');setTimeout(()=>document.getElementById(\'paidGuide\').scrollIntoView({behavior:\'smooth\'}),80);return false" class="nx">'+T("nPaidLink")+'</a>');
   n.appendChild(ul);
-  const note=document.createElement("p"); note.className="muted rsNote"; note.textContent="These are warning signs, not proof of fraud. Checkie never says a listing is safe, and it doesn't judge any person.";
+  const note=document.createElement("p"); note.className="muted rsNote"; note.textContent=T("nNote");
   n.appendChild(note);
 }
-function result(){
+const LEVEL_EN={stop:"Stop before you pay",warn:"Be careful",ok:"No common patterns found"};
+function refreshResultText(){
   const yes = QUESTIONS.filter((_,k)=>ans[k]==="yes");
   const unsure = QUESTIONS.filter((_,k)=>ans[k]==="unsure");
   const box=document.getElementById("resBox"), t=document.getElementById("resTitle"), p=document.getElementById("resText");
-  if(yes.length>=3){ box.className="result stop"; t.textContent="Stop before you pay"; p.textContent=yes.length+" common scam patterns are present. Don't send money until you've seen the room and have a written contract."; }
-  else if(yes.length>=1 || unsure.length>=2){ box.className="result warn"; t.textContent="Be careful"; p.textContent="Some warning signs, or things you couldn't confirm. Verify them before paying anything."; }
-  else { box.className="result ok"; t.textContent="No common patterns found"; p.textContent="That does not mean it's safe. Still see the room and get a written contract first."; }
+  // Scoring rule (unchanged): 3+ Yes = Stop; 1+ Yes or 2+ Not sure = Be careful; otherwise none found
+  if(yes.length>=3){ box.className="result stop"; t.dataset.en=LEVEL_EN.stop; t.textContent=T("stopT"); p.textContent=T("stopP",{n:yes.length}); }
+  else if(yes.length>=1 || unsure.length>=2){ box.className="result warn"; t.dataset.en=LEVEL_EN.warn; t.textContent=T("warnT"); p.textContent=T("warnP"); }
+  else { box.className="result ok"; t.dataset.en=LEVEL_EN.ok; t.textContent=T("okT"); p.textContent=T("okP"); }
   const list=document.getElementById("flagList"); list.innerHTML="";
-  yes.forEach(Q=>{ const li=document.createElement("li"); li.textContent=Q.flag; list.appendChild(li); });
-  unsure.forEach(Q=>{ const li=document.createElement("li"); li.textContent="Not sure: "+Q.flag.toLowerCase(); list.appendChild(li); });
-  renderSigns("resYes", yes, "Warning signs you found", "What to do", true);
-  renderSigns("resUnsure", unsure, "Things you weren't sure about", "How to find out", false);
+  yes.forEach(Q=>{ const li=document.createElement("li"); li.textContent=QX(qIdx(Q),"flag"); list.appendChild(li); });
+  unsure.forEach(Q=>{ const li=document.createElement("li"); li.textContent=T("notSurePre")+(LANG==="en"?Q.flag.toLowerCase():QX(qIdx(Q),"flag")); list.appendChild(li); });
+  renderSigns("resYes", yes, T("signsYesT"), T("doVerb"), true);
+  renderSigns("resUnsure", unsure, T("signsUnsureT"), T("findVerb"), false);
   renderNext(yes, unsure);
   renderLL();
+  return {yes,unsure};
+}
+function result(){
+  const {yes,unsure}=refreshResultText();
   document.getElementById("flagWrap").style.display = (yes.length||unsure.length) ? "block":"none";
   document.getElementById("bar").style.width="100%";
   const rf=document.getElementById("resFile");
@@ -2556,14 +2699,14 @@ function fbValid(){ const ok=!!fb.rating; document.getElementById("fbSend").disa
     const btn=document.getElementById("fbSend"), err=document.getElementById("fbErr"); err.hidden=true; btn.disabled=true; btn.textContent="Sending…";
     try{
       if(!fbDb && fbNetlify){
-        const body=new URLSearchParams({"form-name":"checkie-feedback",sawWarningSign:fb.paid||"",rating:fb.rating?String(fb.rating):"",tags:fb.tags.join("; "),comment:document.getElementById("fbText").value.trim().slice(0,500),result:(document.getElementById("resTitle")||{}).textContent||"",flagged:signsOk()?flaggedList("yes"):"",unsure:signsOk()?flaggedList("unsure"):"",screenshots:String(shots.length),at:new Date().toISOString()});
+        const body=new URLSearchParams({"form-name":"checkie-feedback",sawWarningSign:fb.paid||"",rating:fb.rating?String(fb.rating):"",tags:fb.tags.join("; "),comment:document.getElementById("fbText").value.trim().slice(0,500),result:((el)=>el?(el.dataset.en||el.textContent):"")(document.getElementById("resTitle")),flagged:signsOk()?flaggedList("yes"):"",unsure:signsOk()?flaggedList("unsure"):"",screenshots:String(shots.length),at:new Date().toISOString()});
         const r=await fetch("/",{method:"POST",headers:{"Content-Type":"application/x-www-form-urlencoded"},body:body.toString()});
         if(!r.ok) throw new Error(r.status);
         document.getElementById("fbCard").classList.add("hidden"); document.getElementById("fbThanks").classList.remove("hidden");
         return;
       }
       const uid=await fbUser.id();
-      const lvl=(document.getElementById("resTitle")||{}).textContent||"";
+      const lvl=((el)=>el?(el.dataset.en||el.textContent):"")(document.getElementById("resTitle"));
       await fbDb.collection("feedback/"+uid+"/entries").add({sawWarningSign:fb.paid,rating:fb.rating||null,tags:fb.tags,comment:document.getElementById("fbText").value.trim().slice(0,500),result:lvl,flagged:signsOk()?flaggedList("yes"):"",unsure:signsOk()?flaggedList("unsure"):"",screenshots:shots.length,at:new Date().toISOString()});
       document.getElementById("fbCard").classList.add("hidden"); document.getElementById("fbThanks").classList.remove("hidden");
     }catch(e){ err.textContent="Couldn't send your feedback. You may need edit access to this page. Try again later."; err.hidden=false; btn.disabled=false; btn.textContent="Send feedback"; }
@@ -2622,7 +2765,7 @@ function helpMessage(c){
     const a=AREAS.find(x=>x.id===(ar&&ar.value)), rent=r&&+r.value;
     if(rent>0){ const what=ty&&ty.value==="res"?"Student residence":ty&&ty.value==="studio"?"Studio":(a?a.n:"[area]");
       details[2]="- Area and monthly rent: "+what+", €"+Math.round(rent)+" a month"; } }catch(e){}
-  const lvl=((document.getElementById("resTitle")||{}).textContent||"").trim();
+  const lvl=(((el)=>el?(el.dataset.en||el.textContent):"")(document.getElementById("resTitle"))||"").trim();
   const urgent=yesK.length>=3;
   const found = (yesK.length||unsK.length)
     ? ["What Checkie found:","Checkie is a free self-check of 12 common rental scam warning signs. It shows warning signs, not proof of fraud."+(lvl?" Result: "+lvl+".":""),
@@ -2659,12 +2802,139 @@ function renderHelp(){
   document.getElementById("msgCopy").onclick=e=>copyText(document.getElementById("offMsg").value,e.currentTarget,document.getElementById("offMsg"));
 })();
 
+
+(function initLang(){
+  let lang="en";
+  try{ const q=new URLSearchParams(location.search).get("lang"); const saved=localStorage.getItem("checkieLang");
+    const nav=(navigator.language||"").toLowerCase();
+    const guess = nav.startsWith("ca")?"ca": nav.startsWith("es")?"es": (nav.startsWith("zh-tw")||nav.startsWith("zh-hk")||nav.startsWith("zh-hant"))?"zh-Hant": nav.startsWith("zh")?"zh-Hans":"en";
+    lang = q || saved || guess; }catch(e){}
+  const go=()=>{ applyLang(lang,false); const sel=document.getElementById("langSel"); if(sel) sel.onchange=()=>applyLang(sel.value,true); };
+  if(document.readyState==="loading") document.addEventListener("DOMContentLoaded",go); else go();
+})();
+
+// ---------- Pre-arrival email kit (universities page) ----------
+const EMAIL_KIT={"en": {"subject": "Before you pay for a room in Barcelona: check it first", "body": "Dear [student name],\n\nAs you look for accommodation in Barcelona, please keep in mind that rental scams targeting international students are a known risk, especially when you are searching from abroad.\n\nBefore you send any money:\n• See the room first, in person or on a live video call.\n• Read a written contract with the owner's name and the full address.\n• Pay only by bank transfer to an account in the owner's or agency's name. Never by money-transfer services, crypto or gift cards.\n• Be careful if someone rushes you, asks for your passport before a viewing, or offers a price far below similar rooms.\n\nTo check a specific listing, you can use Checkie, a free, independent tool made by an exchange student: https://symphonious-jelly-dabdfa.netlify.app\nIt asks 12 quick questions and shows which common warning signs a listing has and what to check. It doesn't ask for your name, and it is available in English, Spanish, Catalan and Chinese. Checkie can't confirm that a listing is genuine.\n\nIf anything looks wrong, contact us at [office email] before you pay.\n\nBest wishes,\n[Name]\n[International Office, University]"}, "es": {"subject": "Antes de pagar una habitación en Barcelona, compruébala", "body": "Estimado/a [nombre del estudiante]:\n\nMientras buscas alojamiento en Barcelona, ten en cuenta que las estafas de alquiler dirigidas a estudiantes internacionales son un riesgo conocido, sobre todo cuando se busca desde el extranjero.\n\nAntes de enviar dinero:\n• Mira primero la habitación, en persona o por videollamada en directo.\n• Lee un contrato por escrito con el nombre del propietario y la dirección completa.\n• Paga solo por transferencia bancaria a una cuenta a nombre del propietario o de la agencia. Nunca por servicios de envío de dinero, criptomonedas ni tarjetas regalo.\n• Ten cuidado si te meten prisa, te piden el pasaporte antes de una visita o el precio está muy por debajo de habitaciones parecidas.\n\nPara comprobar un anuncio concreto, puedes usar Checkie, una herramienta gratuita e independiente creada por un estudiante de intercambio: https://symphonious-jelly-dabdfa.netlify.app?lang=es\nHace 12 preguntas rápidas y muestra qué señales de alerta habituales tiene un anuncio y qué comprobar. No pide tu nombre y está disponible en español, catalán, inglés y chino. Checkie no puede confirmar que un anuncio sea real.\n\nSi algo no te cuadra, escríbenos a [correo de la oficina] antes de pagar.\n\nUn saludo,\n[Nombre]\n[Oficina Internacional, Universidad]"}, "ca": {"subject": "Abans de pagar una habitació a Barcelona, comprova-la", "body": "Benvolgut/da [nom de l'estudiant],\n\nMentre busques allotjament a Barcelona, tingues en compte que les estafes de lloguer dirigides a estudiants internacionals són un risc conegut, sobretot quan es busca des de l'estranger.\n\nAbans d'enviar diners:\n• Mira primer l'habitació, en persona o per videotrucada en directe.\n• Llegeix un contracte per escrit amb el nom del propietari i l'adreça completa.\n• Paga només per transferència bancària a un compte a nom del propietari o de l'agència. Mai per serveis d'enviament de diners, criptomonedes ni targetes regal.\n• Vés amb compte si et fan pressa, et demanen el passaport abans d'una visita o el preu és molt per sota d'habitacions semblants.\n\nPer comprovar un anunci concret, pots fer servir Checkie, una eina gratuïta i independent creada per un estudiant d'intercanvi: https://symphonious-jelly-dabdfa.netlify.app?lang=ca\nFa 12 preguntes ràpides i mostra quins senyals d'alerta habituals té un anunci i què has de comprovar. No et demana el nom i està disponible en català, castellà, anglès i xinès. Checkie no pot confirmar que un anunci sigui real.\n\nSi alguna cosa no et quadra, escriu-nos a [correu de l'oficina] abans de pagar.\n\nSalutacions,\n[Nom]\n[Oficina Internacional, Universitat]"}, "zh-Hans": {"subject": "在巴塞罗那租房付款前，请先检查", "body": "亲爱的 [学生姓名]：\n\n在巴塞罗那找住处时，请注意：针对国际学生的租房诈骗是已知风险，尤其是在国外远程找房时。\n\n转账之前，请务必：\n• 先看房，亲自看或通过实时视频看。\n• 阅读写有房东姓名和完整地址的书面合同。\n• 只通过银行转账付款到房东或中介名下的账户。绝不要用汇款服务、加密货币或礼品卡。\n• 如果对方催你付款、在看房前要你的护照，或价格远低于类似房间，请提高警惕。\n\n如需检查某条具体房源，可以使用 Checkie。这是一个由交换生开发的免费独立工具：https://symphonious-jelly-dabdfa.netlify.app?lang=zh-Hans\n它会问 12 个简单问题，告诉你房源有哪些常见警示信号以及需要核实什么。它不要求填写姓名，提供中文、英文、西班牙语和加泰罗尼亚语版本。Checkie 无法确认房源是否真实。\n\n如有任何可疑之处，请在付款前通过 [办公室邮箱] 联系我们。\n\n祝好，\n[姓名]\n[大学国际办公室]"}, "zh-Hant": {"subject": "在巴塞隆納租房付款前，請先檢查", "body": "親愛的 [學生姓名]：\n\n在巴塞隆納找住處時，請注意：針對國際學生的租屋詐騙是已知風險，尤其是在國外遠端找房時。\n\n匯款之前，請務必：\n• 先看房，親自看或透過即時視訊看。\n• 閱讀寫有房東姓名和完整地址的書面合約。\n• 只透過銀行轉帳付款到房東或仲介名下的帳戶。絕不要用匯款服務、加密貨幣或禮品卡。\n• 如果對方催你付款、在看房前要你的護照，或價格遠低於類似房間，請提高警覺。\n\n如需檢查某則具體房源，可以使用 Checkie。這是一個由交換生開發的免費獨立工具：https://symphonious-jelly-dabdfa.netlify.app?lang=zh-Hant\n它會問 12 個簡單問題，告訴你房源有哪些常見警訊以及需要確認什麼。它不要求填寫姓名，提供中文、英文、西班牙文和加泰隆尼亞文版本。Checkie 無法確認房源是否真實。\n\n如有任何可疑之處，請在付款前透過 [辦公室信箱] 與我們聯絡。\n\n祝好，\n[姓名]\n[大學國際事務處]"}};
+(function initKit(){ const box=document.getElementById("emailKit"); if(!box) return; let cur="en";
+  const subj=document.getElementById("kitSubj"), body=document.getElementById("kitBody"), mail=document.getElementById("kitMail");
+  const set=k=>{ cur=k; subj.value=EMAIL_KIT[k].subject; body.value=EMAIL_KIT[k].body;
+    mail.href="mailto:?subject="+encodeURIComponent(EMAIL_KIT[k].subject)+"&body="+encodeURIComponent(EMAIL_KIT[k].body);
+    box.querySelectorAll("[data-kl]").forEach(b=>b.setAttribute("aria-pressed",String(b.dataset.kl===k))); };
+  box.querySelectorAll("[data-kl]").forEach(b=>b.onclick=()=>set(b.dataset.kl));
+  document.getElementById("kitSubjCopy").onclick=e=>copyText(subj.value,e.currentTarget,subj);
+  document.getElementById("kitBodyCopy").onclick=e=>copyText(body.value,e.currentTarget,body);
+  set("en"); })();
+
+// ---------- Paste-and-pre-fill (AI suggests answers; the student decides; the fixed rule scores) ----------
+Object.assign(I18N.ui, {"pfToggle": ["✨ <b>Paste the listing</b> and let AI suggest answers <span class=\"pfOpt\">optional</span>", "✨ <b>Pega el anuncio</b> y deja que la IA sugiera respuestas <span class=\"pfOpt\">opcional</span>", "✨ <b>Enganxa l'anunci</b> i deixa que la IA suggereixi respostes <span class=\"pfOpt\">opcional</span>", "✨ <b>粘贴房源内容</b>，让 AI 建议答案 <span class=\"pfOpt\">可选</span>", "✨ <b>貼上房源內容</b>，讓 AI 建議答案 <span class=\"pfOpt\">選填</span>"], "pfIntro": ["Paste the ad text or your chat with the landlord. The AI only suggests answers it can see clear evidence for, and shows the exact words it used. You check each one and decide.", "Pega el texto del anuncio o tu chat con el propietario. La IA solo sugiere respuestas para las que ve pruebas claras y muestra las palabras exactas que ha usado. Tú revisas cada una y decides.", "Enganxa el text de l'anunci o el teu xat amb el propietari. La IA només suggereix respostes per a les quals veu proves clares i mostra les paraules exactes que ha fet servir. Tu revises cadascuna i decideixes.", "粘贴房源广告文字或你和房东的聊天记录。AI 只对有明确证据的问题给出建议，并显示它依据的原话。每一条都由你检查、由你决定。", "貼上房源廣告文字或你和房東的對話。AI 只對有明確證據的問題給出建議，並顯示它依據的原文。每一條都由你檢查、由你決定。"], "pfPh": ["Paste the listing or chat here…", "Pega aquí el anuncio o el chat…", "Enganxa aquí l'anunci o el xat…", "在这里粘贴房源或聊天内容…", "在這裡貼上房源或對話內容…"], "pfPriv": ["🔒 The text is sent to an AI provider (Anthropic) only when you tap the button. Emails, phone numbers and bank account numbers are removed first. Checkie stores nothing.", "🔒 El texto se envía a un proveedor de IA (Anthropic) solo cuando tocas el botón. Antes se eliminan correos, teléfonos y números de cuenta. Checkie no guarda nada.", "🔒 El text s'envia a un proveïdor d'IA (Anthropic) només quan toques el botó. Abans s'eliminen correus, telèfons i números de compte. Checkie no desa res.", "🔒 只有在你点按钮时，文字才会发送给 AI 服务商（Anthropic）。发送前会先删除邮箱、电话和银行账号。Checkie 不保存任何内容。", "🔒 只有在你點按鈕時，文字才會傳送給 AI 服務商（Anthropic）。傳送前會先刪除電子郵件、電話和銀行帳號。Checkie 不儲存任何內容。"], "pfGo": ["Suggest answers", "Sugerir respuestas", "Suggereix respostes", "建议答案", "建議答案"], "pfBusy": ["Reading the listing…", "Leyendo el anuncio…", "Llegint l'anunci…", "正在读取房源…", "正在讀取房源…"], "pfDone": ["The AI suggested {n} answers, marked ✨ below. Check each one: change it if it's wrong, and answer the rest yourself.", "La IA ha sugerido {n} respuestas, marcadas con ✨ abajo. Revisa cada una: cámbiala si no es correcta y responde tú el resto.", "La IA ha suggerit {n} respostes, marcades amb ✨ a sota. Revisa-les una per una: canvia-les si no són correctes i respon tu la resta.", "AI 建议了 {n} 个答案，已在下方用 ✨ 标出。请逐一检查：不对就改，其余问题由你自己回答。", "AI 建議了 {n} 個答案，已在下方用 ✨ 標出。請逐一檢查：不對就改，其餘問題由你自己回答。"], "pfNone": ["The AI couldn't find clear evidence for any question in this text. Answer the questions yourself.", "La IA no ha encontrado pruebas claras para ninguna pregunta en este texto. Responde tú las preguntas.", "La IA no ha trobat proves clares per a cap pregunta en aquest text. Respon tu les preguntes.", "AI 在这段文字里没有找到任何问题的明确证据，请自己回答问题。", "AI 在這段文字裡沒有找到任何問題的明確證據，請自己回答問題。"], "pfScope": ["This doesn't look like a room or flat to rent in Barcelona, so Checkie can't check it.", "Esto no parece una habitación o un piso de alquiler en Barcelona, así que Checkie no puede comprobarlo.", "Això no sembla una habitació o un pis de lloguer a Barcelona, així que Checkie no ho pot comprovar.", "这看起来不是巴塞罗那的出租房间或公寓，所以 Checkie 无法检查。", "這看起來不是巴塞隆納的出租房間或公寓，所以 Checkie 無法檢查。"], "pfShort": ["Paste a bit more of the listing first.", "Pega primero un poco más del anuncio.", "Enganxa primer una mica més de l'anunci.", "请先多粘贴一些房源内容。", "請先多貼一些房源內容。"], "pfErr": ["The AI suggestions aren't available right now. You can still answer the questions yourself.", "Las sugerencias de la IA no están disponibles ahora. Puedes responder las preguntas tú mismo.", "Els suggeriments de la IA no estan disponibles ara. Pots respondre les preguntes tu mateix.", "AI 建议暂时不可用。你仍然可以自己回答问题。", "AI 建議暫時無法使用。你仍然可以自己回答問題。"], "pfTag": ["✨ AI suggested: {a}", "✨ La IA sugiere: {a}", "✨ La IA suggereix: {a}", "✨ AI 建议：{a}", "✨ AI 建議：{a}"], "pfChanged": ["You changed this answer.", "Has cambiado esta respuesta.", "Has canviat aquesta resposta.", "你修改了这个答案。", "你修改了這個答案。"]});
+const PF={}; let pfEnabled=false;
+function renderPFStatic(){ const t=document.getElementById("pfToggle"); if(!t) return;
+  t.innerHTML=T("pfToggle"); document.getElementById("pfIntro").textContent=T("pfIntro"); document.getElementById("pfPriv").textContent=T("pfPriv");
+  document.getElementById("pfText").placeholder=T("pfPh"); document.getElementById("pfGo").textContent=T("pfGo"); }
+function pfNote(k){ const sg=PF[k]; if(!sg) return null;
+  const d=document.createElement("div"); d.className="pfSug";
+  const head=document.createElement("b"); head.textContent=T("pfTag",{a:T(sg.answer)}); d.append(head," ");
+  const q=document.createElement("q"); q.textContent=sg.quote; d.append(q);
+  if(sg.reason){ d.append(document.createElement("br"), document.createTextNode(sg.reason)); }
+  if(ans[k] && ans[k]!==sg.answer){ const c=document.createElement("span"); c.className="pfCh"; c.textContent=T("pfChanged"); d.append(c); }
+  return d; }
+(function initPF(){ const box=document.getElementById("pfBox"); if(!box) return; renderPFStatic();
+  const tg=document.getElementById("pfToggle"), body=document.getElementById("pfBody"), go=document.getElementById("pfGo"), msg=document.getElementById("pfMsg");
+  tg.onclick=()=>{ body.hidden=!body.hidden; tg.setAttribute("aria-expanded",String(!body.hidden)); if(!body.hidden) document.getElementById("pfText").focus(); };
+  const say=(t,err)=>{ msg.textContent=t; msg.hidden=false; msg.classList.toggle("err",!!err); };
+  go.onclick=async()=>{ const text=document.getElementById("pfText").value.trim();
+    if(text.length<20){ say(T("pfShort"),true); return; }
+    go.disabled=true; go.textContent=T("pfBusy"); msg.hidden=true;
+    try{ const r=await fetch("/api/prefill",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({text,lang:LANG})});
+      if(!r.ok) throw new Error(r.status); const j=await r.json();
+      Object.keys(PF).forEach(k=>delete PF[k]);
+      if(j.notRoom||j.notBarcelona){ say(T("pfScope"),true); renderList(); return; }
+      const sug=(j.suggestions||[]).filter(x=>Number.isInteger(x.k)&&x.k>=0&&x.k<QUESTIONS.length&&(x.answer==="yes"||x.answer==="no"));
+      sug.forEach(x=>{ PF[x.k]=x; if(!ans[x.k]) ans[x.k]=x.answer; });   // never overwrite an answer the student already gave
+      renderList(); say(sug.length?T("pfDone",{n:sug.length}):T("pfNone"),!sug.length);
+    }catch(e){ say(T("pfErr"),true); }
+    finally{ go.disabled=false; go.textContent=T("pfGo"); } };
+  try{ if(/^https?:$/.test(location.protocol)) fetch("/api/prefill",{cache:"no-store"}).then(r=>r.ok?r.json():null).then(j=>{ if(j&&j.enabled){ pfEnabled=true; box.hidden=false; } }).catch(()=>{}); }catch(e){}
+})();
+
+// ---------- Already scammed? helper (guide page). Nothing typed here is sent or saved. ----------
+(function initScamHelp(){ const box=document.getElementById("scamHelp"); if(!box) return;
+  let pay=null, L="en"; const v={};
+  const STEPS={
+   transfer:["<b>Call your bank now</b> (use the number on your card or in your banking app). Ask them to <b>recall the transfer</b> and flag the recipient account. Recalls work best within hours, so call before anything else.","<b>Don't pay anything more</b>, even if they promise a refund or ask for a \"release fee\".","<b>Save the evidence:</b> screenshots of the listing and all messages, the payment receipt, their account number and phone.","<b>File a police report</b> (denuncia) with the Mossos d'Esquadra or the Policía Nacional, and ask for a copy for your bank.","<b>Report the listing</b> to the platform or group where you found it, and tell your university's international office."],
+   card:["<b>Call your bank now</b> and ask them to <b>dispute the payment</b> (a chargeback). Block the card if you typed its details on a site they sent you.","<b>Don't pay anything more</b>, even if they promise a refund.","<b>Save the evidence:</b> the listing, messages, the card payment in your app, any payment link they sent.","<b>File a police report</b> (denuncia) with the Mossos d'Esquadra or the Policía Nacional, and ask for a copy for your bank.","<b>Report the listing</b> to the platform, and tell your university's international office."],
+   bizum:["<b>Call your bank now.</b> Bizum payments arrive instantly and are often hard to reverse, but your bank can try and can flag the recipient's number.","<b>Don't pay anything more.</b>","<b>Save the evidence:</b> the listing, messages, the Bizum payment and the phone number you paid.","<b>File a police report</b> (denuncia) with the Mossos d'Esquadra or the Policía Nacional; the phone number linked to the Bizum helps the police.","<b>Report the listing</b> to the platform, and tell your university's international office."],
+   mt:["<b>Contact Western Union or MoneyGram right away</b> through their official website or app. If the money hasn't been collected yet, ask them to <b>stop the transfer</b>; have your receipt and tracking number (MTCN / reference) ready.","<b>Don't send anything more.</b>","<b>Save the evidence:</b> the receipt, tracking number, listing and messages.","<b>File a police report</b> (denuncia) with the Mossos d'Esquadra or the Policía Nacional.","<b>Report the listing</b> to the platform, and tell your university's international office."],
+   crypto:["<b>Report it straight away</b> to the exchange you used (for crypto) or the company that issued the gift card. Payments like these are usually impossible to reverse, but a fast report sometimes helps.","<b>Don't send anything more.</b>","<b>Save the evidence:</b> the wallet address or gift card codes and receipts, the listing and messages.","<b>File a police report</b> (denuncia) with the Mossos d'Esquadra or the Policía Nacional.","<b>Report the listing</b> to the platform, and tell your university's international office."],
+   id:["<b>Stop sending documents</b> and don't send any money.","<b>Save the evidence:</b> which document you sent, to whom, when, and the messages.","<b>File a police report</b> (denuncia) with the Mossos d'Esquadra or the Policía Nacional saying your ID may be misused. The report helps if someone later uses your identity.","<b>Watch for misuse:</b> unexpected bank or phone contracts, or messages about accounts you didn't open. Tell your bank and, if you lost a passport, your embassy or consulate.","<b>Report the listing</b> to the platform, and tell your university's international office."]};
+  const M={transfer:["bank transfer","transferencia bancaria"],card:["card payment","pago con tarjeta"],bizum:["Bizum","Bizum"],mt:["money-transfer service (Western Union / MoneyGram)","servicio de envío de dinero (Western Union / MoneyGram)"],crypto:["crypto / gift card","criptomonedas / tarjeta regalo"],id:["no payment (ID sent)","sin pago (envié mi documentación)"]};
+  const ASK={transfer:["recall this bank transfer and flag the recipient account","soliciten la devolución (retrocesión) de esta transferencia y marquen la cuenta del beneficiario"],
+   card:["dispute this card payment (chargeback), block my card if needed, and flag the merchant","abran una reclamación (contracargo) de este pago con tarjeta, bloqueen la tarjeta si es necesario y marquen al comercio"],
+   bizum:["investigate this Bizum payment, try to recover it if possible, and flag the recipient's phone number","investiguen este pago por Bizum, intenten recuperarlo si es posible y marquen el número del beneficiario"],
+   mt:["stop this transfer if it has not been collected, and flag the receiver","detengan esta transferencia si todavía no se ha cobrado y marquen al destinatario"],
+   crypto:["record this fraud report and tell me whether anything can be done to block or trace the payment","registren este fraude y me indiquen si se puede bloquear o rastrear el pago"],
+   id:["tell me how to protect my account, because I sent a copy of my identity document to a suspected fraudster","me indiquen cómo proteger mi cuenta, porque he enviado una copia de mi documento de identidad a un posible estafador"]};
+  const f=(k,ph)=>(v[k]&&v[k].trim())?v[k].trim():ph;
+  function bank(){ const e=L==="en"?0:1, isId=pay==="id";
+    const head = pay==="mt" ? (e?"Mensaje a Western Union / MoneyGram":"Message to Western Union / MoneyGram") : pay==="crypto" ? (e?"Mensaje a la plataforma o al emisor de la tarjeta":"Message to the exchange or gift card company") : (e?"Mensaje a tu banco":"Message to your bank");
+    document.getElementById("shBankT").textContent=head;
+    if(!e) return ["Subject: URGENT: suspected rental fraud"+(isId?"":", please act on my payment"),"","Hello,","",
+      "I am a customer of "+f("bank","[bank / service]")+". I believe I have been the victim of a rental scam, and I ask you to urgently "+ASK[pay][0]+".","",
+      ...(isId?[]:["Payment details:","- Date: "+f("date","[date]"),"- Amount: "+f("amount","[amount]")+" €","- Method: "+M[pay][0],"- Paid to: "+f("recipient","[name on the payment]"),"- Their account / IBAN / phone / wallet: "+f("acct","[account]"),"- Reference: "+f("ref","[reference]"),""]),
+      "What happened: I was looking for a room in Barcelona and found it through "+f("platform","[platform]")+(v.link?" ("+v.link.trim()+")":"")+". "+(isId?"I sent a copy of my identity document":"After I paid")+", "+f("what","[what happened, e.g. they stopped answering]")+".","",
+      "I am reporting it to the police (Mossos d'Esquadra / Policía Nacional) and can send you a copy of the report. Please confirm what you can do and what else you need from me.","","Thank you,",f("name","[your name]")].join("\n");
+    return ["Asunto: URGENTE: posible estafa de alquiler"+(isId?"":", solicito actuar sobre mi pago"),"","Hola:","",
+      "Soy cliente de "+f("bank","[banco / servicio]")+". Creo que he sido víctima de una estafa de alquiler y les pido con urgencia que "+ASK[pay][1]+".","",
+      ...(isId?[]:["Datos del pago:","- Fecha: "+f("date","[fecha]"),"- Importe: "+f("amount","[importe]")+" €","- Método: "+M[pay][1],"- Beneficiario: "+f("recipient","[nombre en el pago]"),"- Cuenta / IBAN / teléfono / monedero del beneficiario: "+f("acct","[cuenta]"),"- Concepto o referencia: "+f("ref","[referencia]"),""]),
+      "Qué ha pasado: buscaba habitación en Barcelona y la encontré en "+f("platform","[plataforma]")+(v.link?" ("+v.link.trim()+")":"")+". "+(isId?"Envié una copia de mi documento de identidad":"Después de pagar")+", "+f("what","[qué pasó, p. ej. dejaron de responder]")+".","",
+      "Voy a presentar una denuncia ante los Mossos d'Esquadra / la Policía Nacional y puedo enviarles una copia. Les agradecería que me confirmen qué pueden hacer y qué más necesitan.","","Gracias,",f("name","[tu nombre]")].join("\n"); }
+  function police(){ const e=L==="en"?0:1, isId=pay==="id";
+    if(!e) return ["SUMMARY FOR A POLICE REPORT (DENUNCIA): RENTAL SCAM","","Person reporting: "+f("name","[your name]")+" (bring your passport or NIE)","",
+      "1. I was looking for a room in Barcelona and found a listing through "+f("platform","[platform]")+(v.link?": "+v.link.trim():"")+".",
+      "2. The person who said they rented the room contacted me through: "+f("contact","[their phone / email / username]")+".",
+      isId?"3. They asked for a copy of my identity document, and I sent it on "+f("date","[date]")+".":"3. On "+f("date","[date]")+" I paid "+f("amount","[amount]")+" € by "+M[pay][0]+" to "+f("recipient","[name on the payment]")+", account / phone / wallet "+f("acct","[account]")+", reference "+f("ref","[reference]")+".",
+      "4. Afterwards: "+f("what","[what happened, e.g. they stopped answering and the address doesn't exist]")+".","",
+      "Evidence I can show: screenshots of the listing and messages"+(isId?"":", the payment receipt")+", and the contact details above.",
+      "Also reported to: "+(isId?"":f("bank","[bank / service]")+" on [date]; ")+"the platform on [date]."].join("\n");
+    return ["RESUMEN PARA LA DENUNCIA: ESTAFA DE ALQUILER","","Denunciante: "+f("name","[tu nombre]")+" (llevar pasaporte o NIE)","",
+      "1. Buscaba habitación en Barcelona y encontré un anuncio en "+f("platform","[plataforma]")+(v.link?": "+v.link.trim():"")+".",
+      "2. La persona que decía alquilar la habitación contactó conmigo a través de: "+f("contact","[su teléfono / correo / usuario]")+".",
+      isId?"3. Me pidió una copia de mi documento de identidad y se la envié el "+f("date","[fecha]")+".":"3. El "+f("date","[fecha]")+" pagué "+f("amount","[importe]")+" € mediante "+M[pay][1]+" a "+f("recipient","[nombre en el pago]")+", cuenta / teléfono / monedero "+f("acct","[cuenta]")+", referencia "+f("ref","[referencia]")+".",
+      "4. Después: "+f("what","[qué pasó, p. ej. dejó de responder y la dirección no existe]")+".","",
+      "Pruebas que puedo mostrar: capturas del anuncio y de los mensajes"+(isId?"":", el justificante de pago")+" y los datos de contacto indicados.",
+      "También lo he comunicado a: "+(isId?"":f("bank","[banco / servicio]")+" el [fecha]; ")+"la plataforma el [fecha]."].join("\n"); }
+  function draw(){ if(!pay) return; document.getElementById("shOut").hidden=false;
+    const ol=document.getElementById("shSteps"); ol.innerHTML=""; STEPS[pay].forEach(h=>{ const li=document.createElement("li"); li.innerHTML=h; ol.appendChild(li); });
+    document.getElementById("shAcctL").firstChild.textContent = pay==="bizum"?"Their phone number (Bizum)":pay==="crypto"?"Wallet address or card code":pay==="mt"?"Tracking number (MTCN)":"Their account (IBAN)";
+    document.getElementById("shBank").value=bank(); document.getElementById("shPol").value=police(); }
+  box.querySelectorAll("[data-pay]").forEach(b=>b.onclick=()=>{ pay=b.dataset.pay; box.querySelectorAll("[data-pay]").forEach(x=>x.setAttribute("aria-pressed",String(x===b))); draw(); });
+  box.querySelectorAll("[data-f]").forEach(i=>i.oninput=()=>{ v[i.dataset.f]=i.value; draw(); });
+  box.querySelectorAll("[data-shl]").forEach(b=>b.onclick=()=>{ L=b.dataset.shl; box.querySelectorAll("[data-shl]").forEach(x=>x.setAttribute("aria-pressed",String(x===b))); draw(); });
+  document.getElementById("shBankCopy").onclick=e=>copyText(document.getElementById("shBank").value,e.currentTarget,document.getElementById("shBank"));
+  document.getElementById("shPolCopy").onclick=e=>copyText(document.getElementById("shPol").value,e.currentTarget,document.getElementById("shPol"));
+})();
+
+// ---------- Scam trends: shows only counts a person has reviewed and published in learned.json ----------
+Object.assign(I18N.ui, {"trendNone": ["Not enough reports yet. Once at least 10 students have sent feedback and a person has reviewed it, the warning signs students report most will appear here.", "Todavía no hay suficientes reportes. Cuando al menos 10 estudiantes hayan enviado su opinión y una persona la haya revisado, aquí aparecerán las señales de alerta más reportadas.", "Encara no hi ha prou reports. Quan almenys 10 estudiants hagin enviat la seva opinió i una persona l'hagi revisada, aquí apareixeran els senyals d'alerta més reportats.", "目前报告还不够。等至少 10 名学生提交反馈并经人工审核后，这里会显示学生最常报告的警示信号。", "目前回報還不夠。等至少 10 名學生送出意見回饋並經人工審核後，這裡會顯示學生最常回報的警訊。"], "trendMeta": ["From {n} student reports, {from} to {to}. Reviewed by a person on {d}. These are warning signs students flagged, not proof of fraud.", "De {n} reportes de estudiantes, del {from} al {to}. Revisado por una persona el {d}. Son señales que marcaron los estudiantes, no pruebas de fraude.", "De {n} reports d'estudiants, del {from} al {to}. Revisat per una persona el {d}. Són senyals que van marcar els estudiants, no proves de frau.", "来自 {n} 份学生报告（{from} 至 {to}），由人工于 {d} 审核。这些是学生标记的警示信号，不是诈骗证据。", "來自 {n} 份學生回報（{from} 至 {to}），由人工於 {d} 審核。這些是學生標記的警訊，不是詐騙證據。"], "trendOf": ["{p}% of reports", "{p} % de los reportes", "{p} % dels reports", "占报告的 {p}%", "佔回報的 {p}%"]});
+I18N.html.trendH = ["Señales de alerta más reportadas por estudiantes", "Senyals d'alerta més reportats per estudiants", "学生最常报告的警示信号", "學生最常回報的警訊"];
+function renderTrends(){
+  const tr = LEARNED && LEARNED.trend, ok = tr && LEARNED.reviewedOn && Number(tr.reports)>=Number(LEARNED.minAnswers||10) && Array.isArray(tr.signs) && tr.signs.length;
+  document.querySelectorAll(".trendBox").forEach(box=>{ const uni=box.dataset.trend==="uni"; const LG=uni?"en":LANG; const keep=LANG; if(uni) LANG="en";
+    box.innerHTML="";
+    if(!ok){ const p=document.createElement("p"); p.className="muted"; p.style.fontSize=".88rem"; p.textContent=T("trendNone"); box.appendChild(p); LANG=keep; return; }
+    const ol=document.createElement("ol"); ol.className="trendList";
+    tr.signs.filter(x=>Number.isInteger(x.k)&&x.k>=0&&x.k<QUESTIONS.length).slice(0,5).forEach(x=>{ const li=document.createElement("li");
+      li.textContent=QX(x.k,"flag").replace(/[.。]$/,""); const sp=document.createElement("span"); sp.className="tp"; sp.textContent=T("trendOf",{p:Math.round(100*x.count/tr.reports)}); li.appendChild(sp); ol.appendChild(li); });
+    box.appendChild(ol);
+    const m=document.createElement("p"); m.className="muted trendMeta"; m.textContent=T("trendMeta",{n:tr.reports,from:tr.from||"?",to:tr.to||"?",d:LEARNED.reviewedOn}); box.appendChild(m);
+    LANG=keep; });
+}
+document.addEventListener("DOMContentLoaded",()=>{ try{ renderTrends(); }catch(e){} });
 // ---------- Share link ----------
 (function(){ const b=document.getElementById("shareRes"); if(!b) return;
   const url=(/^https?:$/.test(location.protocol)?location.origin+location.pathname:"https://symphonious-jelly-dabdfa.netlify.app");
-  const text="Found a room in Barcelona? Check it before you pay: a free 2-minute check for common rental scam signs.";
-  b.onclick=async()=>{ if(navigator.share){ try{ await navigator.share({title:"Checkie",text,url}); return; }catch(e){ if(e&&e.name==="AbortError") return; } }
-    try{ await navigator.clipboard.writeText(text+" "+url); b.textContent="Link copied. Paste it in your group chat"; }catch(e){ b.textContent=url; } };
+  b.onclick=async()=>{ const text=T("shareText"); const url2=url+(LANG!=="en"?"?lang="+LANG:""); if(navigator.share){ try{ await navigator.share({title:"Checkie",text,url:url2}); return; }catch(e){ if(e&&e.name==="AbortError") return; } }
+    try{ await navigator.clipboard.writeText(text+" "+url2); b.textContent=T("shareCopied"); }catch(e){ b.textContent=url2; } };
 })();
 (function(){
   const b=document.getElementById("shareBtn"); if(!b) return;
