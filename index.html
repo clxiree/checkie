@@ -657,6 +657,10 @@ a.nx:focus-visible{outline:3px solid var(--ochre);outline-offset:2px}
 .langPick .langIc svg{width:18px;height:18px;display:block}
 .langPick select{appearance:none;-webkit-appearance:none;-moz-appearance:none;border:none;background:transparent url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 8'%3E%3Cpath d='M1 1.5l5 5 5-5' fill='none' stroke='%231d2a33' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") no-repeat right center/11px 8px;padding:0 20px 0 0;margin:0;height:100%;line-height:36px;border-radius:0;outline:none;max-width:none;font:600 .88rem -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;color:var(--ink);text-align:left}
 .langPick select::-ms-expand{display:none}
+/* all dropdowns: one custom arrow with breathing room from the edge */
+select:not(#langSel){-webkit-appearance:none!important;-moz-appearance:none!important;appearance:none!important;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 8'%3E%3Cpath d='M1 1.5l5 5 5-5' fill='none' stroke='%235f6b73' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E")!important;background-repeat:no-repeat!important;background-position:right 18px center!important;background-size:12px 8px!important;padding-right:46px!important;cursor:pointer}
+select:not(#langSel)::-ms-expand{display:none}
+.pcheck select,.pcheck input{box-sizing:border-box;height:48px}
 .i18nNote{font-size:.82rem;margin:0 0 12px;padding:7px 12px;border-radius:10px;background:#fff6e0;border:1px solid #ecd9a8;color:var(--ink)}
 :lang(zh) body,:lang(zh) button,:lang(zh) select,:lang(zh) textarea{word-break:normal;line-break:strict}
 .kit .matHead{flex-wrap:wrap;gap:8px}.kitLangs{display:flex;flex-wrap:wrap;gap:4px}
